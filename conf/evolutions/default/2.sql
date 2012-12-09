@@ -1,5 +1,5 @@
 # --- !Ups
-insert into users (name,email,password) values ('dhydrated','dhydrated@gmail.com','payupnow');
+insert into users (id,name,email,password) values (nextval('users_seq'),'dhydrated','dhydrated@gmail.com','payupnow');
 
 
 # --- !Downs

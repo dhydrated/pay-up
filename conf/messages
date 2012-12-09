@@ -1,5 +1,6 @@
 # Messages
 
 payments.list.title={0,choice,0#No payments|1#One payment|1<{0,number,integer} payments} found
+payees.list.title={0,choice,0#No payees|1#One payee|1<{0,number,integer} payees} found
 
 

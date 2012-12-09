@@ -6,6 +6,8 @@
 create table payees (
   id                        bigint not null,
   name                      varchar(255),
+  account_number            varchar(255),
+  description               varchar(255),
   constraint pk_payees primary key (id))
 ;
 

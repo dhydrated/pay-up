@@ -23,6 +23,11 @@ public class Payee extends Model {
     
     @Constraints.Required
     public String name;
+
+    public String accountNumber;
+    
+    public String description;
+
     
     /**
      * Generic query helper for entity Payee with id Long

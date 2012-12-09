@@ -1,6 +1,7 @@
 package models;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -26,6 +27,12 @@ public class User extends Model {
     @Constraints.Required
     public String name;
     
+    @Constraints.Required
+    public String email;
+    
+    @Constraints.Required
+    public String password;
+    
     /**
      * Generic query helper for entity User with id Long
      */
@@ -37,6 +44,37 @@ public class User extends Model {
             options.put(c.id.toString(), c.name);
         }
         return options;
+    }
+    
+
+    /**
+     * Retrieve all users.
+     */
+    public static List<User> findAll() {
+        return find.all();
+    }
+
+    /**
+     * Retrieve a User from email.
+     */
+    public static User findByEmail(String email) {
+        return find.where().eq("email", email).findUnique();
+    }
+    
+    /**
+     * Authenticate a User.
+     */
+    public static User authenticate(String email, String password) {
+        return find.where()
+            .eq("email", email)
+            .eq("password", password)
+            .findUnique();
+    }
+    
+    // --
+    
+    public String toString() {
+        return "User(" + email + ")";
     }
     
 

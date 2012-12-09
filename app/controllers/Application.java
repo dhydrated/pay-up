@@ -4,6 +4,7 @@ import models.Payment;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.createForm;
 import views.html.editForm;
 import views.html.list;
@@ -11,6 +12,7 @@ import views.html.list;
 /**
  * Manage a database of payments
  */
+@Security.Authenticated(Secured.class)
 public class Application extends Controller {
     
     /**

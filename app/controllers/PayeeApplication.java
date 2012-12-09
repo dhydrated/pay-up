@@ -4,6 +4,7 @@ import models.Payee;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.payeeCreateForm;
 import views.html.payeeEditForm;
 import views.html.payeeList;
@@ -11,6 +12,7 @@ import views.html.payeeList;
 /**
  * Manage a database of payees
  */
+@Security.Authenticated(Secured.class)
 public class PayeeApplication extends Controller {
     
     /**

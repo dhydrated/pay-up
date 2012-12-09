@@ -5,6 +5,12 @@
 # Default path will just redirect to the payment list
 GET     /                           controllers.Application.index()
 
+
+# Authentication
+GET     /login                              controllers.LoginApplication.login()
+POST    /login                              controllers.LoginApplication.authenticate()
+GET     /logout                             controllers.LoginApplication.logout()
+
 # Payments list (look at the default values for pagination parameters)
 GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 

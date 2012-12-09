@@ -4,6 +4,7 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.userCreateForm;
 import views.html.userEditForm;
 import views.html.userList;
@@ -11,6 +12,7 @@ import views.html.userList;
 /**
  * Manage a database of users
  */
+@Security.Authenticated(Secured.class)
 public class UserApplication extends Controller {
     
     /**

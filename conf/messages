@@ -1,0 +1,5 @@
+# Messages
+
+payments.list.title={0,choice,0#No payments|1#One payment|1<{0,number,integer} payments} found
+
+

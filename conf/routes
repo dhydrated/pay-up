@@ -1,0 +1,24 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Default path will just redirect to the payment list
+GET     /                           controllers.Application.index()
+
+# Payments list (look at the default values for pagination parameters)
+GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+
+# Add payment
+GET     /payments/new              controllers.Application.create()
+POST    /payments                  controllers.Application.save()
+
+# Edit existing payment
+GET     /payments/:id              controllers.Application.edit(id:Long)
+POST    /payments/:id              controllers.Application.update(id:Long)
+
+# Delete a payment
+POST    /payments/:id/delete       controllers.Application.delete(id:Long)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+

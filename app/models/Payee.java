@@ -15,6 +15,7 @@ import com.avaje.ebean.*;
  * Payee entity managed by Ebean
  */
 @Entity 
+@Table(name="payees")
 public class Payee extends Model {
 
     @Id

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 
 import play.data.format.Formats;
@@ -19,6 +20,7 @@ import com.avaje.ebean.Page;
  * Payment entity managed by Ebean
  */
 @Entity 
+@Table(name="payments")
 public class Payment extends Model {
 
     @Id

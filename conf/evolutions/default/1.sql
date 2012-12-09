@@ -3,37 +3,49 @@
 
 # --- !Ups
 
-create table payee (
+create table payees (
   id                        bigint not null,
   name                      varchar(255),
-  constraint pk_payee primary key (id))
+  constraint pk_payees primary key (id))
 ;
 
-create table payment (
+create table payments (
   id                        bigint not null,
   name                      varchar(255),
   amount                    decimal(38),
   paid_date                 timestamp,
   payee_id                  bigint,
-  constraint pk_payment primary key (id))
+  constraint pk_payments primary key (id))
 ;
 
-create sequence payee_seq;
+create table users (
+  id                        bigint not null,
+  name                      varchar(255),
+  constraint pk_users primary key (id))
+;
 
-create sequence payment_seq;
+create sequence payees_seq;
 
-alter table payment add constraint fk_payment_payee_1 foreign key (payee_id) references payee (id);
-create index ix_payment_payee_1 on payment (payee_id);
+create sequence payments_seq;
+
+create sequence users_seq;
+
+alter table payments add constraint fk_payments_payee_1 foreign key (payee_id) references payees (id);
+create index ix_payments_payee_1 on payments (payee_id);
 
 
 
 # --- !Downs
 
-drop table if exists payee cascade;
+drop table if exists payees cascade;
 
-drop table if exists payment cascade;
+drop table if exists payments cascade;
 
-drop sequence if exists payee_seq;
+drop table if exists users cascade;
 
-drop sequence if exists payment_seq;
+drop sequence if exists payees_seq;
+
+drop sequence if exists payments_seq;
+
+drop sequence if exists users_seq;
 

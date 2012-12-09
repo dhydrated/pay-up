@@ -23,17 +23,26 @@ POST    /payments/:id/delete       controllers.Application.delete(id:Long)
 
 # Payees list (look at the default values for pagination parameters)
 GET     /payees                  controllers.PayeeApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
-
 # Add payment
 GET     /payees/new              controllers.PayeeApplication.create()
 POST    /payees                  controllers.PayeeApplication.save()
-
 # Edit existing payee
 GET     /payees/:id              controllers.PayeeApplication.edit(id:Long)
 POST    /payees/:id              controllers.PayeeApplication.update(id:Long)
-
 # Delete a payee
 POST    /payees/:id/delete       controllers.PayeeApplication.delete(id:Long)
+
+# Users list (look at the default values for pagination parameters)
+GET     /users                  controllers.UserApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+# Add payment
+GET     /users/new              controllers.UserApplication.create()
+POST    /users                  controllers.UserApplication.save()
+# Edit existing user
+GET     /users/:id              controllers.UserApplication.edit(id:Long)
+POST    /users/:id              controllers.UserApplication.update(id:Long)
+# Delete a user
+POST    /users/:id/delete       controllers.UserApplication.delete(id:Long)
+
 
 
 

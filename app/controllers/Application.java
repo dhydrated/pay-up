@@ -1,14 +1,12 @@
 package controllers;
 
-import java.util.*;
-
-import play.mvc.*;
-import play.data.*;
-import play.*;
-
-import views.html.*;
-
-import models.*;
+import models.Payment;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.createForm;
+import views.html.editForm;
+import views.html.list;
 
 /**
  * Manage a database of payments

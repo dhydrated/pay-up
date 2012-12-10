@@ -8,6 +8,7 @@ create table payees (
   name                      varchar(255),
   account_number            varchar(255),
   description               varchar(255),
+  amount                    decimal(38),
   constraint pk_payees primary key (id))
 ;
 

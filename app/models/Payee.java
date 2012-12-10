@@ -1,14 +1,17 @@
 package models;
 
-import java.util.*;
-import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import play.db.ebean.*;
-import play.data.format.*;
-import play.data.validation.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import play.data.validation.Constraints;
+import play.db.ebean.Model;
 
-import com.avaje.ebean.*;
+import com.avaje.ebean.Page;
 
 
 /**
@@ -27,6 +30,9 @@ public class Payee extends Model {
     public String accountNumber;
     
     public String description;
+    
+    @Constraints.Max(value=10000)
+    public BigDecimal amount;
 
     
     /**

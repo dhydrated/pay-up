@@ -15,6 +15,8 @@ create table payments (
   id                        bigint not null,
   name                      varchar(255),
   amount                    decimal(38),
+  remarks                   varchar(255),
+  reference                 varchar(255),
   paid_date                 timestamp,
   payee_id                  bigint,
   constraint pk_payments primary key (id))

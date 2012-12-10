@@ -16,6 +16,10 @@
             
             @inputText(paymentForm("amount"), '_label -> "Amount")
             
+            @inputText(paymentForm("reference"), '_label -> "Reference")
+            
+            @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50)
+            
             @select(
                 paymentForm("payee.id"), 
                 options(Payee.options), 

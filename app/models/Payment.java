@@ -32,6 +32,11 @@ public class Payment extends Model {
     @Constraints.Required
     public BigDecimal amount;
 
+    @Constraints.MaxLength(value=500)
+    public String remarks;
+    
+    public String reference;
+
     @Formats.DateTime(pattern="yyyy-MM-dd")
     @Column(name="paid_date")
     public Date paidDate = new Date();

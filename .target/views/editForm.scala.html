@@ -11,7 +11,14 @@
     @form(routes.Application.update(id)) {
         
         <fieldset>
-        
+
+            @select(
+                paymentForm("payee.id"), 
+                options(Payee.options), 
+                '_label -> "Payee", '_default -> "-- Choose a payee --",
+                '_showConstraints -> false
+            )
+            
             @inputText(paymentForm("name"), '_label -> "Description")
             
             @inputText(paymentForm("amount"), '_label -> "Amount")
@@ -19,13 +26,6 @@
             @inputText(paymentForm("reference"), '_label -> "Reference")
             
             @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50)
-            
-            @select(
-                paymentForm("payee.id"), 
-                options(Payee.options), 
-                '_label -> "Payee", '_default -> "-- Choose a payee --",
-                '_showConstraints -> false
-            )
         
         </fieldset>
         

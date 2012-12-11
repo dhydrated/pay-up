@@ -9,6 +9,23 @@ window.PayUp = {
 };
 
 $(document).ready(function() {
+	
+	PayUp.Views.PayeeDropdown = Backbone.View.extend({
+		el: "div.input #payee_id",
+		initialize: function() {
+			console.log('PayeeDropdown init.');
+		},
+		events: {
+	    	  "click" : "selectPayee"
+	    },
+	    selectPayee: function(){
+		    	
+		    	console.log('selected Payee!');
+				$(this.el).find('option:selected').each(function () {
+					console.log($(this).val() + " : " + $(this).text());
+				});
+	    }
+	});
 
 	PayUp.Router = Backbone.Router.extend({
 		initialize : function(options) {
@@ -18,7 +35,8 @@ $(document).ready(function() {
 			"" : "index"
 		},
 		index : function() {
-//			console.log('index');
+			console.log('index');
+			new PayUp.Views.PayeeDropdown();
 		}
 	});
 

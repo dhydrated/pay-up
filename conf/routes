@@ -38,6 +38,8 @@ POST    /payees/:id              controllers.PayeeApplication.update(id:Long)
 # Delete a payee
 POST    /payees/:id/delete       controllers.PayeeApplication.delete(id:Long)
 
+GET     /api/payees              controllers.PayeeApplication.apiList()
+
 # Users list (look at the default values for pagination parameters)
 GET     /users                  controllers.UserApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add payment

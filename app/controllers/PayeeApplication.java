@@ -1,7 +1,13 @@
 package controllers;
 
+import java.util.List;
+
 import models.Payee;
+
+import org.codehaus.jackson.node.ObjectNode;
+
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -44,6 +50,12 @@ public class PayeeApplication extends Controller {
                 sortBy, order, filter
             )
         );
+    }
+    
+    public static Result apiList(){
+    	
+    	List<Payee> payees = Payee.find.findList();
+    	return ok(Json.toJson(payees));
     }
     
     /**

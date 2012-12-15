@@ -67,16 +67,24 @@
         <table class="payments zebra-striped">
             <thead>
                 <tr>
-                    @header("name", "Payment name")
-                    @header("paidDate", "Paid Date")
                     @header("payee.name", "Payee")
+                    @header("year", "Year")
+                    @header("month", "Month")
+                    @header("paidDate", "Paid Date")
+                    @header("amount", "Amount")
                 </tr>
             </thead>
             <tbody>
 
                 @for(payment <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Application.edit(payment.id)">@payment.name</a></td>
+                        <td><a href="@routes.Application.edit(payment.id)">@payment.payee.name (@payment.payee.accountNumber)</a></td>
+                        <td>
+                            @payment.year
+                        </td>
+                        <td>
+                            @payment.month
+                        </td>
                         <td>
                             @if(payment.paidDate == null) {
                                 <em>-</em>
@@ -85,11 +93,7 @@
                             }
                         </td>
                         <td>
-                            @if(payment.payee == null) {
-                                <em>-</em>
-                            } else {
-                                @payment.payee.name
-                            }
+                            @payment.amount
                         </td>
                     </tr>
                 }

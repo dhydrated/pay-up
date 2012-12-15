@@ -16,7 +16,22 @@
                 paymentForm("payee.id"), 
                 options(Payee.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",
-                '_showConstraints -> false
+                '_showConstraints -> false,
+                'style -> "width:300px"
+            )
+            
+            @select(
+                paymentForm("year"), 
+                options(Payment.yearOptions), 
+                '_label -> "Year", '_default -> "-- Choose a year --",
+                '_showConstraints -> true
+            )
+            
+            @select(
+                paymentForm("month"), 
+                options(Payment.monthOptions), 
+                '_label -> "Month", '_default -> "-- Choose a month --",
+                '_showConstraints -> true
             )
             
             @inputText(paymentForm("name"), '_label -> "Description")

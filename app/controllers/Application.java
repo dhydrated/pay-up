@@ -5,9 +5,9 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.createForm;
-import views.html.editForm;
-import views.html.list;
+import views.html.payments.createForm;
+import views.html.payments.editForm;
+import views.html.payments.list;
 
 /**
  * Manage a database of payments

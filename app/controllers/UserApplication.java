@@ -5,9 +5,9 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.userCreateForm;
-import views.html.userEditForm;
-import views.html.userList;
+import views.html.users.userCreateForm;
+import views.html.users.userEditForm;
+import views.html.users.userList;
 
 /**
  * Manage a database of users

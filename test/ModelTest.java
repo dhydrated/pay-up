@@ -1,17 +1,15 @@
-import org.junit.*;
+import static org.fest.assertions.Assertions.assertThat;
+import static play.test.Helpers.fakeApplication;
+import static play.test.Helpers.inMemoryDatabase;
+import static play.test.Helpers.running;
 
-import java.util.*;
+import java.util.Date;
 
-import play.mvc.*;
-import play.test.*;
-import play.libs.F.*;
+import models.Payment;
 
-import static play.test.Helpers.*;
-import static org.fest.assertions.Assertions.*;
+import org.junit.Test;
 
-import models.*;
-
-import com.avaje.ebean.*;
+import com.avaje.ebean.Page;
 
 public class ModelTest {
     

@@ -1,0 +1,36 @@
+@(id: Long, payeeForm: Form[Payee])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Edit payee</h1>
+    
+    @form(routes.PayeeApplication.update(id)) {
+        
+        <fieldset>
+        
+            @inputText(payeeForm("name"), '_label -> "Name")
+            
+            @inputText(payeeForm("accountNumber"), '_label -> "Account #")
+            
+            @inputText(payeeForm("amount"), '_label -> "Amount")
+            
+            @inputText(payeeForm("description"), '_label -> "Description")
+        
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this payee" class="btn primary"> or 
+            <a href="@routes.PayeeApplication.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.PayeeApplication.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this payee" class="btn danger">
+    }
+    
+}

@@ -3,17 +3,14 @@ package controllers;
 import java.util.List;
 
 import models.Payee;
-
-import org.codehaus.jackson.node.ObjectNode;
-
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.payeeCreateForm;
-import views.html.payeeEditForm;
-import views.html.payeeList;
+import views.html.payees.payeeCreateForm;
+import views.html.payees.payeeEditForm;
+import views.html.payees.payeeList;
 
 /**
  * Manage a database of payees

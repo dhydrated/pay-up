@@ -1,11 +1,10 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
-import play.data.*;
-
-import models.*;
-import views.html.*;
+import models.User;
+import play.data.Form;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.login;
 
 public class LoginApplication extends Controller {
   

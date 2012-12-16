@@ -33,9 +33,11 @@ public class Payment extends Model {
     public BigDecimal amount;
     
     @Constraints.Max(value=9999)
+    @Constraints.Required
     public Integer year;
     
     @Constraints.Max(value=12)
+    @Constraints.Required
     public Integer month;
 
     @Constraints.MaxLength(value=500)
@@ -46,9 +48,9 @@ public class Payment extends Model {
     @Formats.DateTime(pattern="yyyy-MM-dd")
     @Column(name="paid_date")
     public Date paidDate = new Date();
-    
-    @ManyToOne
+
     @Constraints.Required
+    @ManyToOne
     public Payee payee;
     
     /**

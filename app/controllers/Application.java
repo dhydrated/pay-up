@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Calendar;
+
 import models.Payment;
 import play.data.Form;
 import play.mvc.Controller;
@@ -79,7 +81,17 @@ public class Application extends Controller {
      * Display the 'new payment form'.
      */
     public static Result create() {
-        Form<Payment> paymentForm = form(Payment.class);
+    	
+    	Payment payment = new Payment();
+    	
+    	Calendar now = Calendar.getInstance();
+    	
+    	payment.year = now.get(Calendar.YEAR);
+    	payment.month = now.get(Calendar.MONTH)+1;
+    	
+        Form<Payment> paymentForm = form(Payment.class).fill(
+                payment
+        );
         return ok(
             createForm.render(paymentForm)
         );

@@ -6,9 +6,9 @@
 
 @main {
     
-    <h1>Edit payment</h1>
+    <h2>Edit payment</h2>
     
-    @form(routes.Application.update(id)) {
+    @form(routes.Application.update(id), 'class -> "form-horizontal") {
         
         <fieldset>
 
@@ -44,15 +44,15 @@
         
         </fieldset>
         
-        <div class="actions">
-            <input type="submit" value="Save this payment" class="btn primary"> or 
+        <div class="form-actions">
+            <input type="submit" value="Save this payment" class="btn btn-primary"> or 
             <a href="@routes.Application.list()" class="btn">Cancel</a> 
         </div>
         
     }
     
     @form(routes.Application.delete(id), 'class -> "topRight") {
-        <input type="submit" value="Delete this payment" class="btn danger">
+        <input type="submit" value="Delete this payment" class="btn btn-danger">
     }
     
 }

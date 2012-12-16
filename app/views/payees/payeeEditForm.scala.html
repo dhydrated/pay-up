@@ -6,9 +6,9 @@
 
 @main {
     
-    <h1>Edit payee</h1>
+    <h2>Edit payee</h2>
     
-    @form(routes.PayeeApplication.update(id)) {
+    @form(routes.PayeeApplication.update(id), 'class -> "form-horizontal") {
         
         <fieldset>
         
@@ -22,15 +22,15 @@
         
         </fieldset>
         
-        <div class="actions">
-            <input type="submit" value="Save this payee" class="btn primary"> or 
+        <div class="form-actions">
+            <input type="submit" value="Save this payee" class="btn btn-primary"> or 
             <a href="@routes.PayeeApplication.list()" class="btn">Cancel</a> 
         </div>
         
     }
     
     @form(routes.PayeeApplication.delete(id), 'class -> "topRight") {
-        <input type="submit" value="Delete this payee" class="btn danger">
+        <input type="submit" value="Delete this payee" class="btn btn-danger">
     }
     
 }

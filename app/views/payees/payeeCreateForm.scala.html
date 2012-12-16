@@ -6,9 +6,9 @@
 
 @main {
     
-    <h1>Add a payee</h1>
+    <h2>Add a payee</h2>
     
-    @form(routes.PayeeApplication.save()) {
+    @form(routes.PayeeApplication.save(), 'class -> "form-horizontal") {
         
         <fieldset>
         
@@ -22,8 +22,8 @@
 
         </fieldset>
         
-        <div class="actions">
-            <input type="submit" value="Create this payee" class="btn primary"> or 
+        <div class="form-actions">
+            <input type="submit" value="Create this payee" class="btn btn-primary"> or 
             <a href="@routes.PayeeApplication.list()" class="btn">Cancel</a> 
         </div>
         

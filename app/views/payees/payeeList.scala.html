@@ -48,11 +48,11 @@
     <div id="actions">
         
         <form action="@link(0, "name")" method="GET">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by payee name...">
-            <input type="submit" id="searchsubmit" value="Filter by name" class="btn primary">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by payee name..." class="input-medium search-query">
+            <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-primary">
         </form>
         
-        <a class="btn success" id="add" href="@routes.PayeeApplication.create()">Add a new payee</a>
+        <a class="btn btn-success" id="add" href="@routes.PayeeApplication.create()">Add a new payee</a>
         
     </div>
     
@@ -64,7 +64,7 @@
         
     } else {
         
-        <table class="payees zebra-striped">
+        <table class="payees table table-striped table-bordered">
             <thead>
                 <tr>
                     @header("name", "Payee name")

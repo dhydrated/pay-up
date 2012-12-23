@@ -43,7 +43,10 @@ public class Payee extends Model {
     public static Map<String,String> options() {
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
         for(Payee c: Payee.find.orderBy("name").findList()) {
-            options.put(c.id.toString(), c.name + " (" + c.accountNumber +")");
+        	
+        	String account = c.accountNumber.equals("") ?  "" : "(" + c.accountNumber +")";
+        	
+            options.put(c.id.toString(), c.name + account);
         }
         return options;
     }

@@ -13,6 +13,14 @@
         <fieldset>
 
             @select(
+                paymentForm("paymentType.id"), 
+                options(PaymentType.options), 
+                '_label -> "Payment Type", '_default -> "-- Choose a payment type --",
+                '_showConstraints -> true,
+                'style -> "width:300px"
+            )
+
+            @select(
                 paymentForm("payee.id"), 
                 options(Payee.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",

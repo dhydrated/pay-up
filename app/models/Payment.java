@@ -52,6 +52,10 @@ public class Payment extends Model {
     @Constraints.Required
     @ManyToOne
     public Payee payee;
+
+    @Constraints.Required
+    @ManyToOne
+    public PaymentType paymentType;
     
     /**
      * Generic query helper for entity Payment with id Long

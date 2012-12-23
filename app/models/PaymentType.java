@@ -58,5 +58,13 @@ public class PaymentType extends Model {
                 .getPage(page);
     }
 
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+    
+    
+
 }
 

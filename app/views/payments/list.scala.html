@@ -68,6 +68,7 @@
             <thead>
                 <tr>
                     @header("payee.name", "Payee")
+                    @header("paymentType.name", "Payment Type")
                     @header("year", "Year")
                     @header("month", "Month")
                     @header("paidDate", "Paid Date")
@@ -78,8 +79,16 @@
 
                 @for(payment <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Application.edit(payment.id)">@payment.payee.name (@payment.payee.accountNumber)</a></td>
                         <td>
+                        	<a href="@routes.Application.edit(payment.id)">@payment.payee.name @if(payment.payee.accountNumber != "") {(@payment.payee.accountNumber)}</a></td>
+                        <td>
+                            @if(payment.paymentType == null) {
+                                <em>-</em>
+                            } else {
+                                @payment.paymentType
+                            }
+                        </td>
+                         <td>
                             @payment.year
                         </td>
                         <td>

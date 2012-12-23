@@ -40,6 +40,18 @@ POST    /payees/:id/delete       controllers.PayeeApplication.delete(id:Long)
 
 GET     /api/payees              controllers.PayeeApplication.apiList()
 
+
+# PaymentTypes list (look at the default values for pagination parameters)
+GET     /payment_types                  controllers.PaymentTypeApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+# Add payment
+GET     /payment_types/new              controllers.PaymentTypeApplication.create()
+POST    /payment_types                  controllers.PaymentTypeApplication.save()
+# Edit existing paymentType
+GET     /payment_types/:id              controllers.PaymentTypeApplication.edit(id:Long)
+POST    /payment_types/:id              controllers.PaymentTypeApplication.update(id:Long)
+# Delete a paymentType
+POST    /payment_types/:id/delete       controllers.PaymentTypeApplication.delete(id:Long)
+
 # Users list (look at the default values for pagination parameters)
 GET     /users                  controllers.UserApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add payment

@@ -1,0 +1,26 @@
+@(paymentTypeForm: Form[PaymentType])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h2>Add a paymentType</h2>
+    
+    @form(routes.PaymentTypeApplication.save(), 'class -> "form-horizontal") {
+        
+        <fieldset>
+        
+            @inputText(paymentTypeForm("name"), '_label -> "Name")
+            
+        </fieldset>
+        
+        <div class="form-actions">
+            <input type="submit" value="Create this payment type" class="btn btn-primary"> or 
+            <a href="@routes.PaymentTypeApplication.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

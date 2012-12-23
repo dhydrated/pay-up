@@ -1,6 +1,3 @@
-# --- Created by Ebean DDL
-# To stop Ebean DDL generation, remove this comment and start using Evolutions
-
 # --- !Ups
 
 create table payees (
@@ -25,6 +22,12 @@ create table payments (
   constraint pk_payments primary key (id))
 ;
 
+create table payment_types (
+  id                        bigint not null,
+  name                      varchar(255),
+  constraint pk_payment_types primary key (id))
+;
+
 create table users (
   id                        bigint not null,
   name                      varchar(255),
@@ -36,6 +39,8 @@ create table users (
 create sequence payees_seq;
 
 create sequence payments_seq;
+
+create sequence payment_types_seq;
 
 create sequence users_seq;
 
@@ -50,11 +55,15 @@ drop table if exists payees cascade;
 
 drop table if exists payments cascade;
 
+drop table if exists payment_types cascade;
+
 drop table if exists users cascade;
 
 drop sequence if exists payees_seq;
 
 drop sequence if exists payments_seq;
+
+drop sequence if exists payment_types_seq;
 
 drop sequence if exists users_seq;
 

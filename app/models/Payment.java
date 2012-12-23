@@ -74,7 +74,7 @@ public class Payment extends Model {
     public static Page<Payment> page(int page, int pageSize, String sortBy, String order, String filter) {
         return 
             find.where()
-                .ilike("name", "%" + filter + "%")
+                .ilike("payee.name", "%" + filter + "%")
                 .orderBy(sortBy + " " + order)
                 .fetch("payee")
                 .findPagingList(pageSize)

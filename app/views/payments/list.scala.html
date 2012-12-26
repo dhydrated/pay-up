@@ -69,8 +69,7 @@
                 <tr>
                     @header("payee.name", "Payee")
                     @header("paymentType.name", "Payment Type")
-                    @header("year", "Year")
-                    @header("month", "Month")
+                    @header("startPeriod", "Period")
                     @header("paidDate", "Paid Date")
                     @header("amount", "Amount")
                 </tr>
@@ -88,11 +87,18 @@
                                 @payment.paymentType
                             }
                         </td>
-                         <td>
-                            @payment.year
-                        </td>
                         <td>
-                            @payment.getMonthName
+                            @if(payment.startPeriod == null) {
+                                <em></em>
+                            } else {
+                                @payment.startPeriod.format("dd MMM yyyy")
+                            }
+                            
+                            @if(payment.endPeriod == null) {
+                                <em></em>
+                            } else {
+                                 - @payment.endPeriod.format("dd MMM yyyy")
+                            }
                         </td>
                         <td>
                             @if(payment.paidDate == null) {

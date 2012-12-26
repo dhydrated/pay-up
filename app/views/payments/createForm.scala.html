@@ -28,18 +28,14 @@
                 'style -> "width:300px"
             )
             
-            @select(
-                paymentForm("year"), 
-                options(Payment.yearOptions), 
-                '_label -> "Year", '_default -> "-- Choose a year --",
-                '_showConstraints -> true
+            @inputDate(paymentForm("startPeriod"), 
+            	'_label -> "Start Period", 
+            	Symbol("data-date-format") -> "dd/MM/yyyy"
             )
             
-            @select(
-                paymentForm("month"), 
-                options(Payment.monthOptions), 
-                '_label -> "Month", '_default -> "-- Choose a month --",
-                '_showConstraints -> true
+            @inputDate(paymentForm("endPeriod"), 
+            	'_label -> "End Period", 
+            	Symbol("data-date-format") -> "dd/MM/yyyy"
             )
         
             @inputText(paymentForm("name"), '_label -> "Description")

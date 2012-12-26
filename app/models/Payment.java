@@ -1,6 +1,7 @@
 package models;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -35,14 +36,6 @@ public class Payment extends Model {
 	@Constraints.Required
 	public BigDecimal amount;
 
-	@Constraints.Max(value = 9999)
-	@Constraints.Required
-	public Integer year;
-
-	@Constraints.Max(value = 12)
-	@Constraints.Required
-	public Integer month;
-
 	@Constraints.MaxLength(value = 500)
 	public String remarks;
 
@@ -65,6 +58,12 @@ public class Payment extends Model {
 
 	@Transient
 	public static Map<String, String> months;
+
+	@Column(name = "start_period")
+	public Date startPeriod; 
+
+	@Column(name = "end_period")
+	public Date endPeriod; 
 
 	/**
 	 * Generic query helper for entity Payment with id Long
@@ -102,38 +101,22 @@ public class Payment extends Model {
 		return options;
 	}
 
-	public static Map<String, String> monthOptions() {
-
-		return getMonths();
-	}
-
-	public static Map<String, String> getMonths() {
-
-		if (months == null) {
-			months = new LinkedHashMap<String, String>();
-			months.put("1", "January");
-			months.put("2", "February");
-			months.put("3", "March");
-			months.put("4", "April");
-			months.put("5", "May");
-			months.put("6", "June");
-			months.put("7", "July");
-			months.put("8", "August");
-			months.put("9", "September");
-			months.put("10", "October");
-			months.put("11", "November");
-			months.put("12", "December");
+	public Date getStartPeriod(){
+		if(this.startPeriod == null){
+			Calendar tempDate = Calendar.getInstance();
+			tempDate.set(Calendar.DATE, 1);
+			this.startPeriod = tempDate.getTime();
 		}
-
-		return months;
+		return this.startPeriod;
 	}
-
-	public String getMonthName(){
-		
-		if(this.monthName == null){
-			this.monthName = getMonths().get(this.month.toString());
+	
+	public Date getEndPeriod(){
+		if(this.endPeriod == null){
+			Calendar tempDate = Calendar.getInstance();
+			tempDate.set(Calendar.DATE, tempDate.getActualMaximum(Calendar.DATE));
+			this.endPeriod = tempDate.getTime();
 		}
-		return this.monthName;
+		return this.endPeriod;
 	}
 
 }

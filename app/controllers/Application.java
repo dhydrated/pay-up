@@ -84,11 +84,6 @@ public class Application extends Controller {
     	
     	Payment payment = new Payment();
     	
-    	Calendar now = Calendar.getInstance();
-    	
-    	payment.year = now.get(Calendar.YEAR);
-    	payment.month = now.get(Calendar.MONTH)+1;
-    	
         Form<Payment> paymentForm = form(Payment.class).fill(
                 payment
         );

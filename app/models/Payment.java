@@ -102,7 +102,7 @@ public class Payment extends Model {
 	}
 
 	public Date getStartPeriod(){
-		if(this.startPeriod == null){
+		if(this.id == null && this.startPeriod == null){
 			Calendar tempDate = Calendar.getInstance();
 			tempDate.set(Calendar.DATE, 1);
 			this.startPeriod = tempDate.getTime();
@@ -111,7 +111,7 @@ public class Payment extends Model {
 	}
 	
 	public Date getEndPeriod(){
-		if(this.endPeriod == null){
+		if(this.id == null && this.endPeriod == null){
 			Calendar tempDate = Calendar.getInstance();
 			tempDate.set(Calendar.DATE, tempDate.getActualMaximum(Calendar.DATE));
 			this.endPeriod = tempDate.getTime();

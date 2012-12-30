@@ -10,20 +10,20 @@
 		</form>
 		<div>
 		@if(list != null){
-			<table class="table">
-		    	<th>
+			<table class="table table-bordered">
+		    	<tr>
 				@for(key <- list.get(0).keys){
 					<td>@key</td>
 				}
-				</th>
-		
-			@for(item <- list){
-		    	<tr>
-				@for(key <- item.values){
-					<td>@key</td>
-				}
 				</tr>
-			}
+		
+				@for(item <- list){
+			    	<tr>
+					@for(key <- item.values){
+						<td>@key</td>
+					}
+					</tr>
+				}
 			</table>
 		}
 		</div>

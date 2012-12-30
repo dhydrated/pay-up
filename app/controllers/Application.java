@@ -1,9 +1,12 @@
 package controllers;
 
 import java.util.Calendar;
+import java.util.List;
 
+import models.Payee;
 import models.Payment;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -46,6 +49,11 @@ public class Application extends Controller {
                 sortBy, order, filter
             )
         );
+    }
+
+    public static Result apiList(){
+    	List<Payment> payments = Payment.find.findList();
+    	return ok(Json.toJson(payments));
     }
     
     /**

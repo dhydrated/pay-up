@@ -25,6 +25,8 @@ POST    /payments/:id              controllers.Application.update(id:Long)
 # Delete a payment
 POST    /payments/:id/delete       controllers.Application.delete(id:Long)
 
+GET     /api/payments              controllers.Application.apiList()
+
 
 
 # Payees list (look at the default values for pagination parameters)
@@ -64,7 +66,8 @@ POST    /users/:id              controllers.UserApplication.update(id:Long)
 POST    /users/:id/delete       controllers.UserApplication.delete(id:Long)
 
 
-
+GET     /queries              controllers.QueryApplication.index()
+POST    /queries              controllers.QueryApplication.query()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

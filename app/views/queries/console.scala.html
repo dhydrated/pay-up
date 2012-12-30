@@ -1,0 +1,31 @@
+@(list: List[SqlRow], query: String)
+
+@main {
+	<h3>Query Console</h3>
+
+	<div class="container">
+		<form method="POST" action="/queries">
+			<textarea id="query" name="query" cols="300" rows="10">@query</textarea>
+			<button type="submit" class="btn btn-primary">Go</button>
+		</form>
+		<div>
+		@if(list != null){
+			<table class="table">
+		    	<th>
+				@for(key <- list.get(0).keys){
+					<td>@key</td>
+				}
+				</th>
+		
+			@for(item <- list){
+		    	<tr>
+				@for(key <- item.values){
+					<td>@key</td>
+				}
+				</tr>
+			}
+			</table>
+		}
+		</div>
+	</div>
+}

@@ -1,0 +1,28 @@
+@(reportForm: Form[Report])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h2>Add a report</h2>
+    
+    @form(routes.ReportApplication.save(), 'class -> "form-horizontal") {
+        
+        <fieldset>
+        
+            @inputText(reportForm("name"), '_label -> "Name")
+            
+            @textarea(reportForm("query"), '_label -> "Query", 'rows -> 15, 'cols -> 50)
+
+        </fieldset>
+        
+        <div class="form-actions">
+            <input type="submit" value="Create this report" class="btn btn-primary"> or 
+            <a href="@routes.ReportApplication.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

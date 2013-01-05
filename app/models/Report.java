@@ -76,8 +76,9 @@ public class Report extends Model {
     	
     	List<SqlRow> rows = null;
     	try {
+			rows = q.findList();
 		} catch (Exception e) {
-			Logger.error("Error:", e);
+			Logger.error("Error", e);
 		}
     	return rows;
     }

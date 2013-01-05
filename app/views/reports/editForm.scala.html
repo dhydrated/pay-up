@@ -12,6 +12,8 @@
         
         <fieldset>
         
+			<input type="hidden" name="report_id" id="report_id" value="@id" >
+            
             @inputText(reportForm("name"), '_label -> "Name")
             
             @textarea(reportForm("query"), '_label -> "Query", 'rows -> 15, 'cols -> 50)
@@ -24,7 +26,7 @@
         </div>
         
         <div>
-		@if(list != null){
+		@if(list != null && reportForm.get().getData() != null) {
 			<table class="table table-bordered table-striped">
 		    	<tr>
 				@for(key <- reportForm.get().getData().get(0).keys){
@@ -48,5 +50,7 @@
     @form(routes.ReportApplication.delete(id), 'class -> "topRight") {
         <input type="submit" value="Delete this report" class="btn btn-danger">
     }
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/reports.js")"></script>
     
 }

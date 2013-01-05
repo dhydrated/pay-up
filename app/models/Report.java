@@ -73,7 +73,12 @@ public class Report extends Model {
     
     public List<SqlRow> getData(){
     	SqlQuery q = Ebean.createSqlQuery(this.query);
-    	List<SqlRow> rows = q.findList();
+    	
+    	List<SqlRow> rows = null;
+    	try {
+		} catch (Exception e) {
+			Logger.error("Error:", e);
+		}
     	return rows;
     }
 

@@ -35,8 +35,13 @@ $(document).ready(function() {
 
 			var that = this;
 			
+
+	    	  console.log(this);
+			
 			setTimeout(
 					function(){
+						
+						window.collection = that.collection;
 						google.load('visualization', '1', 
 								{'callback':that.drawChart, 'packages':['corechart']}
 						)
@@ -51,20 +56,69 @@ $(document).ready(function() {
 
     	  console.log('drawChart');
     	  
+    	  console.log(this.collection);
+    	  
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
-        data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
-        ]);
+        
+        console.log(this.collection.models[0]);
+        
+        /*this.collection.each(function(row){
+        	console.log(row);
+        	console.log(row.attributes);
+        	
+        	for(prop in row.attributes){
+        		console.log(prop);
+        	}
+        	
+        });*/
+        
+        for(prop in this.collection.models[0].attributes){
+    		console.log(prop);
+    		var value = this.collection.models[0].get(prop);
+    		console.log(value);
+    		console.log(isNaN(value));
+    		
+    		var columnType = isNaN(value) ? "string" : "number"; 
+
+    		console.log(columnType);
+    		data.addColumn(columnType, value)
+    	}
+        
+        
+        
+        /*data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');*/
+        
+        var myCollection = new Array();
+        var count = 0;
+        this.collection.each(function(row){
+        	 var myArray = new Array();
+        	 var idx = 0;
+        	 for(prop in row.attributes){
+        		 myArray[idx]= row.get(prop);
+        		 idx++;
+        	 }
+        	 console.log(myArray);
+        	 myCollection[count] = myArray;
+        	 count++;
+        });
+        
+        console.log(myCollection);
+        data.addRows(myCollection);
+        
+//        data.addRows([
+//          ['Mushrooms', 3],
+//          ['Onions', 1],
+//          ['Olives', 1],
+//          ['Zucchini', 1],
+//          ['Pepperoni', 2]
+//        ]);
+        
+        var reportName = $('#name').val();
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
+        var options = {'title':reportName,
                        'width':400,
                        'height':300};
 
@@ -79,6 +133,7 @@ $(document).ready(function() {
 			this.collection.fetch({
 				success : function(data) {
 					console.log('success');
+					console.log(data);
 					that.renderChart();
 				},
 				error : function() {

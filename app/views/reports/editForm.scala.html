@@ -25,6 +25,8 @@
             <a href="@routes.ReportApplication.list()" class="btn">Cancel</a> 
         </div>
         
+        <div id="chart_div"></div>
+        
         <div>
 		@if(list != null && reportForm.get().getData() != null) {
 			<table class="table table-bordered table-striped">
@@ -51,6 +53,7 @@
         <input type="submit" value="Delete this report" class="btn btn-danger">
     }
     
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/reports.js")"></script>
     
 }

@@ -30,13 +30,18 @@ $(document).ready(function() {
 			this.fetchData();
 		},
 		renderChart : function() {
+			
 
-			 // Load the Visualization API and the piechart package.
-//		      google.load('visualization', '1.0', {'packages':['corechart']});
 
-		      // Set a callback to run when the Google Visualization API is loaded.
-//		      google.setOnLoadCallback(drawChart);
-
+			var that = this;
+			
+			setTimeout(
+					function(){
+						google.load('visualization', '1', 
+								{'callback':that.drawChart, 'packages':['corechart']}
+						)
+					}
+					, 2000);
 		      
 		},
 		// Callback that creates and populates a data table,
@@ -44,6 +49,8 @@ $(document).ready(function() {
 	      // draws it.
       drawChart: function() {
 
+    	  console.log('drawChart');
+    	  
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
@@ -67,9 +74,9 @@ $(document).ready(function() {
       },
 		fetchData : function() {
 
-			this.data = new PayUp.Collections.ReportDatas();
+			this.collection = new PayUp.Collections.ReportDatas();
 			var that = this;
-			this.data.fetch({
+			this.collection.fetch({
 				success : function(data) {
 					console.log('success');
 					that.renderChart();

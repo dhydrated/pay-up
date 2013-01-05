@@ -77,8 +77,11 @@ POST    /reports/:id              controllers.ReportApplication.update(id:Long)
 # Delete a report
 POST    /reports/:id/delete       controllers.ReportApplication.delete(id:Long)
 
+GET     /api/reports/:id/data     controllers.ReportApplication.apiReportData(id:Long)
+
 GET     /queries              controllers.QueryApplication.index()
 POST    /queries              controllers.QueryApplication.query()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 
+import models.Payment;
 import models.Report;
 import play.data.Form;
 import play.libs.Json;
@@ -108,6 +109,13 @@ public class ReportApplication extends Controller {
         Report.find.ref(id).delete();
         flash("success", "Report has been deleted");
         return GO_HOME;
+    }
+    
+
+    public static Result apiReportData(Long id){
+    	Report report = Report.find.byId(id);
+    	
+    	return ok(Json.toJson(report.getData()));
     }
     
 

@@ -63,8 +63,6 @@ $(document).ready(function() {
 			"blur" : "updateEndPeriod"
 		},
 		updateEndPeriod : function() {
-			console.log('update period');
-			
 			var startDate = Date.parse($(this.el).val());
 			var endDate = startDate.add(1).months().add(-1).days(); //set the end period a month from startPeriod.
 			

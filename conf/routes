@@ -12,7 +12,7 @@ POST    /login                              controllers.LoginApplication.authent
 GET     /logout                             controllers.LoginApplication.logout()
 
 # Payments list (look at the default values for pagination parameters)
-GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "paidDate", o ?= "desc", f ?= "")
 
 # Add payment
 GET     /payments/new              controllers.Application.create()

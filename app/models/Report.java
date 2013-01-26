@@ -60,6 +60,11 @@ public class Report extends Model {
         
         options.put("pie_chart", "Pie Chart");
         options.put("bar_chart", "Bar Chart");
+        options.put("area_chart", "Area Chart");
+        options.put("bubble_chart", "Bubble Chart");
+        options.put("candlestick_chart", "Candlestick Chart");
+        options.put("column_chart", "Column Chart");
+        options.put("gauge", "Gauge");
         
         return options;
     }

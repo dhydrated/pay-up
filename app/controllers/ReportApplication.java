@@ -75,8 +75,10 @@ public class ReportApplication extends Controller {
             return badRequest(editForm.render(id, reportForm));
         }
         reportForm.get().update(id);
-        flash("success", "Report " + reportForm.get().name + " has been updated");
-        return GO_HOME;
+//        flash("success", "Report " + reportForm.get().name + " has been updated");
+        
+        return edit(reportForm.get().id);
+//        return GO_HOME;
     }
     
     /**
@@ -98,8 +100,11 @@ public class ReportApplication extends Controller {
             return badRequest(createForm.render(reportForm));
         }
         reportForm.get().save();
-        flash("success", "Report " + reportForm.get().name + " has been created");
-        return GO_HOME;
+//        flash("success", "Report " + reportForm.get().name + " has been created");
+        
+        return edit(reportForm.get().id);
+        
+//        return GO_HOME;
     }
     
     /**

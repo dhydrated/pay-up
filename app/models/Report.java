@@ -36,6 +36,9 @@ public class Report extends Model {
 
     @Constraints.Required
     public String query;
+
+    @Constraints.Required
+    public String chartType;
     
     
     /**
@@ -49,6 +52,15 @@ public class Report extends Model {
 
         	options.put(c.id.toString(), c.name);
         }
+        return options;
+    }
+    
+    public static Map<String,String> chartTypeOptions() {
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        
+        options.put("pie_chart", "Pie Chart");
+        options.put("bar_chart", "Bar Chart");
+        
         return options;
     }
     

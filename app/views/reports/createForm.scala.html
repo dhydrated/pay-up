@@ -15,6 +15,14 @@
             @inputText(reportForm("name"), '_label -> "Name")
             
             @textarea(reportForm("query"), '_label -> "Query", 'rows -> 15, 'cols -> 50)
+            
+            @select(
+                reportForm("chartType"), 
+                options(Report.chartTypeOptions), 
+                '_label -> "Chart Type", '_default -> "-- Choose a chart type --",
+                '_showConstraints -> true,
+                'style -> "width:300px"
+            )
 
         </fieldset>
         

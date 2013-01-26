@@ -10,9 +10,12 @@ create table payment_templates (
 
 create sequence payment_templates_seq;
 
+alter table reports add column chart_type varchar(15);
 
 # --- !Downs
 
 drop table if exists payment_templates cascade;
 
 drop sequence if exists payment_templates_seq;
+
+alter table reports drop column chart_type;

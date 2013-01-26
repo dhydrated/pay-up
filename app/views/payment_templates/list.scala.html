@@ -76,8 +76,8 @@
 
                 @for(paymentTemplate <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.PaymentTemplateApplication.edit(paymentTemplate.id)">@paymentTemplate.payee.getName</a></td>
-                        <td>@paymentTemplate.paymentType.getName</td>
+                        <td><a href="@routes.PaymentTemplateApplication.edit(paymentTemplate.id)">@paymentTemplate.payee</a></td>
+                        <td>@paymentTemplate.paymentType</td>
                         <td>@paymentTemplate.amount</td>
                     </tr>
                     

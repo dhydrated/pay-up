@@ -12,3 +12,4 @@ create sequence reports_seq;
 # --- !Downs
 
 drop table if exists reports cascade;
+drop sequence if exists reports_seq;

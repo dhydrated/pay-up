@@ -123,6 +123,12 @@ public class ReportApplication extends Controller {
     	return ok(Json.toJson(report.getData()));
     }
     
+    public static Result apiReport(Long id){
+    	Report report = Report.find.byId(id);
+    	
+    	return ok(Json.toJson(report));
+    }
+    
 
 }
             

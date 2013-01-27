@@ -65,7 +65,7 @@ $(document).ready(function() {
         for(prop in this.collection.models[0].attributes){
     		var value = this.collection.models[0].get(prop);
     		var columnType = isNaN(value) ? "string" : "number"; 
-    		data.addColumn(columnType, value)
+    		data.addColumn(columnType, prop);
     	}
 
         var myCollection = new Array();
@@ -82,7 +82,6 @@ $(document).ready(function() {
         });
         
         data.addRows(myCollection);
-        
         var reportName = $('#name').val();
 
         // Set chart options

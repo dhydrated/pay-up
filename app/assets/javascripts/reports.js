@@ -52,7 +52,7 @@ $(document).ready(function() {
 								{'callback':that.drawChart, 'packages':['corechart']}
 						)
 					}
-					, 2000);
+					, 1000);
 		      
 		},
 		// Callback that creates and populates a data table,

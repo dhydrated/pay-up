@@ -37,7 +37,12 @@
             	'_label -> "End Period", 
             	Symbol("data-date-format") -> "dd/MM/yyyy"
             )
-        
+            
+            @inputDate(paymentForm("paidDate"), 
+            	'_label -> "Paid Date", 
+            	Symbol("data-date-format") -> "dd/MM/yyyy"
+            )
+            
             @inputText(paymentForm("name"), '_label -> "Description")
             
             @inputText(paymentForm("amount"), '_label -> "Amount")

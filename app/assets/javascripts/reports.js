@@ -14,6 +14,7 @@ $(document).ready(function() {
 	});
 
 	PayUp.Models.Report = Backbone.Model.extend({
+		urlRoot : '/api/reports'
 	});
 
 	PayUp.Collections.ReportDatas = Backbone.Collection.extend({
@@ -46,7 +47,7 @@ $(document).ready(function() {
 			var that = this;
 			setTimeout(
 					function(){
-						window.collection = that.collection;
+						window.report = that.report;
 						google.load('visualization', '1', 
 								{'callback':that.drawChart, 'packages':['corechart']}
 						)
@@ -58,38 +59,44 @@ $(document).ready(function() {
 	      // instantiates the pie chart, passes in the data and
 	      // draws it.
       drawChart: function() {
-
+    	  
         // Create the data table.
         var data = new google.visualization.DataTable();
         
-        for(prop in this.collection.models[0].attributes){
-    		var value = this.collection.models[0].get(prop);
-    		var columnType = isNaN(value) ? "string" : "number"; 
-    		data.addColumn(columnType, prop);
-    	}
+        for(var key in this.report.attributes.data[0]){
+            var attrName = key;
+            var attrValue = this.report.attributes.data[0][key];
+            var columnType = isNaN(attrValue) ? "string" : "number"; 
+            data.addColumn(columnType, attrName);
+        }
 
         var myCollection = new Array();
         var count = 0;
-        this.collection.each(function(row){
-        	 var myArray = new Array();
-        	 var idx = 0;
-        	 for(prop in row.attributes){
-        		 myArray[idx]= row.get(prop);
-        		 idx++;
-        	 }
-        	 myCollection[count] = myArray;
-        	 count++;
-        });
         
-        data.addRows(myCollection);
-        var reportName = $('#name').val();
+        $(this.report.attributes.data).each(function(key, row){
+	       	var myArray = new Array();
+	       	var idx = 0;
+       	 
+	       	for(var key in row){
+	            var attrName = key;
+	            var attrValue = row[key];
+	            myArray[idx]= attrValue;
+	      		 idx++;
+	       	}
 
-        // Set chart options
-        var options = {'title':reportName,
+	       	myCollection[count] = myArray;
+	       	count++;
+       });
+        
+       data.addRows(myCollection);
+       var reportName = $('#name').val();
+
+       // Set chart options
+       var options = {'title':reportName,
                        'width':800,
                        'height':600};
 
-        var chartType = $("#chartType :selected").val();
+        var chartType = this.report.attributes.chartType;
         
         var chartDiv = document.getElementById('chart_div');
         // Instantiate and draw our chart, passing in some options.
@@ -119,10 +126,9 @@ $(document).ready(function() {
         chart.draw(data, options);
       },
 	  fetchData : function() {
-
-			this.collection = new PayUp.Collections.ReportDatas();
-			var that = this;
-			this.collection.fetch({
+		  var that = this;
+		  this.report = new PayUp.Models.Report({id: $('#report_id').val()});
+		  this.report.fetch({
 				success : function(data) {
 					console.log('success');
 					that.renderChart();

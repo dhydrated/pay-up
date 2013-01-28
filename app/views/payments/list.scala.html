@@ -79,7 +79,9 @@
                 @for(payment <- currentPage.getList) {
                     <tr>
                         <td>
-                        	<a href="@routes.Application.edit(payment.id)">@payment.payee.name @if(payment.payee.accountNumber != "") {(@payment.payee.accountNumber)}</a></td>
+                        	<a href="@routes.Application.edit(payment.id)" 
+                        		rel="tooltip" data-original-title="@payment.name" 
+                        		>@payment.payee.name @if(payment.payee.accountNumber != "") {(@payment.payee.accountNumber)}</a></td>
                         <td>
                             @if(payment.paymentType == null) {
                                 <em>-</em>
@@ -146,4 +148,6 @@
         
 }
 
-            
+<script>
+$('[rel=tooltip]').tooltip();
+</script>            

@@ -8,6 +8,10 @@ window.PayUp = {
 };
 
 $(document).ready(function() {
+	
+	var template = function(name) {
+	   return Handlebars.compile($('#'+name+'-template').html());
+	};
 
 	PayUp.Models.Payee = Backbone.Model.extend({
 		urlRoot : '/api/payees'
@@ -70,6 +74,42 @@ $(document).ready(function() {
 		}
 	});
 
+	PayUp.Views.TemplatesListButton = Backbone.View.extend({
+		el : "#templates-list-button-container",
+		template: template('templates-list-button'),
+		events: {
+			"click #templates-list-open-btn" : "open"
+		},
+		initialize : function() {
+			this.render();
+		},
+		render: function() {
+			$(this.el).html(this.template(this));
+			return this;
+		},
+		open: function(){
+			$("#templates-list-modal").modal({show: true});
+		}
+	});
+	
+	PayUp.Views.TemplatesList = Backbone.View.extend({
+		el : "div #templates-list-container",
+		template: template('templates-list-modal'),
+		events: {
+			"click #templates-list-close-btn" : "close"
+		},
+		initialize : function() {
+			this.render();
+		},
+		render: function() {
+			$(this.el).html(this.template(this));
+			return this;
+		},
+		close: function(){
+			$("#templates-list-modal").modal('hide');
+		}
+	});
+
 	PayUp.Router = Backbone.Router.extend({
 		initialize : function(options) {
 			this.el = options.el
@@ -80,6 +120,8 @@ $(document).ready(function() {
 		index : function() {
 			new PayUp.Views.PayeeDropdown();
 			new PayUp.Views.StartPeriod();
+			new PayUp.Views.TemplatesListButton();
+			new PayUp.Views.TemplatesList();
 		}
 	});
 

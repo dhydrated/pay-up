@@ -17,9 +17,18 @@ $(document).ready(function() {
 		urlRoot : '/api/payees'
 	});
 
+	PayUp.Models.PaymentTemplate = Backbone.Model.extend({
+		urlRoot : '/api/payment_templates'
+	});
+
 	PayUp.Collections.Payees = Backbone.Collection.extend({
 		model : PayUp.Models.Payee,
 		url : '/api/payees'
+	});
+
+	PayUp.Collections.PaymentTemplates = Backbone.Collection.extend({
+		model : PayUp.Models.PaymentTemplate,
+		url : '/api/payment_templates'
 	});
 
 	PayUp.Views.PayeeDropdown = Backbone.View.extend({
@@ -99,14 +108,47 @@ $(document).ready(function() {
 			"click #templates-list-close-btn" : "close"
 		},
 		initialize : function() {
-			this.render();
+			this.fetch();
 		},
 		render: function() {
 			$(this.el).html(this.template(this));
+			
+			var listBody = '<table class="payments table table-striped table-bordered">';
+			
+			listBody += "<thead><tr>";
+			listBody += "<td>Payment Type</td>";
+			listBody += "<td>Payee</td>";
+			listBody += "<td>Amount</td>";
+			listBody += "</tr></thead>";
+			this.collections.each(function(row){
+				
+				listBody += "<tr><td>"+row.attributes.paymentType.name+"</td>" +
+						"<td>"+row.attributes.payee.name+"</td>" +
+						"<td>"+row.attributes.amount+"</td></tr>";
+				console.log(row);
+			});
+			listBody += "</table>";
+			
+			$("#templates-list-body").html(listBody);
+			
 			return this;
 		},
 		close: function(){
 			$("#templates-list-modal").modal('hide');
+		},
+		fetch : function() {
+
+			this.collections = new PayUp.Collections.PaymentTemplates();
+			var that = this;
+			this.collections.fetch({
+				success : function(data) {
+					console.log('success');
+					that.render();
+				},
+				error : function() {
+					console.log('error');
+				}
+			});
 		}
 	});
 

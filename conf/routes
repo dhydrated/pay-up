@@ -94,6 +94,7 @@ GET     /payment_templates/:id              controllers.PaymentTemplateApplicati
 POST    /payment_templates/:id              controllers.PaymentTemplateApplication.update(id:Long)
 # Delete a paymentTemplate
 POST    /payment_templates/:id/delete       controllers.PaymentTemplateApplication.delete(id:Long)
+GET     /api/payment_templates              controllers.PaymentTemplateApplication.apiList()
 
 
 # Map static resources from the /public folder to the /assets URL path

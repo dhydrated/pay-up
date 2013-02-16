@@ -31,9 +31,6 @@ public class Payee extends Model {
     
     public String description;
     
-    @Constraints.Max(value=10000)
-    public BigDecimal amount;
-
     
     /**
      * Generic query helper for entity Payee with id Long

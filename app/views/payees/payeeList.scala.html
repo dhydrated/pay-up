@@ -69,7 +69,6 @@
                 <tr>
                     @header("name", "Payee name")
                     @header("accountNumber", "Account Number")
-                    @header("amount", "Amount")
                 </tr>
             </thead>
             <tbody>
@@ -79,9 +78,6 @@
                         <td><a href="@routes.PayeeApplication.edit(payee.id)">@payee.name</a></td>
                         <td>
                             @payee.accountNumber
-                        </td>
-                        <td>
-                            @payee.amount
                         </td>
                     </tr>
                     

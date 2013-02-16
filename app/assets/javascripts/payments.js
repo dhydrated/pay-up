@@ -101,6 +101,21 @@ $(document).ready(function() {
 		}
 	});
 	
+	PayUp.Views.TemplatesRow = Backbone.View.extend({
+		//el : "template-id-?",
+		events: {
+			"click" : "choose"
+		},
+		choose: function() {
+
+			$('option:contains("'+this.model.attributes.paymentType.name+'")', "#paymentType_id").attr('selected', true);
+			$('option:contains("'+this.model.attributes.payee.name+'")', "#payee_id").attr('selected', true);
+			$("#amount").val(this.model.attributes.amount);
+			
+			$("#templates-list-modal").modal('hide');
+		}
+	});
+	
 	PayUp.Views.TemplatesList = Backbone.View.extend({
 		el : "div #templates-list-container",
 		template: template('templates-list-modal'),
@@ -113,23 +128,32 @@ $(document).ready(function() {
 		render: function() {
 			$(this.el).html(this.template(this));
 			
-			var listBody = '<table class="payments table table-striped table-bordered">';
+			var listBody = '<table id="templates-table" class="payments table table-striped table-bordered table-hover">';
 			
 			listBody += "<thead><tr>";
 			listBody += "<td>Payment Type</td>";
 			listBody += "<td>Payee</td>";
 			listBody += "<td>Amount</td>";
 			listBody += "</tr></thead>";
+			var templateIds = [];
 			this.collections.each(function(row){
 				
-				listBody += "<tr><td>"+row.attributes.paymentType.name+"</td>" +
+				listBody += "<tr id='template-id-"+row.attributes.id+"'><td>"+row.attributes.paymentType.name+"</td>" +
 						"<td>"+row.attributes.payee.name+"</td>" +
 						"<td>"+row.attributes.amount+"</td></tr>";
-				console.log(row);
+
+				templateIds[row.attributes.id] = row;
 			});
 			listBody += "</table>";
 			
 			$("#templates-list-body").html(listBody);
+			
+			for(id in templateIds){
+				new PayUp.Views.TemplatesRow({
+					el : "#template-id-"+id+"",
+					model: templateIds[id]
+				});
+			}
 			
 			return this;
 		},

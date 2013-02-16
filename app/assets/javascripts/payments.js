@@ -31,42 +31,6 @@ $(document).ready(function() {
 		url : '/api/payment_templates'
 	});
 
-	PayUp.Views.PayeeDropdown = Backbone.View.extend({
-		el : "div.input #payee_id",
-		initialize : function() {
-			this.fetchPayees();
-		},
-		events : {
-			"click" : "selectPayee"
-		},
-		selectPayee : function() {
-
-			$('input#amount').val("");
-			
-			var that = this;
-			$(this.el).find('option:selected').each(function() {
-				var selectedPayeeId = $(this).val();
-				that.collections.each(function(payee, index){
-					if(selectedPayeeId == payee.id){
-						$('input#amount').val(payee.get("amount"));
-					}
-				});
-			});
-		},
-		fetchPayees : function() {
-
-			this.collections = new PayUp.Collections.Payees();
-			var that = this;
-			this.collections.fetch({
-				success : function(data) {
-					console.log('success');
-				},
-				error : function() {
-					console.log('error');
-				}
-			});
-		}
-	});
 	
 	PayUp.Views.StartPeriod = Backbone.View.extend({
 		el : "div.input #startPeriod",
@@ -184,7 +148,6 @@ $(document).ready(function() {
 			"" : "index"
 		},
 		index : function() {
-			new PayUp.Views.PayeeDropdown();
 			new PayUp.Views.StartPeriod();
 			new PayUp.Views.TemplatesListButton();
 			new PayUp.Views.TemplatesList();

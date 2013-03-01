@@ -65,6 +65,29 @@ $(document).ready(function() {
 		}
 	});
 	
+	PayUp.Views.TemplateSearchInput = Backbone.View.extend({
+		el : "#template-search-div",
+		events : {
+			"keyup #search-template" : "search"
+		},
+		search : function(event){
+			var searchkeyword = $(this.el).find("#search-template").val();
+			
+			
+			$("#templates-list-body").find("tbody tr").each(function(key, row){
+				pos = $(row).andSelf().text().search(new RegExp(searchkeyword, "i"));
+				
+				if(pos < 0){
+					$(this).hide();
+				}
+				else{
+					$(this).show();
+				}
+			});
+			
+		}
+	});
+	
 	PayUp.Views.TemplatesRow = Backbone.View.extend({
 		//el : "template-id-?",
 		events: {
@@ -118,6 +141,8 @@ $(document).ready(function() {
 					model: templateIds[id]
 				});
 			}
+			
+			new PayUp.Views.TemplateSearchInput();
 			
 			return this;
 		},

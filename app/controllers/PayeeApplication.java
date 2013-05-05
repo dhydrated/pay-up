@@ -11,6 +11,7 @@ import play.mvc.Security;
 import views.html.payees.payeeCreateForm;
 import views.html.payees.payeeEditForm;
 import views.html.payees.payeeList;
+import static play.data.Form.*;
 
 /**
  * Manage a database of payees

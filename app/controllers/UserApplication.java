@@ -8,6 +8,7 @@ import play.mvc.Security;
 import views.html.users.userCreateForm;
 import views.html.users.userEditForm;
 import views.html.users.userList;
+import static play.data.Form.*;
 
 /**
  * Manage a database of users

@@ -13,6 +13,7 @@ import play.mvc.Security;
 import views.html.payments.createForm;
 import views.html.payments.editForm;
 import views.html.payments.list;
+import static play.data.Form.*;
 
 /**
  * Manage a database of payments

@@ -12,6 +12,7 @@ import play.mvc.Security;
 import views.html.reports.createForm;
 import views.html.reports.editForm;
 import views.html.reports.list;
+import static play.data.Form.*;
 
 /**
  * Manage a database of reports

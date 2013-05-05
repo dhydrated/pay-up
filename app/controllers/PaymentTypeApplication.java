@@ -11,6 +11,7 @@ import play.mvc.Security;
 import views.html.payment_types.createForm;
 import views.html.payment_types.editForm;
 import views.html.payment_types.list;
+import static play.data.Form.*;
 
 /**
  * Manage a database of paymentTypes

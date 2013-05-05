@@ -11,6 +11,7 @@ import play.mvc.Security;
 import views.html.payment_templates.createForm;
 import views.html.payment_templates.editForm;
 import views.html.payment_templates.list;
+import static play.data.Form.*;
 
 /**
  * Manage a database of paymentTemplates

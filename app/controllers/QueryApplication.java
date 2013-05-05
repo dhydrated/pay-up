@@ -11,6 +11,7 @@ import views.html.queries.console;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
+import static play.data.Form.*;
 
 @Security.Authenticated(Secured.class)
 public class QueryApplication extends Controller{

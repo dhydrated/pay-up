@@ -111,6 +111,7 @@ $(document).ready(function() {
 		},
 		initialize : function() {
 			this.fetch();
+			this.focus();
 		},
 		render: function() {
 			$(this.el).html(this.template(this));
@@ -143,7 +144,7 @@ $(document).ready(function() {
 			}
 			
 			new PayUp.Views.TemplateSearchInput();
-			
+						
 			return this;
 		},
 		close: function(){
@@ -162,6 +163,11 @@ $(document).ready(function() {
 					console.log('error');
 				}
 			});
+		},
+		focus : function(){
+			$(this.el).on('shown', function () {
+			    $('#search-template').focus();
+			})
 		}
 	});
 

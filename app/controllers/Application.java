@@ -1,9 +1,7 @@
 package controllers;
 
-import java.util.Calendar;
 import java.util.List;
 
-import models.Payee;
 import models.Payment;
 import play.data.Form;
 import play.libs.Json;

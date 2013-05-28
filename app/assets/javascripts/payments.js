@@ -32,7 +32,7 @@ $(document).ready(function() {
 	});
 
 	
-	PayUp.Views.StartPeriod = Backbone.View.extend({
+	/*PayUp.Views.StartPeriod = Backbone.View.extend({
 		el : "div.input #startPeriod",
 		initialize : function() {
 		},
@@ -40,12 +40,11 @@ $(document).ready(function() {
 			"blur" : "updateEndPeriod"
 		},
 		updateEndPeriod : function() {
-			var startDate = Date.parse($(this.el).val());
+			var startDate = Date.parseExact($(this.el).val(), 'dd/MM/yyyy');
 			var endDate = startDate.add(1).months().add(-1).days(); //set the end period a month from startPeriod.
-			
-			$('div.input #endPeriod').val(endDate.toString('yyyy-MM-dd'));
+			$('div.input #endPeriod').val(endDate.toString('dd/MM/yyyy'));
 		}
-	});
+	});*/
 
 	PayUp.Views.TemplatesListButton = Backbone.View.extend({
 		el : "#templates-list-button-container",
@@ -179,7 +178,7 @@ $(document).ready(function() {
 			"" : "index"
 		},
 		index : function() {
-			new PayUp.Views.StartPeriod();
+			//new PayUp.Views.StartPeriod();
 			new PayUp.Views.TemplatesListButton();
 			new PayUp.Views.TemplatesList();
 		}

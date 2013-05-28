@@ -41,8 +41,8 @@ public class Payment extends Model {
 
 	public String reference;
 
-	@Formats.DateTime(pattern = "yyyy-MM-dd")
 	@Column(name = "paid_date")
+	@Formats.DateTime(pattern = "dd/MM/yyyy")
 	public Date paidDate = new Date();
 
 	@Constraints.Required
@@ -60,9 +60,11 @@ public class Payment extends Model {
 	public static Map<String, String> months;
 
 	@Column(name = "start_period")
+	@Formats.DateTime(pattern = "dd/MM/yyyy")
 	public Date startPeriod; 
 
 	@Column(name = "end_period")
+	@Formats.DateTime(pattern = "dd/MM/yyyy")
 	public Date endPeriod; 
 
 	/**

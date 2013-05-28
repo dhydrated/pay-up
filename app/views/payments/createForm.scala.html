@@ -27,21 +27,40 @@
                 '_showConstraints -> true,
                 'style -> "width:300px"
             )
-            
+            <!--
             @inputDate(paymentForm("startPeriod"), 
             	'_label -> "Start Period", 
             	Symbol("data-date-format") -> "dd/MM/yyyy"
             )
+            -->
             
-            @inputDate(paymentForm("endPeriod"), 
-            	'_label -> "End Period", 
-            	Symbol("data-date-format") -> "dd/MM/yyyy"
-            )
+            @input(paymentForm("startPeriod"), 
+            	'_label -> "Start Period") { (id, name, value, args) =>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:80px" />
+			     <script>
+				    $('#@id').datepicker().on('changeDate', function(ev){
+					    var startDate = (new Date(ev.date.valueOf()));
+						var endDate = startDate.add(1).months().add(-1).days(); //set the end period a month from startPeriod.
+						$('div.input #endPeriod').val(endDate.toString('dd/MM/yyyy'));
+					});
+			    </script>
+			} 
             
-            @inputDate(paymentForm("paidDate"), 
-            	'_label -> "Paid Date", 
-            	Symbol("data-date-format") -> "dd/MM/yyyy"
-            )
+            @input(paymentForm("endPeriod"), 
+            	'_label -> "End Period") { (id, name, value, args) =>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:80px"/>
+			    <script>
+			    $('#@id').datepicker();
+			    </script>
+			} 
+            
+            @input(paymentForm("paidDate"), 
+            	'_label -> "Paid Date") { (id, name, value, args) =>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:80px"/>
+			    <script>
+			    $('#@id').datepicker();
+			    </script>
+			} 
             
             @inputText(paymentForm("name"), '_label -> "Description")
             

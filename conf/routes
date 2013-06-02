@@ -12,6 +12,10 @@ POST    /login                              controllers.LoginApplication.authent
 GET     /logout                             controllers.LoginApplication.logout()
 
 # Payments list (look at the default values for pagination parameters)
+
+POST    /payments/uploadFile       controllers.Application.uploadFile(paymentId:Long)
+GET		/payments/artifacts/:id		controllers.Application.getPaymentArtifact(id:Long)
+
 GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "paidDate", o ?= "desc", f ?= "")
 
 # Add payment
@@ -25,7 +29,9 @@ POST    /payments/:id              controllers.Application.update(id:Long)
 # Delete a payment
 POST    /payments/:id/delete       controllers.Application.delete(id:Long)
 
+
 GET     /api/payments              controllers.Application.apiList()
+
 
 
 

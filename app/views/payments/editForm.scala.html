@@ -1,4 +1,4 @@
-@(id: Long, paymentForm: Form[Payment])
+@(id: Long, paymentForm: Form[Payment], artifacts: java.util.List[PaymentArtifact])
 
 @import helper._
 
@@ -60,6 +60,8 @@
             @inputText(paymentForm("reference"), '_label -> "Reference")
             
             @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50)
+            
+   
         
         </fieldset>
         
@@ -70,6 +72,45 @@
         
     }
     
+     @form(action = routes.Application.uploadFile(id), 'enctype -> "multipart/form-data", 'class -> "form-horizontal") {
+     
+     	<div class="clearfix control-group ">
+		    <label for="upload_file" class="control-label">Attachment</label>
+		    <div class="input controls">
+		        
+			    <input id="upload_file" class="btn" type="file" name="picture" style="background:none; width:500px">
+			     
+		    </div>
+		</div>
+		
+		<div class="form-actions">
+		<p>   <input class="btn btn-primary" type="submit">
+			     </p>
+		</div>
+     
+		
+	 }
+	 
+	 
+    <table class="payments table table-striped table-bordered">
+        <thead>
+            <tr>
+                <td>Artifacts</td>
+            </tr>
+        </thead>
+        <tbody>
+        	@for(artifact <- artifacts) {
+                <tr>
+                    <td>
+						<a href="@routes.Application.getPaymentArtifact(artifact.id)">@artifact.name</a>
+
+					</td>
+				</tr>        	
+        	}
+        </tbody>
+        
+    </table>
+	 
     @form(routes.Application.delete(id), 'class -> "topRight") {
         <input type="submit" value="Delete this payment" class="btn btn-danger">
     }

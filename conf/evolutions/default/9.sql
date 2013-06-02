@@ -5,7 +5,8 @@ create table payment_artifacts (
   type            varchar(255),
   data            bytea,
   payment_id        bigint,
-  constraint pk_payment_artifacts primary key (id))
+  constraint pk_payment_artifacts primary key (id),
+  constraint fk_payment_artifacts_payment FOREIGN KEY (payment_id) REFERENCES payments (id))																																																																																																																																																																																											
 ;
 
 create sequence payment_artifacts_seq;

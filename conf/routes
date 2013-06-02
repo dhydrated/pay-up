@@ -15,6 +15,7 @@ GET     /logout                             controllers.LoginApplication.logout(
 
 POST    /payments/uploadFile       controllers.Application.uploadFile(paymentId:Long)
 GET		/payments/artifacts/:id		controllers.Application.getPaymentArtifact(id:Long)
+POST	/payments/artifacts/:id/delete		controllers.Application.deletePaymentArtifact(id:Long)
 
 GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "paidDate", o ?= "desc", f ?= "")
 

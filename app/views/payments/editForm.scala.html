@@ -95,7 +95,7 @@
     <table class="payments table table-striped table-bordered">
         <thead>
             <tr>
-                <td>Artifacts</td>
+                <th class="header">Artifacts</th>
             </tr>
         </thead>
         <tbody>
@@ -103,7 +103,9 @@
                 <tr>
                     <td>
 						<a href="@routes.Application.getPaymentArtifact(artifact.id)">@artifact.name</a>
-
+						@form(routes.Application.deletePaymentArtifact(artifact.id), 'style -> "display:inline") {
+					        <input type="submit" value="Delete" class="btn btn-danger">
+					    }
 					</td>
 				</tr>        	
         	}

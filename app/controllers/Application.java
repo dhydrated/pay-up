@@ -4,12 +4,12 @@ import static play.data.Form.form;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.util.List;
 
 import models.Payment;
 import models.PaymentArtifact;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import play.Logger.ALogger;
@@ -161,10 +161,10 @@ public class Application extends Controller {
 
 			logger.debug(artifact.id.toString());
 			logger.debug(fileName);
-			return ok("File uploaded");
+			return edit(paymentId);
 		} else {
 			flash("error", "Missing file");
-			return redirect(routes.Application.index());
+			return edit(paymentId);
 		}
 	}
 
@@ -172,16 +172,22 @@ public class Application extends Controller {
 
 		PaymentArtifact artifact = PaymentArtifact.find.byId(id);
 		
-		/*File file = new java.io.File("/tmp/"+artifact.id + "_" + artifact.name);
-		FileUtils.writeByteArrayToFile(file, artifact.data);*/
+		logger.debug("download");
+		logger.debug(java.net.URLEncoder.encode(artifact.name, "UTF-8"));
+		
+		File file = new java.io.File("/tmp/"+ java.net.URLEncoder.encode(artifact.id + " " + artifact.name, "UTF-8"));
+		FileUtils.writeByteArrayToFile(file, artifact.data);
 
-		FileOutputStream fos = new FileOutputStream("/tmp/"+artifact.id + "_" + artifact.name); 
-		fos.write(artifact.data);
-		fos.close();
-		
-		File file = new java.io.File("/tmp/"+artifact.id + "_" + artifact.name);
-		
 		return ok(file);
+	}
+	
+	public static Result deletePaymentArtifact(Long id) throws Exception {
+
+		PaymentArtifact artifact = PaymentArtifact.find.byId(id);
+		Long paymentId = artifact.payment.id;
+		artifact.delete();
+		
+		return edit(paymentId);
 	}
 
 }

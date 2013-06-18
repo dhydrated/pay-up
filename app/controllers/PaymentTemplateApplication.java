@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import models.PaymentTemplate;
+import play.Logger.ALogger;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -18,7 +19,9 @@ import static play.data.Form.*;
  */
 @Security.Authenticated(Secured.class)
 public class PaymentTemplateApplication extends Controller {
-    
+
+	static ALogger logger = play.Logger.of(PaymentTemplateApplication.class);
+	
     /**
      * This result directly redirect to application home.
      */
@@ -81,6 +84,9 @@ public class PaymentTemplateApplication extends Controller {
             return badRequest(editForm.render(id, paymentTemplateForm));
         }
         paymentTemplateForm.get().update(id);
+        
+        logger.debug(paymentTemplateForm.get().payer.name);
+        
         flash("success", "Payment Type has been updated");
         return GO_HOME;
     }

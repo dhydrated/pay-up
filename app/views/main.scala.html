@@ -1,7 +1,7 @@
 @(content: Html)
 
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" ng-app>
     <head>
         <title>Payments database</title>
         <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"> 
@@ -14,6 +14,7 @@
         <script type="text/javascript" src="@routes.Assets.at("javascripts/backbone-min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.min.js")"></script>
         <script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap-datepicker.js")"></script>
+    	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js" ></script>
     </head>
     <body>
         
@@ -37,6 +38,7 @@
               	  <li><a href="/users">Users</a></li>
 	              <li><a href="/payment_types">Types</a></li>
 	              <li><a href="/payees">Payees</a></li>
+	              <li><a href="/payers">Payers</a></li>
 	              <li><a href="/payment_templates">Templates</a></li>
                   <li class="divider"></li>
                   <li class="nav-header">Reporting</li>

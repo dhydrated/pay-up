@@ -96,6 +96,7 @@ $(document).ready(function() {
 
 			$('option:contains("'+this.model.attributes.paymentType.name+'")', "#paymentType_id").attr('selected', true);
 			$('option:contains("'+this.model.attributes.payee.name+'")', "#payee_id").attr('selected', true);
+			$('option:contains("'+this.model.attributes.payer.name+'")', "#payer_id").attr('selected', true);
 			$("#amount").val(this.model.attributes.amount);
 			
 			$("#templates-list-modal").modal('hide');
@@ -120,13 +121,17 @@ $(document).ready(function() {
 			listBody += "<thead><tr>";
 			listBody += "<td>Payment Type</td>";
 			listBody += "<td>Payee</td>";
+			listBody += "<td>Payer</td>";
 			listBody += "<td>Amount</td>";
 			listBody += "</tr></thead>";
 			var templateIds = [];
 			this.collections.each(function(row){
 				
+				console.log(row.attributes.payer)
+				
 				listBody += "<tr id='template-id-"+row.attributes.id+"'><td>"+row.attributes.paymentType.name+"</td>" +
 						"<td>"+row.attributes.payee.name+"</td>" +
+						"<td>"+row.attributes.payer.name+"</td>" +
 						"<td>"+row.attributes.amount+"</td></tr>";
 
 				templateIds[row.attributes.id] = row;

@@ -35,6 +35,10 @@ public class PaymentTemplate extends Model {
 	public Payee payee;
 
 	@Constraints.Required
+	@ManyToOne
+	public Payer payer;
+
+	@Constraints.Required
 	public BigDecimal amount;
 
     /**

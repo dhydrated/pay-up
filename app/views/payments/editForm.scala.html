@@ -27,6 +27,14 @@
                 '_showConstraints -> false,
                 'style -> "width:300px"
             )
+
+            @select(
+                paymentForm("payer.id"), 
+                options(Payer.options), 
+                '_label -> "Payer", '_default -> "-- Choose a payer --",
+                '_showConstraints -> true,
+                'style -> "width:300px"
+            )
             
             
             @input(paymentForm("startPeriod"), 

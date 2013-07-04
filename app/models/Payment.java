@@ -67,6 +67,10 @@ public class Payment extends Model {
 	@Formats.DateTime(pattern = "dd/MM/yyyy")
 	public Date endPeriod; 
 
+	@Constraints.Required
+	@ManyToOne
+	public Payer payer;
+
 	/**
 	 * Generic query helper for entity Payment with id Long
 	 */

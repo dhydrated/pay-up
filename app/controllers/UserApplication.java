@@ -1,6 +1,9 @@
 package controllers;
 
+import static play.data.Form.form;
+import models.Role;
 import models.User;
+import play.Logger.ALogger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -8,14 +11,15 @@ import play.mvc.Security;
 import views.html.users.userCreateForm;
 import views.html.users.userEditForm;
 import views.html.users.userList;
-import static play.data.Form.*;
 
 /**
  * Manage a database of users
  */
 @Security.Authenticated(Secured.class)
 public class UserApplication extends Controller {
-    
+
+	static ALogger logger = play.Logger.of(UserApplication.class);
+	
     /**
      * This result directly redirect to application home.
      */
@@ -53,6 +57,13 @@ public class UserApplication extends Controller {
      * @param id Id of the user to edit
      */
     public static Result edit(Long id) {
+    	
+    	User user = User.find.byId(id);
+    	
+    	for(Role role : user.roles){
+    		logger.debug(role.name);
+    	}
+    	
         Form<User> userForm = form(User.class).fill(
             User.find.byId(id)
         );

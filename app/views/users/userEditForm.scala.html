@@ -16,6 +16,20 @@
             @inputText(userForm("email"), '_label -> "Email")
             @inputPassword(userForm("password"), '_label -> "Password")
         
+        	@for(role <- Role.find.all()) {
+			   <div class="control-group">
+			      <label class="control-label"> @role.name </label>
+			      <div class="controls">
+			         <div class="text-toggle-button">
+			            <input type="checkbox" name="securityRoles[@role.id].id" value="@role.id" class="toggle"
+			            @if(userForm.get().hasRole(role.code)) {
+			               CHECKED
+			            } />
+			         </div>
+			      </div>
+			   </div>
+			}
+        
         </fieldset>
         
         <div class="form-actions">

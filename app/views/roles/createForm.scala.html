@@ -1,0 +1,27 @@
+@(roleForm: Form[Role])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h2>Add a role</h2>
+    
+    @form(routes.RoleApplication.save(), 'class -> "form-horizontal") {
+        
+        <fieldset>
+        
+            @inputText(roleForm("name"), '_label -> "Name")
+            @inputText(roleForm("code"), '_label -> "Code")
+
+        </fieldset>
+        
+        <div class="form-actions">
+            <input type="submit" value="Create this role" class="btn btn-primary"> or 
+            <a href="@routes.RoleApplication.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

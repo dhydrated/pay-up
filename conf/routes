@@ -86,6 +86,19 @@ POST    /users/:id              controllers.UserApplication.update(id:Long)
 POST    /users/:id/delete       controllers.UserApplication.delete(id:Long)
 
 
+# Roles list (look at the default values for pagination parameters)
+GET     /roles                  controllers.RoleApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+# Add payment
+GET     /roles/new              controllers.RoleApplication.create()
+POST    /roles                  controllers.RoleApplication.save()
+# Edit existing role
+GET     /roles/:id              controllers.RoleApplication.edit(id:Long)
+POST    /roles/:id              controllers.RoleApplication.update(id:Long)
+# Delete a role
+POST    /roles/:id/delete       controllers.RoleApplication.delete(id:Long)
+
+
+
 # Reports list (look at the default values for pagination parameters)
 GET     /reports                  controllers.ReportApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add report

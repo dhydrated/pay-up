@@ -1,11 +1,16 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import play.data.validation.Constraints;
@@ -32,6 +37,13 @@ public class User extends Model {
     
     @Constraints.Required
     public String password;
+    
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="users_roles", joinColumns=
+            @JoinColumn(name="user_id", referencedColumnName="id"),
+            inverseJoinColumns=
+                @JoinColumn(name="role_id", referencedColumnName="id"))
+    public List<Role> roles = new ArrayList<Role>();
     
     /**
      * Generic query helper for entity User with id Long
@@ -94,6 +106,16 @@ public class User extends Model {
                 .orderBy(sortBy + " " + order)
                 .findPagingList(pageSize)
                 .getPage(page);
+    }
+    
+    public Boolean hasRole(String code){
+    	
+    	for(Role role: roles){
+    		if(role.code.equals(code)){
+    			return Boolean.TRUE;
+    		}
+    	}
+    	return Boolean.FALSE;
     }
 
 }

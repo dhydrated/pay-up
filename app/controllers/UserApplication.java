@@ -1,6 +1,10 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Role;
 import models.User;
 import play.Logger.ALogger;
@@ -82,7 +86,24 @@ public class UserApplication extends Controller {
         if(userForm.hasErrors()) {
             return badRequest(userEditForm.render(id, userForm));
         }
+        
+        List<Role> oldRoles = userForm.get().roles;
+        List<Role> newRoles = new ArrayList<Role>();
+        
+        for(Role role : oldRoles){
+        	if(role.id != null){
+        		newRoles.add(Role.find.byId(role.id));
+        	}
+        }
+        oldRoles = null;
+        
+        userForm.get().roles = newRoles;
+
+        logger.debug(userForm.get().roles.toString());
+
+        
         userForm.get().update(id);
+        
         flash("success", "User " + userForm.get().name + " has been updated");
         return GO_HOME;
     }

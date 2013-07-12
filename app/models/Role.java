@@ -53,7 +53,7 @@ public class Role extends Model {
 
     
     public String toString() {
-        return "Role(" + name + ")";
+        return "Role(" + id + ")";
     }
     
 

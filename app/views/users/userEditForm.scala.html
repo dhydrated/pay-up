@@ -21,9 +21,11 @@
 			      <label class="control-label"> @role.name </label>
 			      <div class="controls">
 			         <div class="text-toggle-button">
-			            <input type="checkbox" name="securityRoles[@role.id].id" value="@role.id" class="toggle"
-			            @if(userForm.get().hasRole(role.code)) {
-			               CHECKED
+			            <input type="checkbox" name="roles[@role.id].id" value="@role.id" class="toggle"
+			            @{
+				            if(userForm.get().hasRole(role.code)) {
+				               "CHECKED"
+				            }
 			            } />
 			         </div>
 			      </div>

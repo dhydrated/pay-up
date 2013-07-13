@@ -98,6 +98,18 @@ POST    /roles/:id              controllers.RoleApplication.update(id:Long)
 POST    /roles/:id/delete       controllers.RoleApplication.delete(id:Long)
 
 
+# Groups list (look at the default values for pagination parameters)
+GET     /groups                  controllers.GroupApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+# Add payment
+GET     /groups/new              controllers.GroupApplication.create()
+POST    /groups                  controllers.GroupApplication.save()
+# Edit existing group
+GET     /groups/:id              controllers.GroupApplication.edit(id:Long)
+POST    /groups/:id              controllers.GroupApplication.update(id:Long)
+# Delete a group
+POST    /groups/:id/delete       controllers.GroupApplication.delete(id:Long)
+
+
 
 # Reports list (look at the default values for pagination parameters)
 GET     /reports                  controllers.ReportApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")

@@ -1,0 +1,26 @@
+@(groupForm: Form[Group])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h2>Add a group</h2>
+    
+    @form(routes.GroupApplication.save(), 'class -> "form-horizontal") {
+        
+        <fieldset>
+        
+            @inputText(groupForm("name"), '_label -> "Name")
+
+        </fieldset>
+        
+        <div class="form-actions">
+            <input type="submit" value="Create this group" class="btn btn-primary"> or 
+            <a href="@routes.GroupApplication.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

@@ -1,0 +1,49 @@
+@(id: Long, groupForm: Form[Group])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h2>Edit group</h2>
+    
+    @form(routes.GroupApplication.update(id), 'class -> "form-horizontal") {
+        
+        <fieldset>
+        
+            @inputText(groupForm("name"), '_label -> "Name")
+        
+        </fieldset>
+        
+        <div class="form-actions">
+            <input type="submit" value="Save this group" class="btn btn-primary"> or 
+            <a href="@routes.GroupApplication.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.GroupApplication.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this group" class="btn btn-danger">
+    }
+    
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="header">Members</th>
+            </tr>
+        </thead>
+        <tbody>
+	    @for(member <- groupForm.get().members) {
+                <tr>
+                    <td>
+	    				<a>@member.name</a>
+					</td>
+				</tr>        
+	    }
+        </tbody>
+        
+    </table>
+    
+}

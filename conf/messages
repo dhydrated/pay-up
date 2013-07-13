@@ -5,6 +5,7 @@ payees.list.title={0,choice,0#No payees|1#One payee|1<{0,number,integer} payees}
 payers.list.title={0,choice,0#No payers|1#One payer|1<{0,number,integer} payers} found
 users.list.title={0,choice,0#No users|1#One user|1<{0,number,integer} users} found
 roles.list.title={0,choice,0#No roles|1#One role|1<{0,number,integer} roles} found
+groups.list.title={0,choice,0#No groups|1#One group|1<{0,number,integer} groups} found
 paymentTypes.list.title={0,choice,0#No payment types|1#One payment type|1<{0,number,integer} payment types} found
 reports.list.title={0,choice,0#No reports|1#One report|1<{0,number,integer} reports} found
 paymentTemplates.list.title={0,choice,0#No payment templates|1#One payment template|1<{0,number,integer} payment templates} found

@@ -50,19 +50,6 @@ POST    /payees/:id/delete       controllers.PayeeApplication.delete(id:Long)
 GET     /api/payees              controllers.PayeeApplication.apiList()
 
 
-# Payers list (look at the default values for pagination parameters)
-GET     /payers                  controllers.PayerApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
-# Add payment
-GET     /payers/new              controllers.PayerApplication.create()
-POST    /payers                  controllers.PayerApplication.save()
-# Edit existing payer
-GET     /payers/:id              controllers.PayerApplication.edit(id:Long)
-POST    /payers/:id              controllers.PayerApplication.update(id:Long)
-# Delete a payer
-POST    /payers/:id/delete       controllers.PayerApplication.delete(id:Long)
-
-GET     /api/payers              controllers.PayerApplication.apiList()
-
 # PaymentTypes list (look at the default values for pagination parameters)
 GET     /payment_types                  controllers.PaymentTypeApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add payment
@@ -84,6 +71,7 @@ GET     /users/:id              controllers.UserApplication.edit(id:Long)
 POST    /users/:id              controllers.UserApplication.update(id:Long)
 # Delete a user
 POST    /users/:id/delete       controllers.UserApplication.delete(id:Long)
+GET     /api/users              controllers.UserApplication.apiList()
 
 
 # Roles list (look at the default values for pagination parameters)

@@ -9,6 +9,7 @@ import models.Role;
 import models.User;
 import play.Logger.ALogger;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -138,6 +139,13 @@ public class UserApplication extends Controller {
         User.find.ref(id).delete();
         flash("success", "User has been deleted");
         return GO_HOME;
+    }
+
+    
+    public static Result apiList(){
+    	
+    	List<User> users = User.find.findList();
+    	return ok(Json.toJson(users));
     }
     
 

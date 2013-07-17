@@ -69,7 +69,7 @@ public class Payment extends Model {
 
 	@Constraints.Required
 	@ManyToOne
-	public Payer payer;
+	public User payer;
 
 	/**
 	 * Generic query helper for entity Payment with id Long

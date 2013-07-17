@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import play.data.validation.Constraints;
@@ -35,8 +36,8 @@ public class User extends Model {
     @Constraints.Required
     public String email;
     
-    @Constraints.Required
-    public String password;
+    @OneToOne(cascade=CascadeType.ALL)
+    public Credential credential;
     
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="users_roles", joinColumns=
@@ -79,7 +80,7 @@ public class User extends Model {
     public static User authenticate(String email, String password) {
         return find.where()
             .eq("email", email)
-            .eq("password", password)
+            .eq("credential.password", password)
             .findUnique();
     }
     

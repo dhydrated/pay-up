@@ -18,6 +18,7 @@ GET		/payments/artifacts/:id		controllers.Application.getPaymentArtifact(id:Long
 POST	/payments/artifacts/:id/delete		controllers.Application.deletePaymentArtifact(id:Long)
 
 GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "paidDate", o ?= "desc", f ?= "")
+GET     /paymentsOfUser            controllers.Application.listByUserId(p:Int ?= 0, s ?= "paidDate", o ?= "desc", u:Long ?= 0)
 
 # Add payment
 GET     /payments/new              controllers.Application.create()

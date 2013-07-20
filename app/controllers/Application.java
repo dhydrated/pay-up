@@ -64,6 +64,12 @@ public class Application extends Controller {
 				sortBy, order, filter));
 	}
 
+	public static Result listByUserId(int page, String sortBy, String order,
+			Long userId) {
+		return ok(list.render(Payment.pageByUserId(page, 10, sortBy, order, userId),
+				sortBy, order, ""));
+	}
+
 	public static Result apiList() {
 		List<Payment> payments = Payment.find.findList();
 

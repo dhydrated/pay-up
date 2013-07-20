@@ -97,6 +97,13 @@ public class Payment extends Model {
 				.orderBy(sortBy + " " + order).fetch("payee")
 				.findPagingList(pageSize).getPage(page);
 	}
+	
+	public static Page<Payment> pageByUserId(int page, int pageSize, String sortBy,
+			String order, Long userId) {
+		return find.where().eq("payer.id", userId)
+				.orderBy(sortBy + " " + order).fetch("payee")
+				.findPagingList(pageSize).getPage(page);
+	}
 
 	public static Map<String, String> yearOptions() {
 		LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();

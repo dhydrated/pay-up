@@ -145,6 +145,11 @@ public class UserApplication extends Controller {
     public static Result apiList(){
     	
     	List<User> users = User.find.findList();
+    	
+    	for(User user : users){
+    		user.credential = null;
+    	}
+    	
     	return ok(Json.toJson(users));
     }
     

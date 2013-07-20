@@ -127,8 +127,6 @@ $(document).ready(function() {
 			var templateIds = [];
 			this.collections.each(function(row){
 				
-				console.log(row.attributes.payer)
-				
 				listBody += "<tr id='template-id-"+row.attributes.id+"'><td>"+row.attributes.paymentType.name+"</td>" +
 						"<td>"+row.attributes.payee.name+"</td>" +
 						"<td>"+row.attributes.payer.name+"</td>" +

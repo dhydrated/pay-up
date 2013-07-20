@@ -8,6 +8,7 @@ import java.util.List;
 
 import models.Payment;
 import models.PaymentArtifact;
+import models.PaymentTemplate;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -65,6 +66,12 @@ public class Application extends Controller {
 
 	public static Result apiList() {
 		List<Payment> payments = Payment.find.findList();
+
+    	for(Payment p : payments){
+    		p.payee.credential = null;
+    		p.payer.credential = null;
+    	}
+    	
 		return ok(Json.toJson(payments));
 	}
 

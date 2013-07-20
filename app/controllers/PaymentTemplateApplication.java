@@ -56,6 +56,12 @@ public class PaymentTemplateApplication extends Controller {
     public static Result apiList(){
     	
     	List<PaymentTemplate> paymentTemplates = PaymentTemplate.find.findList();
+    	
+    	for(PaymentTemplate p : paymentTemplates){
+    		p.payee.credential = null;
+    		p.payer.credential = null;
+    	}
+    	
     	return ok(Json.toJson(paymentTemplates));
     }
     

@@ -22,7 +22,7 @@
 
             @select(
                 paymentForm("payee.id"), 
-                options(Payee.options), 
+                options(User.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",
                 '_showConstraints -> true,
                 'style -> "width:300px"

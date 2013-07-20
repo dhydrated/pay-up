@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -36,8 +37,12 @@ public class User extends Model {
     @Constraints.Required
     public String email;
     
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
     public Credential credential;
+
+    public String accountNumber;
+    
+    public String description;
     
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="users_roles", joinColumns=
@@ -87,7 +92,7 @@ public class User extends Model {
     // --
     
     public String toString() {
-        return "User(" + email + ")";
+        return name;
     }
     
 

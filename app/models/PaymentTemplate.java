@@ -32,7 +32,7 @@ public class PaymentTemplate extends Model {
 
 	@Constraints.Required
 	@ManyToOne
-	public Payee payee;
+	public User payee;
 
 	@Constraints.Required
 	@ManyToOne

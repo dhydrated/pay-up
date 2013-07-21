@@ -62,18 +62,18 @@ public class Application extends Controller {
 	public static Result list(int page, String sortBy, String order,
 			String filter) {
 		return ok(list.render(Payment.page(page, 10, sortBy, order, filter),
-				sortBy, order, filter, "default"));
+				sortBy, order, filter, "payments"));
 	}
 
 	public static Result listByUserId(int page, String sortBy, String order,
 			Long userId) {
 		return ok(list.render(Payment.pageByUserId(page, 10, sortBy, order, userId),
-				sortBy, order, "", "user"));
+				sortBy, order, "", "user_payments"));
 	}
 
 	public static Result listByLoginUserId(int page, String sortBy, String order) {
 		return ok(list.render(Payment.pageByUserId(page, 10, sortBy, order, new Long(session().get("userId"))),
-				sortBy, order, "", "user"));
+				sortBy, order, "", "user_payments"));
 	}
 
 	public static Result apiList() {

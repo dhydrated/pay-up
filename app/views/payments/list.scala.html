@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    if(pageType.equals("default")){
+    if(pageType.equals("payments")){
     	routes.Application.list(newPage, sortBy, order, currentFilter)
     }
     else{
@@ -49,7 +49,7 @@
         </div>
     } 
 
-	@if(AppSession.has("administrator")){
+	@if(pageType.equals("payments")){
     <div id="actions">
         
         <form action="@link(0, "name")" method="GET">

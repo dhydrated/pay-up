@@ -38,12 +38,35 @@
 	    @for(member <- groupForm.get().members) {
                 <tr>
                     <td>
-	    				<a href="/paymentsOfUser?u=@member.id">@member.name</a>
+	    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.id)">@member.name</a>
+	    				@form(routes.GroupApplication.removeMember(id, member.id), 'style -> "display:inline") {
+					        <input type="submit" value="Delete" class="btn btn-danger">
+					    }
 					</td>
 				</tr>        
 	    }
         </tbody>
         
     </table>
+    
+    
+    @form(routes.GroupApplication.addMember(id), 'class -> "form-horizontal") {
+    
+    	<div class="clearfix control-group ">
+	    	@select(
+	                groupForm("member.id"), 
+	                options(User.options), 
+	                '_label -> "Payee", '_default -> "-- Choose a member --",
+	                '_showConstraints -> false,
+	                'style -> "width:300px"
+	            )
+            
+    	</div>
+		
+		<div class="form-actions">
+		<p>   <input class="btn btn-primary" type="submit" value="Add a member">
+			     </p>
+		</div>
+    }
     
 }

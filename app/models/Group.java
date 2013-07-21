@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -26,7 +28,7 @@ import com.avaje.ebean.Page;
 @Table(name="groups")
 public class Group extends Model {
 
-    @Id
+	@Id
     public Long id;
     
     @Constraints.Required
@@ -84,5 +86,17 @@ public class Group extends Model {
                 .getPage(page);
     }
 
+
+    @Override
+	public boolean equals(Object object) {
+    	if (!(object instanceof Group)) {
+    		return false;
+    	}
+    	Group rhs = (Group) object;
+    	return new EqualsBuilder()
+    		.appendSuper(super.equals(object))
+    		.append(id, rhs.id)
+    		.isEquals();
+	}
 }
 

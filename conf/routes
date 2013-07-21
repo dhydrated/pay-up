@@ -18,7 +18,7 @@ GET		/payments/artifacts/:id		controllers.Application.getPaymentArtifact(id:Long
 POST	/payments/artifacts/:id/delete		controllers.Application.deletePaymentArtifact(id:Long)
 
 GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "paidDate", o ?= "desc", f ?= "")
-GET     /paymentsOfUser            controllers.Application.listByUserId(p:Int ?= 0, s ?= "paidDate", o ?= "desc", u:Long ?= 0)
+GET     /payments/users            controllers.Application.listByUserId(p:Int ?= 0, s ?= "paidDate", o ?= "desc", u:Long ?= 0)
 
 # Add payment
 GET     /payments/new              controllers.Application.create()
@@ -83,6 +83,8 @@ POST    /groups/:id              controllers.GroupApplication.update(id:Long)
 # Delete a group
 POST    /groups/:id/delete       controllers.GroupApplication.delete(id:Long)
 
+POST    /groups/:id/members/add   controllers.GroupApplication.addMember(id:Long)
+POST    /groups/:id/members/:memberId/delete   controllers.GroupApplication.removeMember(id:Long, memberId:Long)
 
 
 # Reports list (look at the default values for pagination parameters)

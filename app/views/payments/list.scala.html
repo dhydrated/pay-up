@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.Page[Payment], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(currentPage: com.avaje.ebean.Page[Payment], currentSortBy: String, currentOrder: String, currentFilter: String, pageType: String)
 
 @****************************************
 * Helper generating navigation links    *
@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    if(AppSession.has("administrator")){
+    if(pageType.equals("default")){
     	routes.Application.list(newPage, sortBy, order, currentFilter)
     }
     else{

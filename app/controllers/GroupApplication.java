@@ -5,6 +5,7 @@ import static play.data.Form.form;
 import java.util.Map;
 
 import models.Group;
+import models.GroupUserMap;
 import models.User;
 import play.Logger.ALogger;
 import play.data.Form;
@@ -99,8 +100,15 @@ public class GroupApplication extends Controller {
 	        }
 	    }
 		
+		GroupUserMap groupUser = new GroupUserMap();
+		groupUser.user = member;
+		
+		
 		Group group = Group.find.byId(id);
-		group.members.add(member);
+		
+		groupUser.group = group;
+		
+		group.members.add(groupUser);
 		group.update();
 		
 		Form<Group> groupForm = form(Group.class).fill(Group.find.byId(id));
@@ -109,14 +117,23 @@ public class GroupApplication extends Controller {
 	
 	public static Result removeMember(Long id, Long memberId) {
 		
-		logger.debug(id.toString() + " : " + memberId.toString());
-		User member = User.find.byId(new Long(memberId));
+		GroupUserMap groupUser = GroupUserMap.findByGroupIdAndUserId(id, memberId);
 		
-		logger.debug(member.toString());
+		/*logger.debug(groupUser.group.id + " : " + groupUser.user.id);
 		
 		Group group = Group.find.byId(id);
-		group.members.remove(member);
-		group.update();
+		
+		logger.debug(new Integer(group.members.size()).toString());
+		
+		group.members.remove(groupUser);
+
+		logger.debug(new Integer(group.members.size()).toString());
+		
+		group.update();*/
+		
+		groupUser.delete();
+		
+		
 		
 		Form<Group> groupForm = form(Group.class).fill(Group.find.byId(id));
 		return redirect(routes.GroupApplication.edit(id));

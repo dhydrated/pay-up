@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -34,12 +35,13 @@ public class Group extends Model {
     @Constraints.Required
     public String name;
     
-    @ManyToMany(cascade=CascadeType.ALL)
+    /*@ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name="groups_users", joinColumns=
             @JoinColumn(name="group_id", referencedColumnName="id"),
             inverseJoinColumns=
-                @JoinColumn(name="user_id", referencedColumnName="id"))
-    public List<User> members = new ArrayList<User>();
+                @JoinColumn(name="user_id", referencedColumnName="id"))*/
+    @OneToMany(mappedBy="group", cascade={CascadeType.ALL})
+    public List<GroupUserMap> members = new ArrayList<GroupUserMap>();
     
     /**
      * Generic query helper for entity User with id Long

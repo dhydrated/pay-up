@@ -38,8 +38,8 @@
 	    @for(member <- groupForm.get().members) {
                 <tr>
                     <td>
-	    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.id)">@member.name</a>
-	    				@form(routes.GroupApplication.removeMember(id, member.id), 'style -> "display:inline") {
+	    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.user.id)">@member.user.name</a>
+	    				@form(routes.GroupApplication.removeMember(id, member.user.id), 'style -> "display:inline") {
 					        <input type="submit" value="Delete" class="btn btn-danger">
 					    }
 					</td>

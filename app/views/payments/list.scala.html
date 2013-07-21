@@ -22,8 +22,12 @@
     }
     
     // Generate the link
-    routes.Application.list(newPage, sortBy, order, currentFilter)
-    
+    if(AppSession.has("administrator")){
+    	routes.Application.list(newPage, sortBy, order, currentFilter)
+    }
+    else{
+    	routes.Application.listByLoginUserId(newPage, sortBy, order)
+    }
 }
 
 @**********************************
@@ -82,9 +86,13 @@
                 @for(payment <- currentPage.getList) {
                     <tr>
                         <td>
+							@if(AppSession.has("administrator")){
                         	<a href="@routes.Application.edit(payment.id)" 
                         		rel="tooltip" data-original-title="@payment.name" 
                         		>@payment.payee.name</a></td>
+                        	} else {
+                        		@payment.payee.name
+                        	}
                         <td>
                             @payment.payer.name
                         </td>

@@ -86,7 +86,7 @@
                 @for(payment <- currentPage.getList) {
                     <tr>
                         <td>
-							@if(AppSession.has("administrator")){
+							@if(pageType.equals("payments")){
                         	<a href="@routes.Application.edit(payment.id)" 
                         		rel="tooltip" data-original-title="@payment.name" 
                         		>@payment.payee.name</a></td>

@@ -128,8 +128,8 @@ $(document).ready(function() {
 			this.collections.each(function(row){
 				
 				listBody += "<tr id='template-id-"+row.attributes.id+"'><td>"+row.attributes.paymentType.name+"</td>" +
-						"<td>"+row.attributes.payee.name+"</td>" +
-						"<td>"+row.attributes.payer.name+"</td>" +
+						"<td>"+(row.attributes.payee != null ? row.attributes.payee.name : "")+"</td>" +
+						"<td>"+(row.attributes.payer != null ? row.attributes.payer.name : "")+"</td>" +
 						"<td>"+row.attributes.amount+"</td></tr>";
 
 				templateIds[row.attributes.id] = row;

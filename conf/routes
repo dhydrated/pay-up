@@ -4,6 +4,8 @@
 
 # Default path will just redirect to the payment list
 GET     /                           controllers.Application.index()
+GET     /home         controllers.Application.listByLoginUserId(p:Int ?= 0, s ?= "paidDate", o ?= "desc")
+
 
 
 # Authentication
@@ -19,6 +21,7 @@ POST	/payments/artifacts/:id/delete		controllers.Application.deletePaymentArtifa
 
 GET     /payments                  controllers.Application.list(p:Int ?= 0, s ?= "paidDate", o ?= "desc", f ?= "")
 GET     /payments/users            controllers.Application.listByUserId(p:Int ?= 0, s ?= "paidDate", o ?= "desc", u:Long ?= 0)
+
 
 # Add payment
 GET     /payments/new              controllers.Application.create()

@@ -43,7 +43,8 @@ public class Application extends Controller {
 	 * Handle default path requests, redirect to payments list
 	 */
 	public static Result index() {
-		return GO_HOME;
+		return redirect(routes.Application.listByLoginUserId(0,
+				"paid_date", "desc"));
 	}
 
 	/**
@@ -67,6 +68,11 @@ public class Application extends Controller {
 	public static Result listByUserId(int page, String sortBy, String order,
 			Long userId) {
 		return ok(list.render(Payment.pageByUserId(page, 10, sortBy, order, userId),
+				sortBy, order, ""));
+	}
+
+	public static Result listByLoginUserId(int page, String sortBy, String order) {
+		return ok(list.render(Payment.pageByUserId(page, 10, sortBy, order, new Long(session().get("userId"))),
 				sortBy, order, ""));
 	}
 

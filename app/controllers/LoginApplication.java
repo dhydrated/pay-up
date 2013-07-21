@@ -1,11 +1,18 @@
 package controllers;
 
+import static play.data.Form.form;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import models.Role;
 import models.User;
+import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.login;
-import static play.data.Form.*;
+import flexjson.JSONSerializer;
 
 public class LoginApplication extends Controller {
   
@@ -42,7 +49,24 @@ public class LoginApplication extends Controller {
         if(loginForm.hasErrors()) {
             return badRequest(login.render(loginForm));
         } else {
-            session("email", loginForm.get().email);
+        	String email = loginForm.get().email;
+        	
+            User user = User.findByEmail(loginForm.get().email);
+
+            session("email", user.email);
+            
+            JSONSerializer s = new JSONSerializer();
+            
+            
+            Set<String> roles = new HashSet<String>();
+            for(Role role : user.roles){
+            	roles.add(role.code);
+            }
+
+            session("roles", s.serialize(roles));
+            
+            session("userId", user.id.toString());
+            
             return redirect(
                 routes.Application.index()
             );

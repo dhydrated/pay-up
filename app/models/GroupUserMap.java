@@ -24,6 +24,8 @@ public class GroupUserMap extends Model {
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	public User user;
+	
+	public Boolean admin;
 
 	/**
 	 * Generic query helper for entity GroupUserMap with id Long

@@ -39,6 +39,7 @@
                 <tr>
                     <td>
 	    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.user.id)">@member.user.name</a>
+	    				 <input type="checkbox">
 	    				@form(routes.GroupApplication.removeMember(id, member.user.id), 'style -> "display:inline") {
 					        <input type="submit" value="Delete" class="btn btn-danger">
 					    }

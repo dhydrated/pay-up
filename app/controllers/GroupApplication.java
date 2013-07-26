@@ -108,8 +108,7 @@ public class GroupApplication extends Controller {
 		
 		groupUser.group = group;
 		
-		group.members.add(groupUser);
-		group.update();
+		groupUser.save();
 		
 		Form<Group> groupForm = form(Group.class).fill(Group.find.byId(id));
 		return redirect(routes.GroupApplication.edit(id));

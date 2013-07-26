@@ -40,7 +40,7 @@ public class Group extends Model {
             @JoinColumn(name="group_id", referencedColumnName="id"),
             inverseJoinColumns=
                 @JoinColumn(name="user_id", referencedColumnName="id"))*/
-    @OneToMany(mappedBy="group", cascade={CascadeType.ALL})
+    @OneToMany(mappedBy="group", cascade={CascadeType.REMOVE})
     public List<GroupUserMap> members = new ArrayList<GroupUserMap>();
     
     /**

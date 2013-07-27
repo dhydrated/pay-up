@@ -117,22 +117,7 @@ public class GroupApplication extends Controller {
 	public static Result removeMember(Long id, Long memberId) {
 		
 		GroupUserMap groupUser = GroupUserMap.findByGroupIdAndUserId(id, memberId);
-		
-		/*logger.debug(groupUser.group.id + " : " + groupUser.user.id);
-		
-		Group group = Group.find.byId(id);
-		
-		logger.debug(new Integer(group.members.size()).toString());
-		
-		group.members.remove(groupUser);
-
-		logger.debug(new Integer(group.members.size()).toString());
-		
-		group.update();*/
-		
 		groupUser.delete();
-		
-		
 		
 		Form<Group> groupForm = form(Group.class).fill(Group.find.byId(id));
 		return redirect(routes.GroupApplication.edit(id));

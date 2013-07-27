@@ -25,7 +25,7 @@ public class GroupUserMap extends Model {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	public User user;
 	
-	public Boolean admin;
+	public Boolean admin = false;
 
 	/**
 	 * Generic query helper for entity GroupUserMap with id Long

@@ -7,8 +7,12 @@ import java.util.Map;
 import models.Group;
 import models.GroupUserMap;
 import models.User;
+
+import org.codehaus.jackson.JsonNode;
+
 import play.Logger.ALogger;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -121,6 +125,32 @@ public class GroupApplication extends Controller {
 		
 		Form<Group> groupForm = form(Group.class).fill(Group.find.byId(id));
 		return redirect(routes.GroupApplication.edit(id));
+	}
+	
+	public static Result apiUpdateMember(Long id, Long memberId) {
+		
+		JsonNode jn = request().body().asJson();
+		
+		Boolean isAdmin = jn.findPath("admin").asBoolean();
+		
+
+		GroupUserMap groupUser = GroupUserMap.findByGroupIdAndUserId(id, memberId);
+		
+		groupUser.admin = isAdmin;
+		groupUser.update();
+		
+		return ok();
+	}
+	
+	public static Result apiGetMember(Long id, Long memberId) {
+		
+		GroupUserMap gum = GroupUserMap.findByGroupIdAndUserId(id, memberId);
+		gum.group.members = null;
+		gum.user.credential = null;
+		
+		logger.debug(gum.group.members.toString());
+		
+		return ok(Json.toJson(gum));
 	}
 
 	/**

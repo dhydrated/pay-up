@@ -86,8 +86,11 @@ POST    /groups/:id              controllers.GroupApplication.update(id:Long)
 # Delete a group
 POST    /groups/:id/delete       controllers.GroupApplication.delete(id:Long)
 
+GET    /groups/:id/members/:memberId   controllers.GroupApplication.apiGetMember(id:Long, memberId:Long)
 POST    /groups/:id/members/add   controllers.GroupApplication.addMember(id:Long)
 POST    /groups/:id/members/:memberId/delete   controllers.GroupApplication.removeMember(id:Long, memberId:Long)
+
+POST    /groups/:id/members/:memberId/update   controllers.GroupApplication.apiUpdateMember(id:Long, memberId:Long)
 
 
 # Reports list (look at the default values for pagination parameters)

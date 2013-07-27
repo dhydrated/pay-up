@@ -29,7 +29,7 @@
     
     
     
-        
+    <div ng-controller="MembershipController">
         <table class="table table-striped table-bordered">
 	        <thead>
 	            <tr>
@@ -43,26 +43,26 @@
 		    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.user.id)">@member.user.name</a>
 		    				
 						         <span class="text-toggle-button">
-						            <input type="checkbox" name="member[@member.id].id" value="@member.id" class="toggle"
+						            <input type="checkbox" name="member[@member.id].id" value="@member.admin" class="toggle" 
+						            ng-model="member_@{member.id}.admin" ng-checked="@member.admin" ng-change="updateRole('member_@member.id', @member.group.id, @member.user.id)"
 						            @{
-							            if(member.admin != null && member.admin) {
+							            if(member.admin) {
 							               "CHECKED"
 							            }
-						            } />
-						            
+						            }
+						             />
 						         </span>
             
 		    				@form(routes.GroupApplication.removeMember(id, member.user.id), 'style -> "display:inline") {
 						        <input type="submit" value="Delete" class="btn btn-danger">
 						    }
-						    
 						</td>
 					</tr>        
 		    }
 	        </tbody>
 	        
 	    </table>
-    
+    </div>
     
     @form(routes.GroupApplication.addMember(id), 'class -> "form-horizontal") {
     
@@ -82,5 +82,25 @@
 			     </p>
 		</div>
     }
+    
+    <script>
+    function MembershipController($scope, $http) {
+    	  
+    	 
+    	  $scope.updateRole = function(model, groupId, memberId) {
+			
+			$http({method: 'POST', url: '/groups/'+groupId+'/members/'+memberId+'/update', data: $scope[model]}).
+			  success(function(data, status, headers, config) {
+			    console.log(status);
+			    console.log(data);
+			  }).
+			  error(function(data, status, headers, config) {
+				    console.log(status);
+				    console.log(data);
+			  });
+    	  };
+    	  
+    }
+    </script>
     
 }

@@ -42,7 +42,7 @@
 	                    <td>
 		    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.user.id)">@member.user.name</a>
 		    				
-						         <span class="text-toggle-button">
+						         <div class="text-toggle-button" >
 						            <input type="checkbox" name="member[@member.id].id" value="@member.admin" class="toggle" 
 						            ng-model="member_@{member.id}.admin" ng-checked="@member.admin" ng-change="updateRole('member_@member.id', @member.group.id, @member.user.id)"
 						            @{
@@ -51,11 +51,12 @@
 							            }
 						            }
 						             />
-						         </span>
+						         </div>
             
 		    				@form(routes.GroupApplication.removeMember(id, member.user.id), 'style -> "display:inline") {
 						        <input type="submit" value="Delete" class="btn btn-danger">
 						    }
+						    
 						</td>
 					</tr>        
 		    }

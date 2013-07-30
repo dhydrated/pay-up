@@ -6,9 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.List;
 
+import models.GroupUserMap;
 import models.Payment;
 import models.PaymentArtifact;
-import models.PaymentTemplate;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -207,6 +207,22 @@ public class Application extends Controller {
 		artifact.delete();
 		
 		return edit(paymentId);
+	}
+	
+
+	
+	public static Result getPayments(Long groupId, Long memberId, int page, String sortBy, String order){
+		
+		Long userId = 0L;
+		
+		GroupUserMap gum = GroupUserMap.findByGroupIdAndUserId(groupId, memberId);
+		
+		if(gum != null){
+			userId = gum.user.id;
+		}
+		
+		return ok(list.render(Payment.pageByUserId(page, 10, sortBy, order, userId),
+				sortBy, order, "", "user_payments"));
 	}
 
 }

@@ -40,7 +40,7 @@
 		    @for(member <- groupForm.get().members) {
 	                <tr>
 	                    <td>
-		    				<a href="@routes.Application.listByUserId(0, "paidDate", "desc", member.user.id)">@member.user.name</a>
+		    				<a href="@routes.Application.getPayments(id, member.user.id, 0, "paidDate", "desc")">@member.user.name</a>
 		    				
 						            <input type="checkbox" name="member[@member.id].id" value="@member.admin" class="toggle" 
 						            ng-model="member_@{member.id}.admin" ng-checked="@member.admin" ng-change="updateRole('member_@member.id', @member.group.id, @member.user.id)"

@@ -91,7 +91,7 @@ POST    /groups/:id/members/add   controllers.GroupApplication.addMember(id:Long
 POST    /groups/:id/members/:memberId/delete   controllers.GroupApplication.removeMember(id:Long, memberId:Long)
 
 POST    /groups/:id/members/:memberId/update   controllers.GroupApplication.apiUpdateMember(id:Long, memberId:Long)
-
+GET		/groups/:groupId/members/:memberId/payments controllers.Application.getPayments(groupId:Long, memberId:Long, p:Int ?= 0, s ?= "name", o ?= "asc")
 
 # Reports list (look at the default values for pagination parameters)
 GET     /reports                  controllers.ReportApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")

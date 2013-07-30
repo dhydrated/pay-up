@@ -2,6 +2,8 @@ package controllers;
 
 import static play.data.Form.form;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import models.Group;
@@ -19,6 +21,8 @@ import play.mvc.Security;
 import views.html.groups.createForm;
 import views.html.groups.editForm;
 import views.html.groups.list;
+
+import com.avaje.ebean.ExpressionList;
 
 /**
  * Manage a database of groups
@@ -55,6 +59,9 @@ public class GroupApplication extends Controller {
 	 */
 	public static Result list(int page, String sortBy, String order,
 			String filter) {
+		
+		Long userId = new Long(session().get("userId"));
+		
 		return ok(list.render(Group.page(page, 10, sortBy, order, filter),
 				sortBy, order, filter));
 	}
@@ -181,6 +188,19 @@ public class GroupApplication extends Controller {
 		Group.find.ref(id).delete();
 		flash("success", "Group has been deleted");
 		return GO_HOME;
+	}
+	
+	public static List<Long> groupAdminAccess(Long userId) {
+		
+		List<Long> groupIds = new ArrayList<Long>();
+		
+		List<GroupUserMap> gums = GroupUserMap.groupsWithAdmin(userId);
+		
+		for(GroupUserMap gum : gums){
+			groupIds.add(gum.group.id);
+		}
+		
+		return groupIds;
 	}
 
 }

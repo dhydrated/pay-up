@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -41,6 +43,12 @@ public class GroupUserMap extends Model {
 				.findUnique();
 	}
 	
+	public static List<GroupUserMap> groupsWithAdmin(Long userId) {
+        return 
+            find.where()
+                .eq("user.id", userId)
+                .eq("admin", true).findList();
+    }
 
     @Override
 	public boolean equals(Object object) {

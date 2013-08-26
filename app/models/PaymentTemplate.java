@@ -41,6 +41,8 @@ public class PaymentTemplate extends Model {
 	@Constraints.Required
 	public BigDecimal amount;
 
+    public String payeeAccountNumber;
+
     /**
      * Generic query helper for entity Payee with id Long
      */

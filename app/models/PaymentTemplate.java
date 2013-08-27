@@ -41,6 +41,7 @@ public class PaymentTemplate extends Model {
 	@Constraints.Required
 	public BigDecimal amount;
 
+	@Constraints.MaxLength(value=50)
     public String payeeAccountNumber;
 
     /**

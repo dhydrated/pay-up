@@ -97,6 +97,7 @@ $(document).ready(function() {
 			$('option:contains("'+this.model.attributes.paymentType.name+'")', "#paymentType_id").attr('selected', true);
 			$('option:contains("'+this.model.attributes.payee.name+'")', "#payee_id").attr('selected', true);
 			$('option:contains("'+this.model.attributes.payer.name+'")', "#payer_id").attr('selected', true);
+			$("#payeeAccountNumber").val(this.model.attributes.payeeAccountNumber);
 			$("#amount").val(this.model.attributes.amount);
 			
 			$("#templates-list-modal").modal('hide');
@@ -121,6 +122,7 @@ $(document).ready(function() {
 			listBody += "<thead><tr>";
 			listBody += "<td>Payment Type</td>";
 			listBody += "<td>Payee</td>";
+			listBody += "<td>Payee Account</td>";
 			listBody += "<td>Payer</td>";
 			listBody += "<td>Amount</td>";
 			listBody += "</tr></thead>";
@@ -129,6 +131,7 @@ $(document).ready(function() {
 				
 				listBody += "<tr id='template-id-"+row.attributes.id+"'><td>"+row.attributes.paymentType.name+"</td>" +
 						"<td>"+(row.attributes.payee != null ? row.attributes.payee.name : "")+"</td>" +
+						"<td>"+(row.attributes.payeeAccountNumber != null ? row.attributes.payeeAccountNumber : "")+"</td>" +
 						"<td>"+(row.attributes.payer != null ? row.attributes.payer.name : "")+"</td>" +
 						"<td>"+row.attributes.amount+"</td></tr>";
 

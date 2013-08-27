@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.Constraint;
 
 import play.Logger;
 import play.data.format.Formats;
@@ -70,6 +71,10 @@ public class Payment extends Model {
 	@Constraints.Required
 	@ManyToOne
 	public User payer;
+
+	@Constraints.MaxLength(value=50)
+    public String payeeAccountNumber;
+	
 
 	/**
 	 * Generic query helper for entity Payment with id Long

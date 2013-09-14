@@ -27,9 +27,6 @@ public class LoginApplication extends Controller {
         
         public String validate() {
         	
-        	logger.debug("email: " + email);
-        	logger.debug("password: " + password);
-        	
             if(User.authenticate(email, password) == null) {
                 return "Invalid user or password";
             }

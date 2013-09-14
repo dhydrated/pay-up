@@ -68,6 +68,7 @@ public class UserApplication extends Controller {
     	for(Role role : user.roles){
     		logger.debug(role.name);
     	}
+    	logger.debug("password: " + user.credential.password);
     	
         Form<User> userForm = form(User.class).fill(
             User.find.byId(id)

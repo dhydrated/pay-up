@@ -37,7 +37,7 @@ public class User extends Model {
     @Constraints.Required
     public String email;
     
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     public Credential credential;
 
     public String accountNumber;

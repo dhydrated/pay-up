@@ -8,6 +8,7 @@ import java.util.Set;
 import models.Role;
 import models.User;
 import play.Logger;
+import play.Logger.ALogger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -15,7 +16,8 @@ import views.html.login;
 import flexjson.JSONSerializer;
 
 public class LoginApplication extends Controller {
-  
+
+	static ALogger logger = play.Logger.of(LoginApplication.class);
     // -- Authentication
     
     public static class Login {
@@ -24,6 +26,10 @@ public class LoginApplication extends Controller {
         public String password;
         
         public String validate() {
+        	
+        	logger.debug("email: " + email);
+        	logger.debug("password: " + password);
+        	
             if(User.authenticate(email, password) == null) {
                 return "Invalid user or password";
             }

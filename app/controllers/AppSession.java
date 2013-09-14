@@ -14,7 +14,8 @@ public class AppSession extends Controller{
 	public static Boolean has(String code){
 		
 		String value = session("roles");
-		JSONDeserializer d = new JSONDeserializer();
+		JSONDeserializer<?> d = new JSONDeserializer<Object>();
+		@SuppressWarnings("unchecked")
 		List<String> roles = (ArrayList<String>) d.deserialize(value);
 		
 		return roles.contains(code);

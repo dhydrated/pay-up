@@ -16,12 +16,13 @@
             @inputText(userForm("email"), '_label -> "Email")
             @inputPassword(userForm("credential.password"), '_label -> "Password")
         
-        	@for(role <- Role.find.all()) {
+        	@for((role, index) <- Role.find.all().zipWithIndex) {
+        		
 			   <div class="control-group">
 			      <label class="control-label"> @role.name </label>
 			      <div class="controls">
 			         <div class="text-toggle-button">
-			            <input type="checkbox" name="roles[@role.id].id" value="@role.id" class="toggle"
+			            <input type="checkbox" name="roles[@index].id" value="@role.id" class="toggle"
 			            @{
 				            if(userForm.get().hasRole(role.code)) {
 				               "CHECKED"

@@ -41,7 +41,7 @@
 	                <tr>
 	                    <td>
 		    				<a href="@routes.Application.getPayments(id, member.user.id, 0, "paidDate", "desc")">@member.user.name</a>
-		    						@if(AppSession.has("group_administrator")){
+		    						@if(AppSession.has("administrator")){
 						            <input type="checkbox" name="member[@member.id].id" value="@member.admin" class="toggle" 
 						            ng-model="member_@{member.id}.admin" ng-checked="@member.admin" ng-change="updateRole('member_@member.id', @member.group.id, @member.user.id)"
 							            @{
@@ -63,24 +63,25 @@
 	        
 	    </table>
     </div>
-    
-    @form(routes.GroupApplication.addMember(id), 'class -> "form-horizontal") {
-    
-    	<div class="clearfix control-group ">
-	    	@select(
-	                groupForm("member.id"), 
-	                options(User.options), 
-	                '_label -> "Payee", '_default -> "-- Choose a member --",
-	                '_showConstraints -> false,
-	                'style -> "width:300px"
-	            )
-            
-    	</div>
-		
-		<div class="form-actions">
-		<p>   <input class="btn btn-primary" type="submit" value="Add a member">
-			     </p>
-		</div>
+    @if(AppSession.has("administrator")){
+	    @form(routes.GroupApplication.addMember(id), 'class -> "form-horizontal") {
+	    
+	    	<div class="clearfix control-group ">
+		    	@select(
+		                groupForm("member.id"), 
+		                options(User.options), 
+		                '_label -> "Payee", '_default -> "-- Choose a member --",
+		                '_showConstraints -> false,
+		                'style -> "width:300px"
+		            )
+	            
+	    	</div>
+			
+			<div class="form-actions">
+			<p>   <input class="btn btn-primary" type="submit" value="Add a member">
+				     </p>
+			</div>
+	    }
     }
     
     <script>

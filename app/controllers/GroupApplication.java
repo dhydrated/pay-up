@@ -65,6 +65,14 @@ public class GroupApplication extends Controller {
 		return ok(list.render(Group.page(page, 10, sortBy, order, filter),
 				sortBy, order, filter));
 	}
+	
+	public static Result listByAccess(int page, String sortBy, String order) {
+		
+		Long userId = new Long(session().get("userId"));
+		
+		return ok(list.render(Group.page(page, 10, sortBy, order, userId),
+				sortBy, order, ""));
+	}
 
 	/**
 	 * Display the 'edit form' of a existing Group.

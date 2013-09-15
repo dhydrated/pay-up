@@ -61,6 +61,16 @@ public class Group extends Model {
     public static List<Group> findAll() {
         return find.all();
     }
+    
+
+    /**
+     * Get list of Groups assigned to the user.
+     */
+    public static List<Group> getUserAssignedGroups(Long userId) {
+        return find.where()
+            .eq("members.user.id", userId)
+            .findList();
+    }
 
     
     public String toString() {
@@ -81,6 +91,15 @@ public class Group extends Model {
         return 
             find.where()
                 .ilike("name", "%" + filter + "%")
+                .orderBy(sortBy + " " + order)
+                .findPagingList(pageSize)
+                .getPage(page);
+    }
+
+    public static Page<Group> page(int page, int pageSize, String sortBy, String order, Long userId) {
+        return 
+            find.where()
+                .eq("members.user.id", userId)
                 .orderBy(sortBy + " " + order)
                 .findPagingList(pageSize)
                 .getPage(page);

@@ -76,7 +76,8 @@ POST    /roles/:id/delete       controllers.RoleApplication.delete(id:Long)
 
 
 # Groups list (look at the default values for pagination parameters)
-GET     /groups                  controllers.GroupApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /groups2	             controllers.GroupApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET     /groups                  controllers.GroupApplication.listByAccess(p:Int ?= 0, s ?= "name", o ?= "asc")
 # Add payment
 GET     /groups/new              controllers.GroupApplication.create()
 POST    /groups                  controllers.GroupApplication.save()

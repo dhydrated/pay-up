@@ -78,6 +78,13 @@ public class User extends Model {
     public static User findByEmail(String email) {
         return find.where().eq("email", email).findUnique();
     }
+
+    /**
+     * Retrieve a User from email.
+     */
+    public static User findById(Long id) {
+        return find.where().eq("id", id).findUnique();
+    }
     
     /**
      * Authenticate a User.

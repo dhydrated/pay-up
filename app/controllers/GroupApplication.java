@@ -22,8 +22,6 @@ import views.html.groups.createForm;
 import views.html.groups.editForm;
 import views.html.groups.list;
 
-import com.avaje.ebean.ExpressionList;
-
 /**
  * Manage a database of groups
  */
@@ -133,6 +131,7 @@ public class GroupApplication extends Controller {
 		return redirect(routes.GroupApplication.edit(id));
 	}
 	
+	
 	public static Result removeMember(Long id, Long memberId) {
 		
 		GroupUserMap groupUser = GroupUserMap.findByGroupIdAndUserId(id, memberId);
@@ -185,6 +184,13 @@ public class GroupApplication extends Controller {
 			return badRequest(createForm.render(groupForm));
 		}
 		groupForm.get().save();
+		
+		GroupUserMap groupUser = new GroupUserMap();
+		groupUser.user = User.findById(new Long(session().get("userId")));
+		groupUser.group = groupForm.get();
+		groupUser.admin = true;
+		groupUser.save();
+		
 		flash("success", "Group " + groupForm.get().name + " has been created");
 		return GO_HOME;
 	}

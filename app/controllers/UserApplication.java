@@ -5,6 +5,8 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import models.Credential;
 import models.Role;
 import models.User;
@@ -131,6 +133,8 @@ public class UserApplication extends Controller {
         if(credentialForm.hasErrors()) {
             return badRequest(changePasswordForm.render(id, credentialForm));
         }
+        credentialForm.get().password = DigestUtils.md5Hex(credentialForm.get().password);
+        
         credentialForm.get().update(id);
         flash("success", "User password has been updated");
         return GO_HOME;
@@ -154,6 +158,7 @@ public class UserApplication extends Controller {
         if(userForm.hasErrors()) {
             return badRequest(userCreateForm.render(userForm));
         }
+        userForm.get().credential.password = DigestUtils.md5Hex(userForm.get().credential.password);
         userForm.get().save();
         flash("success", "User " + userForm.get().name + " has been created");
         return GO_HOME;

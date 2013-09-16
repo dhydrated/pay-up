@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -92,7 +94,7 @@ public class User extends Model {
     public static User authenticate(String email, String password) {
         return find.where()
             .eq("email", email)
-            .eq("credential.password", password)
+            .eq("credential.password", DigestUtils.md5Hex(password))
             .findUnique();
     }
     

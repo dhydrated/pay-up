@@ -204,17 +204,19 @@ public class GroupApplication extends Controller {
 		return GO_HOME;
 	}
 	
-	public static List<Long> groupAdminAccess(Long userId) {
+	public static Boolean hasAdminAccess(Long groupId) {
 		
-		List<Long> groupIds = new ArrayList<Long>();
 		
-		List<GroupUserMap> gums = GroupUserMap.groupsWithAdmin(userId);
+		List<GroupUserMap> gums = GroupUserMap.groupsWithAdmin(new Long(session().get("userId")));
 		
 		for(GroupUserMap gum : gums){
-			groupIds.add(gum.group.id);
+			
+			if(gum.group.id == groupId){
+				return true;
+			}
 		}
 		
-		return groupIds;
+		return false;
 	}
 
 }

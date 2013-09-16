@@ -75,7 +75,7 @@
 	    	<div class="clearfix control-group ">
 		    	@select(
 		                groupForm("member.id"), 
-		                options(User.options), 
+		                options(GroupUserMap.userOptionsNotInGroupId(id)), 
 		                '_label -> "Payee", '_default -> "-- Choose a member --",
 		                '_showConstraints -> false,
 		                'style -> "width:300px"

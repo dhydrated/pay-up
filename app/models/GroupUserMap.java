@@ -1,6 +1,8 @@
 package models;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,6 +37,26 @@ public class GroupUserMap extends Model {
 	public static Model.Finder<Long, GroupUserMap> find = new Model.Finder<Long, GroupUserMap>(
 			Long.class, GroupUserMap.class);
 
+	public static Map<String,String> userOptionsNotInGroupId(Long groupId) {
+		
+		List<GroupUserMap> gums = GroupUserMap.find.where().eq("group.id", groupId).findList();
+		
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        for(User c: User.find.orderBy("name").findList()) {
+        	boolean flag = true;
+        	for(GroupUserMap gum : gums){
+        		if(gum.user.id == c.id){
+        			flag = false;
+        		}
+        	}
+    		
+    		if(flag){
+                options.put(c.id.toString(), c.name);
+    		}
+        }
+        return options;
+    }
+	
 	/**
 	 * Retrieve a User from email.
 	 */

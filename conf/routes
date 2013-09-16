@@ -57,7 +57,9 @@ GET     /users/new              controllers.UserApplication.create()
 POST    /users                  controllers.UserApplication.save()
 # Edit existing user
 GET     /users/:id              controllers.UserApplication.edit(id:Long)
+GET     /users/change_password/:id              controllers.UserApplication.changePassword(id:Long)
 POST    /users/:id              controllers.UserApplication.update(id:Long)
+POST    /users/change_password/:id              controllers.UserApplication.updatePassword(id:Long)
 # Delete a user
 POST    /users/:id/delete       controllers.UserApplication.delete(id:Long)
 GET     /api/users              controllers.UserApplication.apiList()

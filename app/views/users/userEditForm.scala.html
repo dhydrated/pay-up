@@ -14,7 +14,6 @@
         
             @inputText(userForm("name"), '_label -> "Name")
             @inputText(userForm("email"), '_label -> "Email")
-            @inputPassword(userForm("credential.password"), '_label -> "Password")
         
         	@for((role, index) <- Role.find.all().zipWithIndex) {
         		

@@ -16,6 +16,7 @@ import play.mvc.Security;
 import views.html.users.userCreateForm;
 import views.html.users.userEditForm;
 import views.html.users.userList;
+import views.html.users.changePasswordForm;
 
 /**
  * Manage a database of users
@@ -78,6 +79,19 @@ public class UserApplication extends Controller {
         );
     }
     
+
+    public static Result changePassword(Long id) {
+    	
+    	User user = User.find.byId(id);
+    	
+        Form<User> userForm = form(User.class).fill(
+            User.find.byId(id)
+        );
+        return ok(
+            changePasswordForm.render(id, userForm)
+        );
+    }
+    
     /**
      * Handle the 'edit form' submission 
      *
@@ -106,6 +120,17 @@ public class UserApplication extends Controller {
         
         userForm.get().update(id);
         
+        flash("success", "User " + userForm.get().name + " has been updated");
+        return GO_HOME;
+    }
+    
+    public static Result updatePassword(Long id) {
+    	
+        Form<User> userForm = form(User.class).bindFromRequest();
+        if(userForm.hasErrors()) {
+            return badRequest(changePasswordForm.render(id, userForm));
+        }
+        userForm.get().update(id);
         flash("success", "User " + userForm.get().name + " has been updated");
         return GO_HOME;
     }

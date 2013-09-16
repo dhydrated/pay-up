@@ -5,6 +5,7 @@ import static play.data.Form.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Credential;
 import models.Role;
 import models.User;
 import play.Logger.ALogger;
@@ -13,10 +14,10 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.users.changePasswordForm;
 import views.html.users.userCreateForm;
 import views.html.users.userEditForm;
 import views.html.users.userList;
-import views.html.users.changePasswordForm;
 
 /**
  * Manage a database of users
@@ -84,11 +85,11 @@ public class UserApplication extends Controller {
     	
     	User user = User.find.byId(id);
     	
-        Form<User> userForm = form(User.class).fill(
-            User.find.byId(id)
+        Form<Credential> credentialForm = form(Credential.class).fill(
+        		Credential.find.byId(id)
         );
         return ok(
-            changePasswordForm.render(id, userForm)
+            changePasswordForm.render(id, credentialForm)
         );
     }
     
@@ -126,12 +127,12 @@ public class UserApplication extends Controller {
     
     public static Result updatePassword(Long id) {
     	
-        Form<User> userForm = form(User.class).bindFromRequest();
-        if(userForm.hasErrors()) {
-            return badRequest(changePasswordForm.render(id, userForm));
+        Form<Credential> credentialForm = form(Credential.class).bindFromRequest();
+        if(credentialForm.hasErrors()) {
+            return badRequest(changePasswordForm.render(id, credentialForm));
         }
-        userForm.get().update(id);
-        flash("success", "User " + userForm.get().name + " has been updated");
+        credentialForm.get().update(id);
+        flash("success", "User password has been updated");
         return GO_HOME;
     }
     

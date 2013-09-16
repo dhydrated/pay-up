@@ -59,7 +59,7 @@
 	                    <td>
 	                   	 @if(AppSession.has("administrator") || GroupApplication.hasAdminAccess(id)){
 			    				@form(routes.GroupApplication.removeMember(id, member.user.id), 'style -> "display:inline") {
-							        <input type="submit" value="Delete" class="btn btn-danger" >
+							        <input type="submit" value="Remove" class="btn btn-danger" title="Remove will only remove the user from the group. The user will not be deleted from the database.">
 							    }
 						    }
 						</td>

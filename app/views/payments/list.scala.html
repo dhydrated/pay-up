@@ -1,4 +1,4 @@
-@(currentPage: com.avaje.ebean.Page[Payment], currentSortBy: String, currentOrder: String, currentFilter: String, pageType: String)
+@(currentPage: com.avaje.ebean.Page[Payment], currentSortBy: String, currentOrder: String, currentFilter: String, pageType: String, groupId: Long, userId: Long)
 
 @****************************************
 * Helper generating navigation links    *
@@ -25,6 +25,10 @@
     if(pageType.equals("payments")){
     	routes.Application.list(newPage, sortBy, order, currentFilter)
     }
+    else if(pageType.equals("group_user_payments") && groupId != null) {
+    	routes.Application.getPayments(groupId, userId, newPage, "paidDate", "desc")
+    }
+    //user_payments
     else{
     	routes.Application.listByLoginUserId(newPage, sortBy, order)
     }
@@ -94,7 +98,11 @@
                         		@payment.payee.name
                         	}
                         <td>
-                            @payment.payer.name
+                            @if(payment.payer == null) {
+                                <em>-</em>
+                            } else {
+                                @payment.payer.name
+                            }
                         </td>
                         <td>
                             @if(payment.paymentType == null) {

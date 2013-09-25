@@ -26,6 +26,7 @@ import com.avaje.ebean.Page;
 /**
  * User entity managed by Ebean
  */
+@SuppressWarnings("serial")
 @Entity 
 @Table(name="users")
 public class User extends Model {
@@ -35,6 +36,9 @@ public class User extends Model {
     
     @Constraints.Required
     public String name;
+    
+    @Constraints.Required
+    public String nickName;
     
     @Constraints.Required
     public String email;

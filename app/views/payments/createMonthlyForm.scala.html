@@ -55,7 +55,7 @@
 			         <div class="text-toggle-button">
 			            <input type="checkbox" name="months[@key]" value="@key" class="toggle"
 			             />
-			            <input type="text" name="receipts[@key]" value=""
+			            <input type="text" name="references[@key]" value=""
 			             />
 			         </div>
 			      </div>
@@ -65,8 +65,6 @@
             @inputText(paymentForm("name"), '_label -> "Description")
             
             @inputText(paymentForm("amount"), '_label -> "Amount")
-            
-            @inputText(paymentForm("reference"), '_label -> "Reference")
             
             @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50)
             

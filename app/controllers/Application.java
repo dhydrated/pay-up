@@ -186,7 +186,7 @@ public class Application extends Controller {
 		
 		logger.debug(monthly.year.toString());
 		logger.debug(monthly.months.toString());
-		logger.debug(monthly.receipts.toString());
+		logger.debug(monthly.references.toString());
 		
 		int index=0;
 		Payment payment = null;
@@ -213,7 +213,7 @@ public class Application extends Controller {
 				payment.payeeAccountNumber =  monthly.payeeAccountNumber;
 				payment.payer =  monthly.payer;
 				payment.paymentType =  monthly.paymentType;
-				payment.reference =  monthly.reference;
+				payment.reference =  monthly.references.get(index);
 				payment.remarks =  monthly.remarks;
 				payment.save();
 				

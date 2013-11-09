@@ -4,9 +4,12 @@ import static play.data.Form.form;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import models.GroupUserMap;
+import models.MonthlyPayment;
 import models.Payment;
 import models.PaymentArtifact;
 
@@ -22,6 +25,7 @@ import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.payments.createForm;
+import views.html.payments.createMonthlyForm;
 import views.html.payments.editForm;
 import views.html.payments.list;
 
@@ -137,6 +141,17 @@ public class Application extends Controller {
 	}
 
 	/**
+	 * Display the 'new payment form'.
+	 */
+	public static Result createMonthly() {
+
+		MonthlyPayment payment = new MonthlyPayment();
+
+		Form<MonthlyPayment> paymentForm = form(MonthlyPayment.class).fill(payment);
+		return ok(createMonthlyForm.render(paymentForm));
+	}
+
+	/**
 	 * Handle the 'new payment form' submission
 	 */
 	public static Result save() {
@@ -146,6 +161,67 @@ public class Application extends Controller {
 		}
 		paymentForm.get().save();
 		flash("success", "Payment " + paymentForm.get().name
+				+ " has been created");
+		return GO_HOME;
+	}
+	
+
+
+	/**
+	 * Handle the 'new payment form' submission
+	 */
+	public static Result saveMonthly() {
+		
+		logger.debug("saveMonthly");
+		
+		Form<MonthlyPayment> paymentForm = form(MonthlyPayment.class).bindFromRequest();
+		if (paymentForm.hasErrors()) {
+			logger.debug("error");
+			return badRequest(createMonthlyForm.render(paymentForm));
+		}
+		
+		
+		MonthlyPayment monthly = paymentForm.get();
+
+		
+		logger.debug(monthly.year.toString());
+		logger.debug(monthly.months.toString());
+		logger.debug(monthly.receipts.toString());
+		
+		int index=0;
+		Payment payment = null;
+		for(Integer month: monthly.months){
+			
+			if(month != null){
+				Calendar cal = Calendar.getInstance();
+				cal.set(monthly.year, month-1, 1);
+				Date startDate = cal.getTime();
+				logger.debug(String.valueOf(cal.getActualMaximum(Calendar.DATE)));
+				cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+				Date endDate = cal.getTime();
+				
+				logger.debug(startDate.toString());
+				logger.debug(endDate.toString());
+
+				payment = new Payment();
+				payment.startPeriod = startDate;
+				payment.endPeriod = endDate;
+				payment.amount = monthly.amount;
+				payment.name = monthly.name;
+				payment.paidDate =  monthly.paidDate;
+				payment.payee =  monthly.payee;
+				payment.payeeAccountNumber =  monthly.payeeAccountNumber;
+				payment.payer =  monthly.payer;
+				payment.paymentType =  monthly.paymentType;
+				payment.reference =  monthly.reference;
+				payment.remarks =  monthly.remarks;
+				payment.save();
+				
+			}
+			index++;
+		}
+		
+		flash("success", "Monthly Payments " + paymentForm.get().name
 				+ " has been created");
 		return GO_HOME;
 	}

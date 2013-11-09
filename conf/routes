@@ -25,7 +25,11 @@ GET     /payments/users            controllers.Application.listByUserId(p:Int ?=
 
 # Add payment
 GET     /payments/new              controllers.Application.create()
+GET     /monthly_payments/new       controllers.Application.createMonthly()
+
+
 POST    /payments                  controllers.Application.save()
+POST    /monthly_payments          controllers.Application.saveMonthly()
 
 # Edit existing payment
 GET     /payments/:id              controllers.Application.edit(id:Long)

@@ -98,7 +98,12 @@ public class Payment extends Model {
 	 */
 	public static Page<Payment> page(int page, int pageSize, String sortBy,
 			String order, String filter) {
-		return find.where().ilike("payee.name", "%" + filter + "%")
+		return find.where()
+				.disjunction()
+					.ilike("payee.name", "%" + filter + "%")
+					.ilike("payer.name", "%" + filter + "%")
+					.ilike("payeeAccountNumber", "%" + filter + "%")
+				.endJunction()
 				.orderBy(sortBy + " " + order).fetch("payee")
 				.findPagingList(pageSize).getPage(page);
 	}

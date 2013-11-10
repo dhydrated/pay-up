@@ -67,8 +67,10 @@
         <table class="paymentTemplates table table-striped table-bordered">
             <thead>
                 <tr>
+                    @header("payer.name", "Payer Name")
                     @header("payee.name", "Payee Name")
-                    @header("paymentType.name", "Payee Type")
+                    @header("payeeAccountNumber", "Account Number")
+                    @header("paymentType.name", "Payment Type")
                     @header("amount", "Amount")
                 </tr>
             </thead>
@@ -76,7 +78,9 @@
 
                 @for(paymentTemplate <- currentPage.getList) {
                     <tr>
+                        <td><a href="@routes.PaymentTemplateApplication.edit(paymentTemplate.id)">@paymentTemplate.payer</a></td>
                         <td><a href="@routes.PaymentTemplateApplication.edit(paymentTemplate.id)">@paymentTemplate.payee</a></td>
+                        <td>@paymentTemplate.payeeAccountNumber</td>
                         <td>@paymentTemplate.paymentType</td>
                         <td>@paymentTemplate.amount</td>
                     </tr>

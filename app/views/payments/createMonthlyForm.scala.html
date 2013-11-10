@@ -4,6 +4,16 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
 
+<!-- @currentYear = @{
+				  import java.util.Calendar
+				  import java.text.SimpleDateFormat
+				
+				  val today = Calendar.getInstance.getTime
+				  val curYear = new SimpleDateFormat("yyyy")
+				
+				  curYear.format(today)
+				} -->
+			
 @main {
     
     <h2>Add a payment</h2>
@@ -33,12 +43,11 @@
             @select(
                 paymentForm("payer.id"), 
                 options(User.options), 
-                '_label -> "Payer", '_default -> "-- Choose a payer --",
+                '_label -> "Payer", 
                 '_showConstraints -> true,
                 'style -> "width:300px"
             )
-            
-            
+                        
             @select(
                 paymentForm("year"), 
                 options(Payment.yearOptions), 

@@ -113,8 +113,13 @@ public class Payment extends Model {
 	public static Map<String, String> yearOptions() {
 		LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
 
-		options.put("2013", "2013");
-		options.put("2012", "2012");
+		Calendar cal = Calendar.getInstance();
+		int currentYear = cal.get(Calendar.YEAR);
+		int nextYear = currentYear + 1;
+		for(int i=nextYear; i>nextYear-3; i--){
+			String year = Integer.toString(i);
+			options.put(year, year);
+		}
 
 		return options;
 	}

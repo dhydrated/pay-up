@@ -61,9 +61,17 @@
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn" style="top:0">
         </form>
         
-        <a class="btn btn-success" id="add" href="@routes.Application.create()">Add a new payment</a>
-        <a class="btn btn-success" id="secondary-add" href="@routes.Application.createMonthly()">Add a new monthly payment</a>
-        
+         <div id="add">
+		  <button  class="btn btn-success" data-toggle="dropdown">
+		    Add a new payment
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu">
+		    <li><a href="@routes.Application.create()">Single</a></li>
+		    <li><a href="@routes.Application.createMonthly()">Monthly</a></li>
+		  </ul>
+		</div>
+              
     </div>
     }
     

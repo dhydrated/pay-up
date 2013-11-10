@@ -47,20 +47,22 @@
                 'style -> "width:300px"
             )
             
+        	<div ng-controller="ReferenceController">
             @for((key, value) <- Payment.monthOptions()) {
-        		
-			   <div class="control-group">
-			      <label class="control-label"> @value </label>
-			      <div class="controls">
-			         <div class="text-toggle-button">
-			            <input type="checkbox" name="months[@key]" value="@key" class="toggle"
-			             />
-			            <input type="text" name="references[@key]" value=""
-			             />
-			         </div>
-			      </div>
-			   </div>
+				   <div class="control-group">
+				      <label class="control-label"> @value </label>
+				      <div class="controls">
+				         <div class="text-toggle-button">
+				            <input type="checkbox" id="months[@key]" name="months[@key]" value="@key" class="toggle"  
+				            	ng-model="month_@key"
+				             />
+				            <input type="text" id="references[@key]" name="references[@key]" value="" placeholder="reference #" ng-show="month_@key"
+				             />
+				         </div>
+				      </div>
+				   </div>
 			}
+		   </div>
             
             @inputText(paymentForm("name"), '_label -> "Description")
             
@@ -114,5 +116,6 @@
     
     <script type="text/javascript" src="@routes.Assets.at("javascripts/date.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/payments.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/reference-controller.js")"></script>
     
 }

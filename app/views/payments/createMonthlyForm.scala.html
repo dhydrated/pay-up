@@ -18,7 +18,7 @@
     
     <h2>Add a payment</h2>
     
-    @form(routes.Application.saveMonthly(), 'class -> "form-horizontal") {
+    @form(routes.Application.saveMonthly(), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
 
@@ -27,7 +27,8 @@
                 options(PaymentType.options), 
                 '_label -> "Payment Type", '_default -> "-- Choose a payment type --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
 
             @select(
@@ -35,17 +36,20 @@
                 options(User.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
             
-            @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account")
+            @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
+                'class -> "form-control")
 
             @select(
                 paymentForm("payer.id"), 
                 options(User.options), 
                 '_label -> "Payer", 
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
                         
             @select(
@@ -53,19 +57,21 @@
                 options(Payment.yearOptions), 
                 '_label -> "Year",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
             
         	<div ng-controller="ReferenceController">
             @for((key, value) <- Payment.monthOptions()) {
-				   <div class="control-group">
-				      <label class="control-label"> @value </label>
-				      <div class="controls">
-				         <div class="text-toggle-button">
-				            <input type="checkbox" id="months[@key]" name="months[@key]" value="@key" class="toggle"  
+				   <div class="form-group">
+				      <label class="col-sm-2 control-label"> @value </label>
+				      <div class="controls col-sm-5 ">
+				         <div class="text-toggle-button ">
+				            <input type="checkbox" id="months[@key]" name="months[@key]" value="@key" class="toggle" 
 				            	ng-model="month_@key"
 				             />
-				            <input type="text" id="references[@key]" name="references[@key]" value="" placeholder="reference #" ng-show="month_@key"
+				            <input type="text" id="references[@key]" name="references[@key]" value="" placeholder="reference #" ng-show="month_@key" 
+				            	class="form-control"
 				             />
 				         </div>
 				      </div>
@@ -73,11 +79,14 @@
 			}
 		   </div>
             
-            @inputText(paymentForm("name"), '_label -> "Description")
+            @inputText(paymentForm("name"), '_label -> "Description",
+                'class -> "form-control")
             
-            @inputText(paymentForm("amount"), '_label -> "Amount")
+            @inputText(paymentForm("amount"), '_label -> "Amount",
+                'class -> "form-control")
             
-            @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50)
+            @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50,
+                'class -> "form-control")
             
 
         </fieldset>

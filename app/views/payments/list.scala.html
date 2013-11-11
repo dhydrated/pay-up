@@ -54,11 +54,13 @@
     } 
 
 	@if(pageType.equals("payments")){
-    <div id="actions">
+    <div id="actions" >
         
-        <form action="@link(0, "name")" method="GET">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by payment name..." class="input-medium search-query">
-            <input type="submit" id="searchsubmit" value="Search" class="btn btn-default" style="top:0">
+        <form action="@link(0, "name")" method="GET" class="form-inline">
+        	<div class="form-group">
+            	<input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by payment name..." class="form-control">
+            </div>
+            <input type="submit" id="searchsubmit" value="Search" class="btn btn-default" >
         </form>
         
          <div id="add">
@@ -149,8 +151,8 @@
             </tbody>
         </table>
 
-        <div id="pagination" class="pagination">
-            <ul>
+        <div id="pagination">
+            <ul class="pagination">
                 @if(currentPage.hasPrev) {
                     <li class="prev">
                         <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a>

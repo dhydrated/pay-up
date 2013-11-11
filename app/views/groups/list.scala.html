@@ -47,8 +47,10 @@
 
     <div id="actions">
         
-        <form action="@link(0, "name")" method="GET">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by group name..." class="input-medium search-query">
+        <form action="@link(0, "name")" method="GET" class="form-inline">
+        	<div class="form-group">
+            	<input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="Filter by group name..." class="form-control">
+            </div>
             <input type="submit" id="searchsubmit" value="Filter by name" class="btn btn-default">
         </form>
         
@@ -81,8 +83,8 @@
             </tbody>
         </table>
 
-        <div id="pagination" class="pagination">
-            <ul>
+        <div id="pagination">
+            <ul class="pagination">
                 @if(currentPage.hasPrev) {
                     <li class="prev">
                         <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Previous</a>

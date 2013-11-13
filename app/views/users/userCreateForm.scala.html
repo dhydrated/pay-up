@@ -8,14 +8,18 @@
     
     <h2>Add a user</h2>
     
-    @form(routes.UserApplication.save(), 'class -> "form-horizontal") {
+    @form(routes.UserApplication.save(), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(userForm("name"), '_label -> "Name")
-            @inputText(userForm("nickName"), '_label -> "Nick Name")
-            @inputText(userForm("email"), '_label -> "Email")
-            @inputPassword(userForm("credential.password"), '_label -> "Password")
+            @inputText(userForm("name"), '_label -> "Name",
+                'class -> "form-control")
+            @inputText(userForm("nickName"), '_label -> "Nick Name",
+                'class -> "form-control")
+            @inputText(userForm("email"), '_label -> "Email",
+                'class -> "form-control")
+            @inputPassword(userForm("credential.password"), '_label -> "Password",
+                'class -> "form-control")
 
         </fieldset>
         

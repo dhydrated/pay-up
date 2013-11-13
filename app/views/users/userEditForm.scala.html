@@ -8,20 +8,23 @@
     
     <h2>Edit user</h2>
     
-    @form(routes.UserApplication.update(id), 'class -> "form-horizontal") {
+    @form(routes.UserApplication.update(id), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(userForm("name"), '_label -> "Name")
-            @inputText(userForm("nickName"), '_label -> "Nick Name")
-            @inputText(userForm("email"), '_label -> "Email")
+            @inputText(userForm("name"), '_label -> "Name",
+                'class -> "form-control")
+            @inputText(userForm("nickName"), '_label -> "Nick Name",
+                'class -> "form-control")
+            @inputText(userForm("email"), '_label -> "Email",
+                'class -> "form-control")
         
         	@for((role, index) <- Role.find.all().zipWithIndex) {
         		
-			   <div class="control-group">
-			      <label class="control-label"> @role.name </label>
+			   <div class="form-group">
+			      <label class="control-label col-sm-2"> @role.name </label>
 			      <div class="controls">
-			         <div class="text-toggle-button">
+			         <div class="text-toggle-button col-sm-5 ">
 			            <input type="checkbox" name="roles[@index].id" value="@role.id" class="toggle"
 			            @{
 				            if(userForm.get().hasRole(role.code)) {

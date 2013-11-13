@@ -8,7 +8,7 @@
     
     <h2>Edit payment</h2>
     
-    @form(routes.Application.update(id), 'class -> "form-horizontal") {
+    @form(routes.Application.update(id), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
 
@@ -17,7 +17,8 @@
                 options(PaymentType.options), 
                 '_label -> "Payment Type", '_default -> "-- Choose a payment type --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
 
             @select(
@@ -25,23 +26,26 @@
                 options(User.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",
                 '_showConstraints -> false,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
             
-            @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account")
+            @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
+                'class -> "form-control")
 
             @select(
                 paymentForm("payer.id"), 
                 options(User.options), 
                 '_label -> "Payer", '_default -> "-- Choose a payer --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
             
             
             @input(paymentForm("startPeriod"), 
             	'_label -> "Start Period") { (id, name, value, args) =>
-			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:80px"/>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:7em" class="form-control"/>
 			    <script>
 			    $('#@id').datepicker();
 			    </script>
@@ -49,7 +53,7 @@
             
             @input(paymentForm("endPeriod"), 
             	'_label -> "End Period") { (id, name, value, args) =>
-			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:80px"/>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:7em" class="form-control"/>
 			    <script>
 			    $('#@id').datepicker();
 			    </script>
@@ -57,19 +61,23 @@
             
             @input(paymentForm("paidDate"), 
             	'_label -> "Paid Date") { (id, name, value, args) =>
-			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:80px"/>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:7em" class="form-control"/>
 			    <script>
 			    $('#@id').datepicker();
 			    </script>
 			} 
             
-            @inputText(paymentForm("name"), '_label -> "Description")
+            @inputText(paymentForm("name"), '_label -> "Description",
+                'class -> "form-control")
             
-            @inputText(paymentForm("amount"), '_label -> "Amount")
+            @inputText(paymentForm("amount"), '_label -> "Amount",
+                'class -> "form-control")
             
-            @inputText(paymentForm("reference"), '_label -> "Reference")
+            @inputText(paymentForm("reference"), '_label -> "Reference",
+                'class -> "form-control")
             
-            @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50)
+            @textarea(paymentForm("remarks"), '_label -> "Remarks", 'rows -> 4, 'cols -> 50,
+                'class -> "form-control")
             
    
         
@@ -82,13 +90,15 @@
         
     }
     
+    <br>
+    <hr>
      @form(action = routes.Application.uploadFile(id), 'enctype -> "multipart/form-data", 'class -> "form-horizontal") {
      
      	<div class="clearfix control-group ">
-		    <label for="upload_file" class="control-label">Attachment</label>
-		    <div class="input controls">
+		    <label for="upload_file" class="control-label col-sm-2 control-label" >Attachment</label>
+		    <div class="input controls controls col-sm-5 ">
 		        
-			    <input id="upload_file" class="btn btn-default" type="file" name="picture" style="background:none; width:500px">
+			    <input id="upload_file" class="btn btn-default" type="file" name="picture" style="background:none; width:500px" class="form-control">
 			     
 		    </div>
 		</div>

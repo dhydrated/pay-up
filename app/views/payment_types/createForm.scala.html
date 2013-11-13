@@ -8,11 +8,12 @@
     
     <h2>Add a payment type</h2>
     
-    @form(routes.PaymentTypeApplication.save(), 'class -> "form-horizontal") {
+    @form(routes.PaymentTypeApplication.save(), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(paymentTypeForm("name"), '_label -> "Name")
+            @inputText(paymentTypeForm("name"), '_label -> "Name",
+                'class -> "form-control")
             
         </fieldset>
         

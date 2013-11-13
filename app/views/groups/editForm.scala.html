@@ -8,11 +8,12 @@
     
     <h2>Edit group</h2>
     
-    @form(routes.GroupApplication.update(id), 'class -> "form-horizontal") {
+    @form(routes.GroupApplication.update(id), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(groupForm("name"), '_label -> "Name")
+            @inputText(groupForm("name"), '_label -> "Name",
+                'class -> "form-control")
         
         </fieldset>
         
@@ -27,6 +28,8 @@
         <input type="submit" value="Delete this group" class="btn btn-danger">
     }
     
+    <br>
+    <hr>
     
     
     <div ng-controller="MembershipController">
@@ -46,7 +49,7 @@
 						</td>
 	                    <td>
                   			@if(AppSession.has("administrator") || GroupApplication.hasAdminAccess(id)){
-					            <input type="checkbox" name="member[@member.id].id" value="@member.admin" class="toggle" 
+					            <input type="checkbox" name="member[@member.id].id" value="@member.admin" class="toggle " 
 					            ng-model="member_@{member.id}.admin" ng-checked="@member.admin" ng-change="updateRole('member_@member.id', @member.group.id, @member.user.id)"
 						            @{
 							            if(member.admin) {
@@ -78,7 +81,8 @@
 		                options(GroupUserMap.userOptionsNotInGroupId(id)), 
 		                '_label -> "Payee", '_default -> "-- Choose a member --",
 		                '_showConstraints -> false,
-		                'style -> "width:300px"
+		                'style -> "width:300px",
+		                'class -> "form-control"
 		            )
 	            
 	    	</div>

@@ -8,11 +8,12 @@
     
     <h2>Add a group</h2>
     
-    @form(routes.GroupApplication.save(), 'class -> "form-horizontal") {
+    @form(routes.GroupApplication.save(), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(groupForm("name"), '_label -> "Name")
+            @inputText(groupForm("name"), '_label -> "Name",
+                'class -> "form-control")
 
         </fieldset>
         

@@ -8,7 +8,7 @@
     
     <h2>Add a payment template</h2>
     
-    @form(routes.PaymentTemplateApplication.save(), 'class -> "form-horizontal") {
+    @form(routes.PaymentTemplateApplication.save(), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
             
@@ -17,7 +17,8 @@
                 options(PaymentType.options), 
                 '_label -> "Payment Type", '_default -> "-- Choose a payment type --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
 
             @select(
@@ -25,20 +26,24 @@
                 options(User.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
             
-            @inputText(paymentTemplateForm("payeeAccountNumber"), '_label -> "Payee Account")
+            @inputText(paymentTemplateForm("payeeAccountNumber"), '_label -> "Payee Account",
+                'class -> "form-control")
 
             @select(
                 paymentTemplateForm("payer.id"), 
                 options(User.options), 
                 '_label -> "Payer", '_default -> "-- Choose a payer --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
             
-            @inputText(paymentTemplateForm("amount"), '_label -> "Amount")
+            @inputText(paymentTemplateForm("amount"), '_label -> "Amount",
+                'class -> "form-control")
             
         </fieldset>
         

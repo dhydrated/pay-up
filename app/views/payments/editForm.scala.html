@@ -84,6 +84,7 @@
         </fieldset>
         
         <div class="form-actions">
+        	<div class="col-sm-2"></div>
             <input type="submit" value="Save this payment" class="btn btn-primary"> or 
             <a href="@routes.Application.list()" class="btn btn-default">Cancel</a> 
         </div>
@@ -92,7 +93,7 @@
     
     <br>
     <hr>
-     @form(action = routes.Application.uploadFile(id), 'enctype -> "multipart/form-data", 'class -> "form-horizontal") {
+     @form(action = routes.Application.uploadFile(id), 'enctype -> "multipart/form-data", 'class -> "form-horizontal", 'role -> "form") {
      
      	<div class="clearfix control-group ">
 		    <label for="upload_file" class="control-label col-sm-2 control-label" >Attachment</label>
@@ -102,10 +103,10 @@
 			     
 		    </div>
 		</div>
-		
+		<br>
 		<div class="form-actions">
-		<p>   <input class="btn btn-primary" type="submit">
-			     </p>
+        	<div class="col-sm-2"></div>
+			<p><input class="btn btn-primary" type="submit" value="Upload"></p>
 		</div>
      
 		

@@ -8,12 +8,14 @@
     
     <h2>Edit role</h2>
     
-    @form(routes.RoleApplication.update(id), 'class -> "form-horizontal") {
+    @form(routes.RoleApplication.update(id), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(roleForm("name"), '_label -> "Name")
-            @inputText(roleForm("code"), '_label -> "Code")
+            @inputText(roleForm("name"), '_label -> "Name",
+                'class -> "form-control")
+            @inputText(roleForm("code"), '_label -> "Code",
+                'class -> "form-control")
         
         </fieldset>
         

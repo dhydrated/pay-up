@@ -8,20 +8,23 @@
     
     <h2>Add a report</h2>
     
-    @form(routes.ReportApplication.save(), 'class -> "form-horizontal") {
+    @form(routes.ReportApplication.save(), 'class -> "form-horizontal", 'role -> "form") {
         
         <fieldset>
         
-            @inputText(reportForm("name"), '_label -> "Name")
+            @inputText(reportForm("name"), '_label -> "Name",
+                'class -> "form-control")
             
-            @textarea(reportForm("query"), '_label -> "Query", 'rows -> 15, 'cols -> 50)
+            @textarea(reportForm("query"), '_label -> "Query", 'rows -> 15, 'cols -> 50,
+                'class -> "form-control")
             
             @select(
                 reportForm("chartType"), 
                 options(Report.chartTypeOptions), 
                 '_label -> "Chart Type", '_default -> "-- Choose a chart type --",
                 '_showConstraints -> true,
-                'style -> "width:300px"
+                'style -> "width:300px",
+                'class -> "form-control"
             )
 
         </fieldset>

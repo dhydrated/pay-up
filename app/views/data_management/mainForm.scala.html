@@ -1,0 +1,42 @@
+@(dataManagementForm: Form[DataManagementForm])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h2>Export Data</h2>
+    
+    @form(routes.DataManagementApplication.exportToCsv(), 'class -> "form-horizontal", 'role -> "form") {
+        
+        <fieldset>
+        
+            @input(dataManagementForm("startDate"), 
+            	'_label -> "Start Date") { (id, name, value, args) =>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:7em" class="form-control" />
+			    <script>
+			    $('#@id').datepicker();
+			    </script>
+			} 
+            
+            @input(dataManagementForm("endDate"), 
+            	'_label -> "End Date") { (id, name, value, args) =>
+			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:7em" class="form-control" />
+			    <script>
+			    $('#@id').datepicker();
+			    </script>
+			} 
+
+        </fieldset>
+        
+        <div class="form-actions">
+        	<div class="col-sm-2"></div>
+            <input type="submit" value="Export Data" class="btn btn-primary"> or 
+            <a href="/" class="btn btn-default">Cancel</a> 
+        </div>
+        
+    }
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/date.js")"></script>
+}

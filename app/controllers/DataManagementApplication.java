@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import models.DataManagementForm;
 
@@ -24,6 +25,7 @@ import views.html.data_management.mainForm;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
+import com.avaje.ebeaninternal.server.core.DefaultSqlUpdate;
 
 
 @Security.Authenticated(Secured.class)
@@ -42,6 +44,32 @@ public class DataManagementApplication extends Controller {
 		return ok(mainForm.render(dataManagementForm));
 	}
 	
+
+	public static Result execute() {
+
+		Form<DataManagementForm> dataManagementForm = form(DataManagementForm.class).bindFromRequest();
+		if (dataManagementForm.hasErrors()) {
+			logger.debug("error");
+			return badRequest(mainForm.render(dataManagementForm));
+		}
+
+		Map<String, String> data = dataManagementForm.data();
+		logger.debug("hello");
+		logger.debug(data.toString());
+		logger.debug("world");
+		
+		if(data.containsKey("Export Data")){
+			logger.debug("first");
+			return exportToCsv();
+		}
+		else if (data.containsKey("Purge Data")){
+			logger.debug("second");
+			return deletePaymentsByDateRange();
+		}
+
+		return ok(mainForm.render(dataManagementForm));
+	}
+	
 	public static Result exportToCsv() {
 
 		Form<DataManagementForm> dataManagementForm = form(DataManagementForm.class).bindFromRequest();
@@ -55,6 +83,7 @@ public class DataManagementApplication extends Controller {
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		
+		logger.debug(dataManagementForm.data().toString());
 		logger.debug(df.format(startDate));
 		logger.debug(df.format(endDate));
 		
@@ -131,5 +160,44 @@ public class DataManagementApplication extends Controller {
 		}
 
 		return ok(file);
+	}
+	
+	public static Result deletePaymentsByDateRange() {
+
+		Form<DataManagementForm> dataManagementForm = form(DataManagementForm.class).bindFromRequest();
+		if (dataManagementForm.hasErrors()) {
+			logger.debug("error");
+			return badRequest(mainForm.render(dataManagementForm));
+		}
+		//TODO: export data
+		Date startDate = dataManagementForm.get().startDate;
+		Date endDate = dataManagementForm.get().endDate;
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		
+		logger.debug(df.format(startDate));
+		logger.debug(df.format(endDate));
+		
+		StringBuffer queryBuffer = new StringBuffer();
+		queryBuffer.append("DELETE FROM ");
+		queryBuffer.append("payments pay ");
+		queryBuffer.append("WHERE pay.start_period BETWEEN '%s' AND '%s'");
+		
+		String query = String.format(queryBuffer.toString(), df.format(startDate), df.format(endDate));
+
+		DefaultSqlUpdate sqlUpdate = new DefaultSqlUpdate(query);
+		
+    	int result = Ebean.execute(sqlUpdate);
+    	
+    	logger.debug("delete result: " + result);
+    	
+    	if(result > 0){
+    		flash("success", result + " payment(s) has been deleted.");
+    	}
+    	else{
+    		flash("warning", "No payment has been deleted.");
+    	}
+    	
+		return ok(mainForm.render(dataManagementForm));
 	}
 }

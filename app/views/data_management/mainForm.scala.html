@@ -8,8 +8,19 @@
     
     <h2>Export Data</h2>
     
-    @form(routes.DataManagementApplication.exportToCsv(), 'class -> "form-horizontal", 'role -> "form") {
+    @form(routes.DataManagementApplication.execute(), 'class -> "form-horizontal", 'role -> "form") {
         
+        @if(flash.containsKey("success")) {
+	        <div class="alert alert-success">
+	            <strong>Done!</strong> @flash.get("success")
+	        </div>
+    	} 
+    	@if(flash.containsKey("warning")) {
+	        <div class="alert alert-warning">
+	            <strong>Error!</strong> @flash.get("warning")
+	        </div>
+    	} 
+    	
         <fieldset>
         
             @input(dataManagementForm("startDate"), 
@@ -32,7 +43,8 @@
         
         <div class="form-actions">
         	<div class="col-sm-2"></div>
-            <input type="submit" value="Export Data" class="btn btn-primary"> or 
+            <input type="submit" name="Export Data" value="Export Data" class="btn btn-primary"> or 
+            <input type="submit" name="Purge Data" value="Purge Data" class="btn btn-danger"> or 
             <a href="/" class="btn btn-default">Cancel</a> 
         </div>
         

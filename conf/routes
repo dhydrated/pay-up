@@ -132,7 +132,7 @@ GET     /api/payment_templates              controllers.PaymentTemplateApplicati
 
 
 GET    /data_management                     controllers.DataManagementApplication.display()
-GET    /data_management/export.csv          controllers.DataManagementApplication.exportToCsv()
+GET    /data_management/execute             controllers.DataManagementApplication.execute()
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -6,4 +6,5 @@ public class DataManagementForm {
 
 	public Date startDate;
 	public Date endDate;
+	public String submit;
 }

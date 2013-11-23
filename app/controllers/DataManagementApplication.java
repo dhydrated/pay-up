@@ -59,8 +59,24 @@ public class DataManagementApplication extends Controller {
 		logger.debug(df.format(endDate));
 		
 		StringBuffer queryBuffer = new StringBuffer();
-		queryBuffer.append("SELECT * ");
-		queryBuffer.append("FROM payments WHERE start_period BETWEEN '%s' AND '%s'");
+		queryBuffer.append("SELECT ");
+		queryBuffer.append("pay.id, ");
+		queryBuffer.append("amount, "); 
+		queryBuffer.append("remarks, "); 
+		queryBuffer.append("reference, "); 
+		queryBuffer.append("paid_date::date, "); 
+		queryBuffer.append("payee.name as payee, "); 
+		queryBuffer.append("type.name as payment_type, "); 
+		queryBuffer.append("start_period::date, "); 
+		queryBuffer.append("end_period::date, "); 
+		queryBuffer.append("payer.name as payer, "); 
+		queryBuffer.append("payee_account_number ");
+		queryBuffer.append("from "); 
+		queryBuffer.append("payments pay ");
+		queryBuffer.append("join users payee on pay.payee_id = payee.id ");
+		queryBuffer.append("join users payer on pay.payer_id = payer.id ");
+		queryBuffer.append("join payment_types type on pay.payment_type_id = type.id ");
+		queryBuffer.append("WHERE pay.start_period BETWEEN '%s' AND '%s'");
 		
 		String query = String.format(queryBuffer.toString(), df.format(startDate), df.format(endDate));
 

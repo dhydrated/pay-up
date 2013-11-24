@@ -176,7 +176,7 @@ $(document).ready(function() {
 			});
 		},
 		focus : function(){
-			$(this.el).on('shown', function () {
+			$(this.el).on('shown.bs.modal', function () {
 			    $('#search-template').focus();
 			})
 		}

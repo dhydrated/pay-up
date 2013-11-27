@@ -20,48 +20,31 @@ function UsersController($scope, $http) {
 	$http({ method: 'GET', url: '/api/users' }).
 	  success(function (data, status, headers, config) {
 		$scope.users = data;
-	    $scope.populateSearchUsersList();
-	    
 	  }).
 	  error(function (data, status, headers, config) {
 	    console.log('failed retrieving users list.');
 	  });
 	
-	$scope.populateSearchUsersList = function() {
-		console.log('populate users');
-		console.log($scope.users);
-		
-		content = "";
-
-		  content += "<tr>";
-		  content += "  <th>";
-		  content += "  Name";
-		  content += "  </th>";
-		  content += "</tr>";
-		  
-		angular.forEach($scope.users, function(user){
-			  console.log(user.email);
-			  
-			  content += "<tr>";
-			  content += "  <td>";
-			  content += user.name;
-			  content += "  </td>";
-			  content += "</tr>";
-				  
-			});
-		
-		console.log(content);
-		
-		$scope.myHTML = content;
-		/*$scope.users.each(function(user){
-			
-			console.log($(user));
-			
-		});*/
-		
-	};
 	
-	$('#payee-modal').on('shown.bs.modal', function () {
-		  console.log('test');
-		})
+	$($scope.userSelectId).on('shown.bs.modal', function () {
+		$('#search-user').focus();
+	});
+	
+	$($scope.userSelectId).on('hidden.bs.modal', function () {
+		$scope.userSelectId = undefined;
+	});
+		
+	$scope.selectUser = function(user){
+		$($scope.userSelectId).val(user.id);
+		$($scope.userSelectName).val(user.name);
+		$('#user-modal').modal('hide');
+	}
+	
+	$scope.showUserSearch = function(userSelect){
+		$scope.userSelectId = '#'+userSelect+'_id';
+		$scope.userSelectName = '#'+userSelect+'_name';
+		$('#user-modal').modal('show')
+	}	
+	
+	
 }

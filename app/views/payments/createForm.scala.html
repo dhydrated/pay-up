@@ -22,31 +22,49 @@
                 '_label -> "Payment Type", '_default -> "-- Choose a payment type --",
                 '_showConstraints -> true,
                 'style -> "width:300px",
-                'class -> "form-control"
+                'class -> "form-control",
+                'required -> ""
             )
 
-            @select(
+            <!-- @select(
                 paymentForm("payee.id"), 
                 options(User.options), 
                 '_label -> "Payee", '_default -> "-- Choose a payee --",
                 '_showConstraints -> true,
                 'style -> "width:300px",
-                'class -> "form-control"
-            )
-
-			<input type="button" class="btn btn-default" value="Search Payee" data-toggle="modal" data-target="#payee-modal" />
+                'class -> "form-control",
+                'required -> ""
+            ) -->
             
+            <div class="form-group">
+			    <label for="payee_id" class="col-sm-2 control-label">Payee</label>
+			    <div class="col-sm-5">
+			        <input type="hidden" id="payee_id" name="payee.id" class="form-control">
+            		<input type="text" id="payee_name" name="payee.name" class="form-control" ng-click="showUserSearch('payee')" required>
+			    </div>
+			</div>
+
+			 
             @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
-            @select(
+            <!-- @select(
                 paymentForm("payer.id"), 
                 options(User.options), 
                 '_label -> "Payer", '_default -> "-- Choose a payer --",
                 '_showConstraints -> true,
                 'style -> "width:300px",
                 'class -> "form-control"
-            )
+            ) -->
+            
+            <div class="form-group">
+			    <label for="payer_id" class="col-sm-2 control-label">Payer</label>
+			    <div class="col-sm-5">
+			        <input type="hidden" id="payer_id" name="payer.id" class="form-control">
+            		<input type="text" id="payer_name" name="payer.name" class="form-control" ng-click="showUserSearch('payer')" required>
+			    </div>
+			</div>
+            
             <!--
             @inputDate(paymentForm("startPeriod"), 
             	'_label -> "Start Period", 
@@ -142,23 +160,34 @@
 		
 		
 
-		<div class="modal fade" id="payee-modal" tabindex="-1" role="dialog" aria-labelledby="payee-modal-label" aria-hidden="true">
+		<div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="user-modal-label" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="payee-modal-label">Modal title</h4>
+		        <h4 class="modal-title" id="user-modal-label">Users</h4>
 		      </div>
 		      <div class="modal-body">
+				<div id="user-search-div" class="search-div">
+					<input type="search" id="search-user" name="search-user" ng-model="search.name" value="" placeholder="Filter..." class="form-control">
+				</div>
 		        <div id="search-payees-list" >
-		        	<table ng-bind-html="myHTML" class="table table-bordered">
-		        	
+		        	<table class="table table-bordered">
+		        		<tr>
+		        			<th>Name</th>
+		        			<th>Nickname</th>
+		        			<th>Email</th>
+		        		</tr>
+		        		<tr ng-repeat="user in users | filter:search:true" ng-click="selectUser(user)">
+		        			<td>{{user.name}}</td>
+		        			<td>{{user.nickName}}</td>
+		        			<td>{{user.email}}</td>
+		        		</tr>
 		        	</table>
 		        </div>
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->

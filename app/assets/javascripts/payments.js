@@ -98,10 +98,17 @@ $(document).ready(function() {
 				$('option:contains("'+this.model.attributes.paymentType.name+'")', "#paymentType_id").attr('selected', true);
 			}
 			if(this.model.attributes.payee){
-				$('option:contains("'+this.model.attributes.payee.name+'")', "#payee_id").attr('selected', true);
+//				$('option:contains("'+this.model.attributes.payee.name+'")', "#payee_id").attr('selected', true);
+				console.log(this.model.attributes.payee.name);
+				console.log($('#payee_id'));
+				$('#payee_id').val(this.model.attributes.payee.id);
+				$('#payee_name').val(this.model.attributes.payee.name);
 			}
 			if(this.model.attributes.payer){
-				$('option:contains("'+this.model.attributes.payer.name+'")', "#payer_id").attr('selected', true);
+//				$('option:contains("'+this.model.attributes.payer.name+'")', "#payer_id").attr('selected', true);
+				console.log(this.model.attributes.payer.name);
+				$('#payer_id').val(this.model.attributes.payer.id);
+				$('#payer_name').val(this.model.attributes.payer.name);
 			}
 			$("#payeeAccountNumber").val(this.model.attributes.payeeAccountNumber);
 			$("#amount").val(this.model.attributes.amount);

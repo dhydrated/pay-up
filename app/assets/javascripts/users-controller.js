@@ -11,25 +11,11 @@ function UsersController($scope, $http) {
 	  });
 	
 	
-	$($scope.userSelectId).on('shown.bs.modal', function () {
-		$('#search-user').focus();
-	});
-	
-	$($scope.userSelectId).on('hidden.bs.modal', function () {
-		$scope.userSelectId = undefined;
-	});
-		
-	$scope.selectUser = function(user){
-		$($scope.userSelectId).val(user.id);
-		$($scope.userSelectName).val(user.name);
-		$('#user-modal').modal('hide');
-	}
-	
 	$scope.showUserSearch = function(userSelect){
-		$scope.userSelectId = '#'+userSelect+'_id';
-		$scope.userSelectName = '#'+userSelect+'_name';
-		$('#user-modal').modal('show')
-	}	
+		$scope.userSelectId = '#'+userSelect.toLowerCase()+'_id';
+		$scope.userSelectName = '#'+userSelect.toLowerCase()+'_name';
+		$('#'+userSelect.toLowerCase()+'-modal').modal('show');
+	};
 	
 	
 }
@@ -59,6 +45,17 @@ app.directive('userSearch', function() {
 			scope.userLabel = attribute.label;
 			scope.userSearchId = attribute.userSearchId;
 			scope.userSearchName = attribute.userSearchName;
+			
+			scope.selectUser = function(user) {
+				$('#'+scope.userId.id).val(user.id);
+				$('#'+scope.userName.id).val(user.name);
+				$('#'+scope.name+'-modal').modal('hide');
+			};
+			
+			$(element).on('shown.bs.modal', function () {
+				$('#search-'+scope.name.toLowerCase()).focus();
+			});
+			
 			
 		}
 	}

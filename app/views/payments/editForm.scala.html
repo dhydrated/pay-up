@@ -126,39 +126,6 @@
         <input type="submit" value="Delete this payment" class="btn btn-danger">
     }
     
-    <div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="user-modal-label" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="user-modal-label">Users</h4>
-		      </div>
-		      <div class="modal-body">
-				<div id="user-search-div" class="search-div">
-					<input type="search" id="search-user" name="search-user" ng-model="search.name" value="" placeholder="Filter..." class="form-control">
-				</div>
-		        <div id="search-payees-list" >
-		        	<table class="table table-bordered">
-		        		<tr>
-		        			<th>Name</th>
-		        			<th>Nickname</th>
-		        			<th>Email</th>
-		        		</tr>
-		        		<tr ng-repeat="user in users | filter:search:true" ng-click="selectUser(user)">
-		        			<td>{{user.name}}</td>
-		        			<td>{{user.nickName}}</td>
-		        			<td>{{user.email}}</td>
-		        		</tr>
-		        	</table>
-		        </div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-		</div>
-    
     <script type="text/javascript" src="@routes.Assets.at("javascripts/date.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/payments.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/users-controller.js")"></script>

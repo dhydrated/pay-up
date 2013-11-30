@@ -4,4 +4,37 @@
         <input type="hidden" id="{{userId.id}}" name="{{userId.name}}" value="{{userSearchId}}" class="form-control">
          		<input type="text" id="{{userName.id}}" name="{{userName.name}}" value="{{userSearchName}}" class="form-control" ng-click="eventHandler()" required>
     </div>
+    
+    <div class="modal fade" id="{{name}}-modal" tabindex="-1" role="dialog" aria-labelledby="{{name}}-modal-label" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="{{name}}-modal-label">{{userLabel}}</h4>
+	      </div>
+	      <div class="modal-body">
+			<div id="{{name}}-search-div" class="search-div">
+				<input type="search" id="search-{{name}}" name="search-{{name}}" ng-model="search.name" value="" placeholder="Filter..." class="form-control">
+			</div>
+	        <div id="search-{{name}}-list" >
+	        	<table class="table table-bordered">
+	        		<tr>
+	        			<th>Name</th>
+	        			<th>Nickname</th>
+	        			<th>Email</th>
+	        		</tr>
+	        		<tr ng-repeat="user in $parent.users | filter:search:true" ng-click="selectUser(user)">
+	        			<td>{{user.name}}</td>
+	        			<td>{{user.nickName}}</td>
+	        			<td>{{user.email}}</td>
+	        		</tr>
+	        	</table>
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div>
 </div>

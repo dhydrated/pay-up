@@ -22,24 +22,17 @@
                 'class -> "form-control"
             )
 
-            <div class="form-group">
-			    <label for="payee_id" class="col-sm-2 control-label">Payee</label>
-			    <div class="col-sm-5">
-			        <input type="hidden" id="payee_id" name="payee.id" class="form-control" value="@paymentForm.get().payee.id">
-            		<input type="text" id="payee_name" name="payee.name" class="form-control" ng-click="showUserSearch('payee')" value="@paymentForm.get().payee.name" required>
-			    </div>
+			<div user-search="payee" label="Payee" ng-click="showUserSearch('payee')" user-search-id="@paymentForm.get().payee.id" user-search-name="@paymentForm.get().payee.name">
 			</div>
             
             @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
-            <div class="form-group">
-			    <label for="payer_id" class="col-sm-2 control-label">Payer</label>
-			    <div class="col-sm-5">
-			        <input type="hidden" id="payer_id" name="payer.id" class="form-control" value="@paymentForm.get().payer.id">
-            		<input type="text" id="payer_name" name="payer.name" class="form-control" ng-click="showUserSearch('payer')" required value="@paymentForm.get().payer.name">
-			    </div>
-			</div>
+            <div user-search="payer" label="Payer" ng-click="showUserSearch('payer')" user-search-id="@paymentForm.get().payer.id" user-search-name="@paymentForm.get().payer.name">
+            </div>
+            
+
+            
             
             
             @input(paymentForm("startPeriod"), 

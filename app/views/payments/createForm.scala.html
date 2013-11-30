@@ -36,14 +36,7 @@
                 'required -> ""
             ) -->
             
-            <div class="form-group">
-			    <label for="payee_id" class="col-sm-2 control-label">Payee</label>
-			    <div class="col-sm-5">
-			        <input type="hidden" id="payee_id" name="payee.id" class="form-control">
-            		<input type="text" id="payee_name" name="payee.name" class="form-control" ng-click="showUserSearch('payee')" required>
-			    </div>
-			</div>
-
+            <div user-search="payee" label="Payee" ng-click="showUserSearch('payee')"></div>
 			 
             @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
@@ -57,13 +50,8 @@
                 'class -> "form-control"
             ) -->
             
-            <div class="form-group">
-			    <label for="payer_id" class="col-sm-2 control-label">Payer</label>
-			    <div class="col-sm-5">
-			        <input type="hidden" id="payer_id" name="payer.id" class="form-control">
-            		<input type="text" id="payer_name" name="payer.name" class="form-control" ng-click="showUserSearch('payer')" required>
-			    </div>
-			</div>
+            
+            <div user-search="payer" label="Payer" ng-click="showUserSearch('payer')"></div>
             
             <!--
             @inputDate(paymentForm("startPeriod"), 

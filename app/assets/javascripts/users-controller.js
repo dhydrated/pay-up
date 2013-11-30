@@ -1,21 +1,6 @@
-angular.module('pay-up', ['ngSanitize']);
+var app = angular.module('pay-up', ['ngSanitize']);
 
 function UsersController($scope, $http) {
-	
-	/*$scope.updateReferenceFields = function(value) {
-		console.log('hi there!');
-		console.log(value);
-		console.log($scope);
-		
-		var obj = angular.element("#references["+value+"]");
-		console.log(obj);
-		obj.css( "display", "inline");
-	};
-	
-	$scope.toggle = function(a){
-		console.log(a);
-	}*/
-	
 	
 	$http({ method: 'GET', url: '/api/users' }).
 	  success(function (data, status, headers, config) {
@@ -48,3 +33,33 @@ function UsersController($scope, $http) {
 	
 	
 }
+
+app.directive('userSearch', function() {
+	return {
+		restrict: 'A',
+		transclude: true,
+		templateUrl: '/assets/templates/user-name-field-and-search.html',
+		scope: {
+            eventHandler: '&ngClick'
+        },
+		link: function(scope, element, attribute){
+			
+			scope.name = attribute.userSearch;
+			
+			scope.userId = {
+					name: attribute.userSearch + ".id",
+					id: attribute.userSearch + "_id"
+			};
+			
+			scope.userName = {
+					name: attribute.userSearch + ".name",
+					id: attribute.userSearch + "_name"
+			};
+			
+			scope.userLabel = attribute.label;
+			scope.userSearchId = attribute.userSearchId;
+			scope.userSearchName = attribute.userSearchName;
+			
+		}
+	}
+});

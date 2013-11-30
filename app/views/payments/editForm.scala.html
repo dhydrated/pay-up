@@ -31,10 +31,6 @@
             <div user-search="payer" label="Payer" ng-click="showUserSearch('payer')" user-search-id="@paymentForm.get().payer.id" user-search-name="@paymentForm.get().payer.name">
             </div>
             
-
-            
-            
-            
             @input(paymentForm("startPeriod"), 
             	'_label -> "Start Period") { (id, name, value, args) =>
 			    <input type="text" name="@name" id="@id" value="@value" @toHtmlArgs(args) data-date-format="dd/mm/yyyy" style="width:7em" class="form-control"/>

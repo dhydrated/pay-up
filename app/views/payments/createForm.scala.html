@@ -7,7 +7,6 @@
 @main {
 
 	
-    <div ng-controller="UsersController">
     
     <h2>Add a payment</h2>
     
@@ -36,8 +35,9 @@
                 'required -> ""
             ) -->
             
-            <div user-search="payee" label="Payee" ng-click="showUserSearch('Payee')" ></div>
-			 
+            <div ng-controller="UsersController" ng-init="retrieveUsers()">
+       	    <div user-search="payee" label="Payee" ng-click="showUserSearch('Payee')" ></div>
+			</div>
             @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
@@ -50,8 +50,9 @@
                 'class -> "form-control"
             ) -->
             
-            
-            <div user-search="payer" label="Payer" ng-click="showUserSearch('Payer')"></div>
+            <div ng-controller="UsersController" ng-init="retrieveUsers()">
+           		<div user-search="payer" label="Payer" ng-click="showUserSearch('Payer')"  ></div>
+           	</div>
             
             <!--
             @inputDate(paymentForm("startPeriod"), 
@@ -156,5 +157,4 @@
     <script type="text/javascript" src="@routes.Assets.at("javascripts/payments.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/users-controller.js")"></script>
     
-    </div>
 }

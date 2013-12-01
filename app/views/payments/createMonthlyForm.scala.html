@@ -16,7 +16,6 @@
 			
 @main {
     
-    <div ng-controller="UsersController">
     <h2>Add a payment</h2>
     
     @form(routes.Application.saveMonthly(), 'class -> "form-horizontal", 'role -> "form") {
@@ -32,12 +31,18 @@
                 'class -> "form-control"
             )
 
-            <div user-search="payee" label="Payee" ng-click="showUserSearch('payee')"></div>
+			
+            <div ng-controller="UsersController" ng-init="retrieveUsers()">
+            	<div user-search="payee" label="Payee" ng-click="showUserSearch('payee')"></div>
+            </div>
             
             @inputText(paymentForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
-            <div user-search="payer" label="Payer" ng-click="showUserSearch('payer')"></div>
+			
+            <div ng-controller="UsersController" ng-init="retrieveUsers()">
+            	<div user-search="payer" label="Payer" ng-click="showUserSearch('payer')"></div>
+			</div>                        
                         
             @select(
                 paymentForm("year"), 
@@ -127,5 +132,4 @@
     <script type="text/javascript" src="@routes.Assets.at("javascripts/payments.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/users-controller.js")"></script>
     
-    </div>
 }

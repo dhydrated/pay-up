@@ -1,15 +1,16 @@
 var app = angular.module('pay-up', ['ngSanitize']);
 
-function UsersController($scope, $http) {
+app.controller('UsersController', function($scope, $http) {
 	
-	$http({ method: 'GET', url: '/api/users' }).
-	  success(function (data, status, headers, config) {
-		$scope.users = data;
-	  }).
-	  error(function (data, status, headers, config) {
-	    console.log('failed retrieving users list.');
-	  });
-	
+	$scope.retrieveUsers = function(){
+		$http({ method: 'GET', url: '/api/users' }).
+		  success(function (data, status, headers, config) {
+			$scope.users = data;
+		  }).
+		  error(function (data, status, headers, config) {
+		    console.log('failed retrieving users list.');
+		  });
+	};
 	
 	$scope.showUserSearch = function(userSelect){
 		$scope.userSelectId = '#'+userSelect.toLowerCase()+'_id';
@@ -18,7 +19,7 @@ function UsersController($scope, $http) {
 	};
 	
 	
-}
+});
 
 app.directive('userSearch', function() {
 	return {

@@ -1,5 +1,5 @@
 
-var app = angular.module('payupUser', ['ngSanitize']);
+var app = angular.module('puUser', ['ngSanitize']);
 
 app.controller('UsersController', function($scope, $http) {
 	

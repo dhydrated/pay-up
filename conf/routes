@@ -25,6 +25,7 @@ GET     /payments/users            controllers.Application.listByUserId(p:Int ?=
 
 # Add payment
 GET     /payments/new              controllers.Application.create()
+GET		/payments/new2			   controllers.Application.create2()
 GET     /monthly_payments/new       controllers.Application.createMonthly()
 
 
@@ -40,6 +41,8 @@ POST    /payments/:id/delete       controllers.Application.delete(id:Long)
 
 
 GET     /api/payments              controllers.Application.apiList()
+GET     /api/payments/:id          controllers.Application.apiGet(id:Long)
+POST    /api/payments              controllers.Application.apiPost()
 
 
 

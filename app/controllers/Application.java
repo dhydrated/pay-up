@@ -15,16 +15,20 @@ import models.PaymentArtifact;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ObjectNode;
 
 import play.Logger.ALogger;
 import play.data.Form;
 import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.payments.createForm;
+import views.html.payments.createForm2;
 import views.html.payments.createMonthlyForm;
 import views.html.payments.editForm;
 import views.html.payments.list;
@@ -90,6 +94,22 @@ public class Application extends Controller {
     	
 		return ok(Json.toJson(payments));
 	}
+	
+	public static Result apiGet(Long id) {
+
+		return ok(Json.toJson(Payment.find.byId(id)));
+	}
+	
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+	public static Result apiPost() {
+
+		JsonNode json = request().body().asJson();
+		String name = json.findPath("name").getTextValue();
+		ObjectNode result = Json.newObject();
+		result.put("status", "OK");
+		result.put("message", "Hello " + name);
+		return ok(result);
+	}
 
 	/**
 	 * Display the 'edit form' of a existing Payment.
@@ -138,6 +158,14 @@ public class Application extends Controller {
 
 		Form<Payment> paymentForm = form(Payment.class).fill(payment);
 		return ok(createForm.render(paymentForm));
+	}
+
+	/**
+	 * Display the 'new payment form'.
+	 */
+	public static Result create2() {
+
+		return ok(createForm2.render());
 	}
 
 	/**

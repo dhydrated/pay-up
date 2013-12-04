@@ -1,11 +1,30 @@
+
+
 <h2>Add a payment</h2>
 
-<form class="form-horizontal">
+<form class="form-horizontal" ng-init="initializeForm()">
 
 	<fieldset>
 
-		<input id="name" placeholder="Enter name" class="form-control"
-			ng-model="payment.name">
+		<field-row element-label="Payment Type" element-id="payment_type_id">
+			<select ng-model="color" ng-options="type.name for type in paymentTypes" class="form-control">
+				<option value="">-- choose type --</option>
+			</select>
+		</field-row>
+
+		<div ng-controller="UsersController" ng-init="retrieveUsers()">
+			<div user-search="payer" label="Payer"
+				ng-click="showUserSearch('Payer')"></div>
+		</div>
+
+		<div ng-controller="UsersController" ng-init="retrieveUsers()">
+			<div user-search="payee" label="Payee"
+				ng-click="showUserSearch('Payee')"></div>
+		</div>
+
+		<field-row element-label="Account" element-id="payee_account">
+			<input id="payee_account" class="form-control">
+		</field-row>
 
 	</fieldset>
 

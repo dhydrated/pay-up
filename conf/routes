@@ -57,6 +57,8 @@ POST    /payment_types/:id              controllers.PaymentTypeApplication.updat
 # Delete a paymentType
 POST    /payment_types/:id/delete       controllers.PaymentTypeApplication.delete(id:Long)
 
+GET		/api/payment_types				controllers.PaymentTypeApplication.apiList()
+
 # Users list (look at the default values for pagination parameters)
 GET     /users                  controllers.UserApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add payment

@@ -1,6 +1,8 @@
-var app = angular.module('pay-up', ['ngSanitize']);
+var app = angular.module('pay-up', ['payupUser']);
 
-app.controller('UsersController', function($scope, $http) {
+var payupUser = angular.module('payupUser', ['ngSanitize']);
+
+payupUser.controller('UsersController', function($scope, $http) {
 	
 	$scope.retrieveUsers = function(){
 		$http({ method: 'GET', url: '/api/users' }).
@@ -21,7 +23,7 @@ app.controller('UsersController', function($scope, $http) {
 	
 });
 
-app.directive('userSearch', function() {
+payupUser.directive('userSearch', function() {
 	return {
 		restrict: 'A',
 		transclude: true,

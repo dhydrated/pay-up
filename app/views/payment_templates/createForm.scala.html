@@ -21,26 +21,16 @@
                 'class -> "form-control"
             )
 
-            @select(
-                paymentTemplateForm("payee.id"), 
-                options(User.options), 
-                '_label -> "Payee", '_default -> "-- Choose a payee --",
-                '_showConstraints -> true,
-                'style -> "width:300px",
-                'class -> "form-control"
-            )
+            <div ng-controller="UsersController" ng-init="retrieveUsers()">
+           		<div user-search="payee" label="Payee" ng-click="showUserSearch('Payee')"  ></div>
+           	</div>
             
             @inputText(paymentTemplateForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
-            @select(
-                paymentTemplateForm("payer.id"), 
-                options(User.options), 
-                '_label -> "Payer", '_default -> "-- Choose a payer --",
-                '_showConstraints -> true,
-                'style -> "width:300px",
-                'class -> "form-control"
-            )
+            <div ng-controller="UsersController" ng-init="retrieveUsers()">
+           		<div user-search="payer" label="Payer" ng-click="showUserSearch('Payer')"  ></div>
+           	</div>
             
             @inputText(paymentTemplateForm("amount"), '_label -> "Amount",
                 'class -> "form-control")
@@ -54,5 +44,8 @@
         </div>
         
     }
+    
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/users-controller.js")"></script>
     
 }

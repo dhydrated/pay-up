@@ -21,26 +21,17 @@
                 'class -> "form-control"
             )
 
-            @select(
-                paymentTemplateForm("payee.id"), 
-                options(User.options), 
-                '_label -> "Payee", '_default -> "-- Choose a payee --",
-                '_showConstraints -> true,
-                'style -> "width:300px",
-                'class -> "form-control"
-            )
+           <div ng-controller="UsersController" ng-init="retrieveUsers()">
+				<div user-search="payee" label="Payee" ng-click="showUserSearch('payee')" user-search-id="@paymentTemplateForm.get().payee.id" user-search-name="@paymentTemplateForm.get().payee.name"></div>
+            </div>
             
             @inputText(paymentTemplateForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
-            @select(
-                paymentTemplateForm("payer.id"), 
-                options(User.options), 
-                '_label -> "Payer", '_default -> "-- Choose a payer --",
-                '_showConstraints -> true,
-                'style -> "width:300px",
-                'class -> "form-control"
-            )
+            
+           <div ng-controller="UsersController" ng-init="retrieveUsers()">
+				<div user-search="payer" label="Payer" ng-click="showUserSearch('payer')" user-search-id="@paymentTemplateForm.get().payer.id" user-search-name="@paymentTemplateForm.get().payer.name"></div>
+            </div>
             
             @inputText(paymentTemplateForm("amount"), '_label -> "Amount",
                 'class -> "form-control")
@@ -58,5 +49,7 @@
     @form(routes.PaymentTemplateApplication.delete(id), 'class -> "topRight") {
         <input type="submit" value="Delete this payment template" class="btn btn-danger">
     }
+    
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/users-controller.js")"></script>
     
 }

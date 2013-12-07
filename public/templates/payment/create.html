@@ -7,7 +7,7 @@
 	<fieldset>
 
 		<field-row element-label="Payment Type" element-id="payment_type_id">
-			<select ng-model="color" ng-options="type.name for type in paymentTypes" class="form-control">
+			<select id="payment_type_id" ng-model="color" ng-options="type.name for type in paymentTypes" class="form-control" required>
 				<option value="">-- choose type --</option>
 			</select>
 		</field-row>
@@ -23,8 +23,41 @@
 		</div>
 
 		<field-row element-label="Account" element-id="payee_account">
-			<input id="payee_account" class="form-control">
+			<input id="payee_account" class="form-control" required>
 		</field-row>
+		
+		<field-row element-label="Start Period" element-id="start_period">
+			<date-picker element-label="Start Period" element-id="start_period" ng-model="payment.startPeriod" ng-change="updateEndPeriod()">
+			</date-picker>
+		</field-row>
+		
+		<field-row element-label="End Period" element-id="end_period">
+			<date-picker element-label="End Period" element-id="end_period" ng-model="payment.endPeriod">
+			</date-picker>
+		</field-row>
+		
+		<field-row element-label="Paid Date" element-id="paid_date">
+			<date-picker element-label="Paid Date" element-id="paid_date" ng-model="payment.paidDate">
+			</date-picker>
+		</field-row>
+		
+		<field-row element-label="Description" element-id="description">
+			<input id="description" class="form-control" >
+		</field-row>
+		
+		<field-row element-label="Amount" element-id="amount">
+			<input id="amount" class="form-control" required>
+		</field-row>
+		
+		<field-row element-label="Reference" element-id="reference">
+			<input id="reference" class="form-control" required>
+		</field-row>
+		
+		<field-row element-label="Remarks" element-id="remarks">
+			<input id="remarks" class="form-control" >
+		</field-row>
+		
+		
 
 	</fieldset>
 

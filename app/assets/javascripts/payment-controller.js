@@ -1,4 +1,4 @@
-var app = angular.module('puPayment', [ 'puUser' ]);
+var app = angular.module('puPayment', ['puUser']);
 
 app.config(function($routeProvider) {
 	$routeProvider.when('/new', {
@@ -22,6 +22,37 @@ app.directive("fieldRow", function(){
 	}
 });
 
+app.directive("datePicker", function(){
+	return {
+		restrict: "E",
+		transclude: true,
+		scope: {
+			elementLabel: "@",
+			elementId: "@",
+			ngModel:"=",
+            eventHandler: '&ngChange'
+		},
+		templateUrl: "/assets/templates/date-picker.html",
+		link: function(scope, element, attributes){
+
+			scope.$watch('elementId', function(oldValue, newValue){
+				$('#'+newValue).datepicker().on('changeDate', function(ev){
+				    /*var startDate = (new Date(ev.date.valueOf()));
+					var endDate = startDate.add(1).months().add(-1).days(); //set the end period a month from startPeriod.
+*/				
+					console.log('change me');
+					scope.eventHandler();
+//					$('div.input #endPeriod').val(endDate.toString('dd/MM/yyyy'));
+				});
+			});
+			
+
+			
+			
+		}
+	}
+})
+
 app.controller('CreatePaymentController', function($scope, $http) {
 
 	$scope.payment = {
@@ -43,11 +74,16 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			id: "",
 			name: ""
 		},
-		startPeriod: "",
+		startPeriod: "2012-09-01T00:00:00.000Z",
 		endPeriod: "",
 		payeeAccount: ""
 		
 	}
+	
+	$scope.$watch('payment.startPeriod', function (v) {
+        console.log('value changed, new value is: ' + v);
+    });
+	
 	
 	$scope.initializeForm = function(){
 		
@@ -59,6 +95,17 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		}).error(function(data, status, headers, config) {
 			console.log('failed to retrieve payment templates.');
 		});
+		
+		
+	}
+	
+	$scope.updateEndPeriod = function(){
+		console.log('updateEndPeriod');
+		var startDate = (new Date($scope.payment.startPeriod.valueOf()));
+		var endDate = startDate.add(1).months().add(-1).days();
+		
+		$scope.payment.endPeriod = endDate;
+		$scope.$apply();
 	}
 
 	$scope.save = function() {

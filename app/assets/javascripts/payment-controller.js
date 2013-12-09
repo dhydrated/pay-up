@@ -52,7 +52,7 @@ app.directive("datePicker", function(){
 */				
 					scope.eventHandler();
 
-					scope.ngModel= (new Date(ev.date.valueOf()));
+					scope.ngModel= (new Date(ev.date.valueOf())).toString('dd/MM/yyyy');
 				});
 			});
 		}

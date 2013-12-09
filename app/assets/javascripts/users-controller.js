@@ -62,9 +62,6 @@ app.directive('userSearch', function() {
 				$('#search-'+scope.name.toLowerCase()).focus();
 			});
 			
-			scope.$watch('userSearchName', function(oldValue, newValue){
-				console.log(oldValue + " >>> " + newValue);
-			});
 		}
 	}
 });

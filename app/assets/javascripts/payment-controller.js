@@ -32,27 +32,14 @@ app.directive("datePicker", function(){
 			ngModel:"=",
             eventHandler: '&ngChange'
 		},
-		/*controller:function($scope,$attrs)  {
-            $scope.x=$attrs;
-
-            $scope.$watch('ngModel',function(){
-                $scope.$parent.ngModel=$scope.ngModel;
-            	console.log($scope.$parent);
-            }) ;
-
-            $scope.ngModel=$attrs.value;
-        },*/
 		templateUrl: "/assets/templates/date-picker.html",
 		link: function(scope, element, attributes){
 
 			scope.$watch('elementId', function(oldValue, newValue){
 				$('#'+newValue).datepicker({'format':'dd/mm/yyyy'}).on('changeDate', function(ev){
-				    /*var startDate = (new Date(ev.date.valueOf()));
-					var endDate = startDate.add(1).months().add(-1).days(); //set the end period a month from startPeriod.
-*/				
-					scope.eventHandler();
-
 					scope.ngModel= (new Date(ev.date.valueOf())).toString('dd/MM/yyyy');
+					scope.$apply();
+					scope.eventHandler();
 				});
 			});
 		}
@@ -67,7 +54,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		amount: "",
 		remarks: "",
 		reference: "",
-		paidDate: "",
+		paidDate: (new Date()).toString('dd/MM/yyyy'),
 		payee: {
 			id: "",
 			name: ""
@@ -87,10 +74,6 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		
 	}
 	
-	$scope.$watch('payment.startPeriod', function (v) {
-        console.log('value changed, new value is: ' + v);
-    });
-	
 	
 	$scope.initializeForm = function(){
 		
@@ -108,10 +91,13 @@ app.controller('CreatePaymentController', function($scope, $http) {
 	
 	$scope.updateEndPeriod = function(){
 		console.log('updateEndPeriod');
-		var startDate = (new Date($scope.payment.startPeriod.valueOf()));
+		console.log($scope.payment);
+		var startDate = Date.parseExact($scope.payment.startPeriod, 'dd/MM/yyyy');
+		
+		console.log(startDate);
 		var endDate = startDate.add(1).months().add(-1).days();
 		
-		$scope.payment.endPeriod = endDate;
+		$scope.payment.endPeriod = endDate.toString('dd/MM/yyyy');
 		$scope.$apply();
 	}
 

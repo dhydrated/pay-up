@@ -1,8 +1,8 @@
 <div class="form-group">
     <label for="payer_id" class="col-sm-2 control-label">{{userLabel}}</label>
     <div class="col-sm-5">
-        <input type="hidden" id="{{userId.id}}" name="{{userId.name}}" value="{{userSearchId}}" class="form-control">
-         		<input type="text" id="{{userName.id}}" name="{{userName.name}}" value="{{userSearchName}}" class="form-control" ng-click="eventHandler()" required>
+        <input type="hidden" id="{{userId.id}}" name="{{userId.name}}" value="{{userSearchId}}" class="form-control" ng-model="ngModel">
+         		<input type="text" id="{{userName.id}}" name="{{userName.name}}" value="{{userSearchName}}" class="form-control" ng-click="eventHandler()" required >
     </div>
     
     <div class="modal fade" id="{{name}}-modal" tabindex="-1" role="dialog" aria-labelledby="{{name}}-modal-label" aria-hidden="true">

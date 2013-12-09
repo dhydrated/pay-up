@@ -28,9 +28,12 @@ app.directive('userSearch', function() {
 		transclude: true,
 		templateUrl: '/assets/templates/user-name-field-and-search.html',
 		scope: {
+			ngModel:"=",
             eventHandler: '&ngClick'
+            
         },
 		link: function(scope, element, attribute){
+			
 			
 			scope.name = attribute.userSearch;
 			
@@ -52,13 +55,16 @@ app.directive('userSearch', function() {
 				$('#'+scope.userId.id).val(user.id);
 				$('#'+scope.userName.id).val(user.name);
 				$('#'+scope.name+'-modal').modal('hide');
+				scope.ngModel = user.id;
 			};
 			
 			$(element).on('shown.bs.modal', function () {
 				$('#search-'+scope.name.toLowerCase()).focus();
 			});
 			
-			
+			scope.$watch('userSearchName', function(oldValue, newValue){
+				console.log(oldValue + " >>> " + newValue);
+			});
 		}
 	}
 });

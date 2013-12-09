@@ -32,23 +32,29 @@ app.directive("datePicker", function(){
 			ngModel:"=",
             eventHandler: '&ngChange'
 		},
+		/*controller:function($scope,$attrs)  {
+            $scope.x=$attrs;
+
+            $scope.$watch('ngModel',function(){
+                $scope.$parent.ngModel=$scope.ngModel;
+            	console.log($scope.$parent);
+            }) ;
+
+            $scope.ngModel=$attrs.value;
+        },*/
 		templateUrl: "/assets/templates/date-picker.html",
 		link: function(scope, element, attributes){
 
 			scope.$watch('elementId', function(oldValue, newValue){
-				$('#'+newValue).datepicker().on('changeDate', function(ev){
+				$('#'+newValue).datepicker({'format':'dd/mm/yyyy'}).on('changeDate', function(ev){
 				    /*var startDate = (new Date(ev.date.valueOf()));
 					var endDate = startDate.add(1).months().add(-1).days(); //set the end period a month from startPeriod.
 */				
-					console.log('change me');
 					scope.eventHandler();
-//					$('div.input #endPeriod').val(endDate.toString('dd/MM/yyyy'));
+
+					scope.ngModel= (new Date(ev.date.valueOf()));
 				});
 			});
-			
-
-			
-			
 		}
 	}
 })
@@ -74,7 +80,8 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			id: "",
 			name: ""
 		},
-		startPeriod: "2012-09-01T00:00:00.000Z",
+		startPeriod: "",
+//		startPeriod: "2012-09-01T00:00:00.000Z",
 		endPeriod: "",
 		payeeAccount: ""
 		
@@ -109,6 +116,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 	}
 
 	$scope.save = function() {
+		
 		$http({
 			method : 'POST',
 			url : '/api/payments',

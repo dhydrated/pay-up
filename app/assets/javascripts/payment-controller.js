@@ -7,6 +7,12 @@ app.config(function($routeProvider) {
 	});
 	
 
+	$routeProvider.when('/test', {
+		templateUrl : '/assets/templates/payment/test.html',
+		controller : 'TestPaymentController'
+	});
+	
+
 	$routeProvider.otherwise({ redirectTo: '/new' });
 });
 
@@ -52,7 +58,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		id: "",
 		name: "",
 		amount: "",
-		remarks: "",
+		remark: "",
 		reference: "",
 		paidDate: (new Date()).toString('dd/MM/yyyy'),
 		payee: {
@@ -114,4 +120,27 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		});
 	};
 
+});
+
+
+app.controller('TestPaymentController', function($scope, $http) {
+
+	$scope.test = {
+			amount: "",
+			paymentType: ""
+	}
+	
+	$scope.paymentTypes = [];
+	
+	$scope.init = function(){
+		$scope.paymentTypes.push({id: "1", name: "Bill"});
+		$scope.paymentTypes.push({id: "2", name: "Installment"});
+	}
+	
+	$scope.save = function(){
+		
+		console.log('save');
+		console.log($scope.test);
+	};
+	
 });

@@ -2,28 +2,31 @@
 
 <h2>Add a payment</h2>
 
-<form class="form-horizontal" ng-init="initializeForm()">
+<form role="form" class="form-horizontal" ng-init="initializeForm()" id="payment_form" name="payment_form">
 
 	<fieldset>
 
 		<field-row element-label="Payment Type" element-id="payment_type_id">
-			<select id="payment_type_id" ng-model="payment.paymentType" ng-options="type.name for type in paymentTypes" class="form-control" required>
+			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentType.id" ng-options="type.name for type in paymentTypes" class="form-control" required>
 				<option value="">-- choose type --</option>
 			</select>
+			<span class="error" ng-show="payment_form.payment_type_id.$error.required">Required</span>
 		</field-row>
 
 		<div ng-controller="UsersController" ng-init="retrieveUsers()">
 			<div user-search="payer" label="Payer"
 				ng-click="showUserSearch('Payer')" ng-model="payment.payee.id"></div>
+			<span class="error" ng-show="payment_form.payer_name.$error.required">Required</span>
 		</div>
 
 		<div ng-controller="UsersController" ng-init="retrieveUsers()">
 			<div user-search="payee" label="Payee"
 				ng-click="showUserSearch('Payee')" ng-model="payment.payer.id"></div>
+			<span class="error" ng-show="payment_form.payee_name.$error.required">Required</span>
 		</div>
 
 		<field-row element-label="Account" element-id="payee_account">
-			<input id="payee_account" class="form-control" ng-model="payment.payeeAccount" required>
+			<input id="payee_account" name="payee_account" class="form-control" ng-model="payment.payeeAccount" required>
 		</field-row>
 		
 		<field-row element-label="Start Period" element-id="start_period">
@@ -42,19 +45,21 @@
 		</field-row>
 		
 		<field-row element-label="Description" element-id="description">
-			<input id="description" class="form-control" ng-model="payment.description">
+			<input id="description" name="description" class="form-control" ng-model="payment.description">
 		</field-row>
 		
 		<field-row element-label="Amount" element-id="amount">
-			<input id="amount" class="form-control" required ng-model="payment.amount">
+			<input id="amount" name="amount" class="form-control" required ng-model="payment.amount" ng-pattern="/^\d+$/">
+			<span class="error" ng-show="payment_form.amount.$error.required">Required</span>
+			<span class="error" ng-show="payment_form.amount.$error.pattern">Invalid!</span>
 		</field-row>
 		
 		<field-row element-label="Reference" element-id="reference">
-			<input id="reference" class="form-control" required ng-model="payment.reference">
+			<input id="reference" name="reference" class="form-control" ng-model="payment.reference">
 		</field-row>
 		
 		<field-row element-label="Remarks" element-id="remarks">
-			<input id="remarks" class="form-control" ng-model="payment.remark">
+			<input id="remarks" name="remarks" class="form-control" ng-model="payment.remark">
 		</field-row>
 		
 		

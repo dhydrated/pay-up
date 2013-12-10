@@ -38,12 +38,12 @@ app.directive('userSearch', function() {
 			scope.name = attribute.userSearch;
 			
 			scope.userId = {
-					name: attribute.userSearch + ".id",
+					name: attribute.userSearch + "_id",
 					id: attribute.userSearch + "_id"
 			};
 			
 			scope.userName = {
-					name: attribute.userSearch + ".name",
+					name: attribute.userSearch + "_name",
 					id: attribute.userSearch + "_name"
 			};
 			

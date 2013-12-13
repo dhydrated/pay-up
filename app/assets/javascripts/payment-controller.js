@@ -49,6 +49,37 @@ app.directive("datePicker", function(){
 	}
 })
 
+
+
+app.directive("paymentTemplates", function($http){
+	return {
+		restrict: "E",
+		templateUrl: "/assets/templates/payment/payment-templates.html",
+		scope: {
+		},
+		link: function(scope, element, attributes){
+			
+			$http({
+				method : 'GET',
+				url : '/api/payment_templates'
+			}).success(function(data, status, headers, config) {
+				scope.paymentTemplates = data;
+			}).error(function(data, status, headers, config) {
+				console.log('failed to retrieve payment templates.');
+			});
+			
+			scope.$watch('paymentTemplates', function(value){
+				console.log(value);
+			});
+			
+			scope.open = function(){
+				$('#templates-list-modal').modal('show');
+			}
+		}
+	
+	}
+})
+
 app.controller('CreatePaymentController', function($scope, $http) {
 
 	$scope.payment = {

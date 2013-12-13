@@ -1,0 +1,34 @@
+
+<div class="topRight">
+	<a id="templates-list-open-btn" class="btn btn-default" ng-click="open()">Templates</a>
+</div>
+<div>
+	<div id="templates-list-modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h3>Templates</h3>
+				</div>
+				<div class="modal-body">
+					<div id="template-search-div" class="search-div">
+						<input type="search" id="search-template" name="search-template"
+							value="" placeholder="Filter..." class="form-control">
+					</div>
+
+					<div id="templates-list-body">
+						<table class="table table-bordered">
+							<tr ng-repeat="template in paymentTemplates">
+								<td>{{template.amount}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a id="templates-list-close-btn" class="btn btn-default">Close</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

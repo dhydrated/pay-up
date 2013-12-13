@@ -1,16 +1,11 @@
 <div class="form-group">
-    <label for="payer_id" class="col-sm-2 control-label">{{userLabel}}</label>
-    <div class="col-sm-5">
-        <input type="hidden" id="{{userId.id}}" name="{{userId.name}}" value="{{userSearchId}}" class="form-control" ng-model="ngModel">
-         		<input type="text" id="{{userName.id}}" name="{{userName.name}}" value="{{userSearchName}}" class="form-control" ng-click="eventHandler()" required >
-    </div>
     
     <div class="modal fade" id="{{name}}-modal" tabindex="-1" role="dialog" aria-labelledby="{{name}}-modal-label" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="{{name}}-modal-label">{{userLabel}}</h4>
+	        <h4 class="modal-title" id="{{name}}-modal-label">{{label}}</h4>
 	      </div>
 	      <div class="modal-body">
 			<div id="{{name}}-search-div" class="search-div">

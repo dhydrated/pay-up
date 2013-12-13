@@ -7,7 +7,7 @@
 	<fieldset>
 
 		<field-row element-label="Payment Type" element-id="payment_type_id">
-			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentType.id" ng-options="type.name for type in paymentTypes" class="form-control" required>
+			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentType" ng-options="type.name for type in paymentTypes" class="form-control" required>
 				<option value="">-- choose type --</option>
 			</select>
 			<span class="error" ng-show="payment_form.payment_type_id.$error.required">Required</span>
@@ -37,8 +37,8 @@
 		</field-row>
 		
 		<field-row element-label="Start Period" element-id="start_period">
-			<date-picker parent-model="payment" model-variable="startPeriod">
-				 <input id="start_period" name="start_period" class="form-control" type="text" ng-model="payment.startPeriod" class="form-control" ng-change="updateEndPeriod()" required>
+			<date-picker parent-model="payment" model-variable="startPeriod" >
+				 <input id="start_period" name="start_period" class="form-control" type="text" ng-model="payment.startPeriod" class="form-control" required>
 			</date-picker>
 			<span class="error" ng-show="payment_form.start_period.$error.required">Required</span>
 		</field-row>

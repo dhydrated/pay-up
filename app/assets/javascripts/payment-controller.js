@@ -66,10 +66,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			id: "",
 			name: ""
 		},
-		paymentType: {
-			id: "",
-			name: ""
-		},
+		paymentType: "",
 		startPeriod: "",
 //		startPeriod: "2012-09-01T00:00:00.000Z",
 		endPeriod: "",
@@ -93,16 +90,17 @@ app.controller('CreatePaymentController', function($scope, $http) {
 	}
 	
 	$scope.updateEndPeriod = function(){
-		console.log('updateEndPeriod');
-		console.log($scope.payment);
 		var startDate = Date.parseExact($scope.payment.startPeriod, 'dd/MM/yyyy');
-		
-		console.log(startDate);
 		var endDate = startDate.add(1).months().add(-1).days();
-		
 		$scope.payment.endPeriod = endDate.toString('dd/MM/yyyy');
-		$scope.$apply();
 	}
+	
+	$scope.$watch('payment.startPeriod', function(value){
+		
+		if(value!==''){
+			$scope.updateEndPeriod();
+		}
+	});
 
 	$scope.save = function() {
 		

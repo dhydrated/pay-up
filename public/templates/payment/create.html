@@ -33,15 +33,31 @@
 		
 
 		<field-row element-label="Account" element-id="payee_account">
-			<input id="payee_account" name="payee_account" class="form-control" ng-model="payment.payeeAccount" required>
+			<input id="payee_account" name="payee_account" class="form-control" ng-model="payment.payeeAccount" >
 		</field-row>
 		
 		<field-row element-label="Start Period" element-id="start_period">
-			<date-picker element-label="Start Period" element-id="start_period" ng-model="payment.startPeriod" ng-change="updateEndPeriod()">
+			<date-picker parent-model="payment" model-variable="startPeriod">
+				 <input id="start_period" name="start_period" class="form-control" type="text" ng-model="payment.startPeriod" class="form-control" ng-change="updateEndPeriod()" required>
 			</date-picker>
+			<span class="error" ng-show="payment_form.start_period.$error.required">Required</span>
 		</field-row>
 		
 		<field-row element-label="End Period" element-id="end_period">
+			<date-picker parent-model="payment" model-variable="endPeriod">
+				 <input id="end_period" name="end_period" class="form-control" type="text" ng-model="payment.endPeriod" class="form-control" required>
+			</date-picker>
+			<span class="error" ng-show="payment_form.end_period.$error.required">Required</span>
+		</field-row>
+		
+		<field-row element-label="Paid Date" element-id="paid_date">
+			<date-picker parent-model="payment" model-variable="paidDate">
+				 <input id="paid_date" name="paid_date" class="form-control" type="text" ng-model="payment.paidDate" class="form-control" required>
+			</date-picker>
+			<span class="error" ng-show="payment_form.paid_date.$error.required">Required</span>
+		</field-row>
+		
+		<!-- <field-row element-label="End Period" element-id="end_period">
 			<date-picker element-label="End Period" element-id="end_period" ng-model="payment.endPeriod">
 			</date-picker>
 		</field-row>
@@ -49,7 +65,7 @@
 		<field-row element-label="Paid Date" element-id="paid_date">
 			<date-picker element-label="Paid Date" element-id="paid_date" ng-model="payment.paidDate">
 			</date-picker>
-		</field-row>
+		</field-row> -->
 		
 		<field-row element-label="Description" element-id="description">
 			<input id="description" name="description" class="form-control" ng-model="payment.description">

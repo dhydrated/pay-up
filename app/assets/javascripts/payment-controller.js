@@ -32,22 +32,19 @@ app.directive("datePicker", function(){
 	return {
 		restrict: "E",
 		transclude: true,
-		scope: {
-			elementLabel: "@",
-			elementId: "@",
-			ngModel:"=",
-            eventHandler: '&ngChange'
-		},
 		templateUrl: "/assets/templates/date-picker.html",
+		scope: {
+			parentModel: "@",
+			modelVariable: "@"
+		},
 		link: function(scope, element, attributes){
 
-			scope.$watch('elementId', function(oldValue, newValue){
-				$('#'+newValue).datepicker({'format':'dd/mm/yyyy'}).on('changeDate', function(ev){
-					scope.ngModel= (new Date(ev.date.valueOf())).toString('dd/MM/yyyy');
-					scope.$apply();
-					scope.eventHandler();
-				});
-			});
+			$(element).datepicker({'format':'dd/mm/yyyy'}).on('changeDate', function(ev){
+				scope.$parent.$parent[scope.parentModel][scope.modelVariable] = (new Date(ev.date.valueOf())).toString('dd/MM/yyyy');
+				scope.$apply();
+				scope.$parent.$parent.$apply();
+				$(element).datepicker('hide');
+			});;
 		}
 	}
 })

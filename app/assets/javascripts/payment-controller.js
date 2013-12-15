@@ -75,6 +75,19 @@ app.directive("paymentTemplates", function($http){
 			scope.open = function(){
 				$('#templates-list-modal').modal('show');
 			}
+			
+			scope.selectTemplate = function(template){
+				console.log(template);
+				console.log(scope.$parent['payment']);
+				scope.$parent['payment']['amount'] = template['amount'];
+				scope.$parent['payment']['payer'] = template['payer'];
+				scope.$parent['payment']['payee'] = template['payee'];
+				scope.$parent['payment']['payeeAccountNumber'] = template['payeeAccountNumber'];
+				scope.$parent['payment']['paymentType'] = template['paymentType'];
+
+				$('#templates-list-modal').modal('hide');
+				window.scope = scope.$parent;
+			}
 		}
 	
 	}
@@ -93,6 +106,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			id: "",
 			name: ""
 		},
+		payeeAccountNumber: "",
 		payer: {
 			id: "",
 			name: ""
@@ -131,6 +145,15 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		if(value!==''){
 			$scope.updateEndPeriod();
 		}
+	});
+	
+
+	
+	$scope.$watch('payment.paymentType', function(value){
+		
+		console.log(value);
+		$scope.payment.paymentType = value;
+		console.log($scope);
 	});
 
 	$scope.save = function() {

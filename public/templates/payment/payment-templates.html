@@ -13,21 +13,31 @@
 				</div>
 				<div class="modal-body">
 					<div id="template-search-div" class="search-div">
-						<input type="search" id="search-template" name="search-template"
-							value="" placeholder="Filter..." class="form-control">
+						<input type="search" id="search-payment-template" name="search-payment-template" ng-model="search" value="" placeholder="Filter..." class="form-control">
 					</div>
 
 					<div id="templates-list-body">
 						<table class="table table-bordered">
-							<tr ng-repeat="template in paymentTemplates">
+							<tr>
+								<th>Payer</th>
+								<th>Payee</th>
+								<th>Payee's Account</th>
+								<th>Payment Type</th>
+								<th>Amount</th>
+							</tr>
+							<tr ng-repeat="template in paymentTemplates | filter:search:true" ng-click="selectTemplate(template)">
+								<td>{{template.payer.name}}</td>
+								<td>{{template.payee.name}}</td>
+								<td>{{template.payeeAccountNumber}}</td>
+								<td>{{template.paymentType.name}}</td>
 								<td>{{template.amount}}</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a id="templates-list-close-btn" class="btn btn-default">Close</a>
-				</div>
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			    </div>
 			</div>
 		</div>
 	</div>

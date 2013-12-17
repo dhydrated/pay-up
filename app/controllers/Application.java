@@ -109,33 +109,22 @@ public class Application extends Controller {
 	public static Result apiPost() {
 
 		JsonNode json = request().body().asJson();
-		String name = json.findPath("name").getTextValue();
-		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Payment payment = null;
 		try {
 
-			logger.debug(json.toString());
-			
 			payment = new Payment();
 			payment.amount = json.findPath("amount").getDecimalValue();
-			
-//			logger.debug(json.findPath("endPeriod").getTextValue());
-			
 			payment.endPeriod = df.parse(json.findPath("endPeriod").getTextValue());
 			payment.startPeriod = df.parse(json.findPath("startPeriod").getTextValue());
 			payment.paidDate = df.parse(json.findPath("paidDate").getTextValue());
 			payment.payeeAccountNumber = json.findPath("payeeAccountNumber").getTextValue();
-			payment.paymentType = PaymentType.find.byId(json.findPath("paymentType.id").getLongValue());
+			payment.paymentType = PaymentType.find.byId(json.findPath("paymentType").findPath("id").getLongValue());
 			payment.reference = json.findPath("reference").getTextValue();
 			payment.remarks = json.findPath("remarks").getTextValue();
-			payment.payer = User.findById(json.findPath("payer.id").getLongValue());
-			payment.payee = User.findById(json.findPath("payee.id").getLongValue());
-			
-
-//			logger.debug(User.findById(json.findPath("payee.id").getLongValue()).name);
-			
-//			payment.save();
+			payment.payer = User.findById(json.findPath("payer").findPath("id").getLongValue());
+			payment.payee = User.findById(json.findPath("payee").findPath("id").getLongValue());
+			payment.save();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

@@ -93,7 +93,7 @@ app.directive("paymentTemplates", function($http){
 	}
 })
 
-app.controller('CreatePaymentController', function($scope, $http) {
+app.controller('CreatePaymentController', function($scope, $http, $window) {
 
 	$scope.payment = {
 		id: "",
@@ -165,6 +165,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			data : $scope.payment
 		}).success(function(data, status, headers, config) {
 			$scope.users = data;
+			$window.location='/payments';
 		}).error(function(data, status, headers, config) {
 			console.log('failed saving user.');
 		});

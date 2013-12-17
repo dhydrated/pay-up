@@ -83,7 +83,7 @@ app.directive("paymentTemplates", function($http){
 				scope.$parent['payment']['payer'] = template['payer'];
 				scope.$parent['payment']['payee'] = template['payee'];
 				scope.$parent['payment']['payeeAccountNumber'] = template['payeeAccountNumber'];
-				scope.$parent['payment']['paymentType'] = template['paymentType'];
+				scope.$parent['payment']['paymentTypeId'] = template['paymentType']['id'];
 
 				$('#templates-list-modal').modal('hide');
 				window.scope = scope.$parent;
@@ -111,11 +111,10 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			id: "",
 			name: ""
 		},
-		paymentType: "",
+		paymentTypeId: "",
 		startPeriod: Date.today().clearTime().moveToFirstDayOfMonth().toString('dd/MM/yyyy'),
 //		startPeriod: "2012-09-01T00:00:00.000Z",
-		endPeriod: "",
-		payeeAccount: ""
+		endPeriod: ""
 		
 	}
 	

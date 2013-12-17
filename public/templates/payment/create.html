@@ -7,7 +7,7 @@
 	<fieldset>
 
 		<field-row element-label="Payment Type" element-id="payment_type_id">
-			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentTypeId" ng-options="type.id as type.name for type in paymentTypes" class="form-control" required>
+			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentType.id" ng-options="type.id as type.name for type in paymentTypes" class="form-control" required>
 				<option value="">-- choose type --</option>
 			</select>
 			<span class="error" ng-show="payment_form.payment_type_id.$error.required">Required</span>

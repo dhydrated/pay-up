@@ -112,7 +112,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 			name: ""
 		},
 		paymentType: "",
-		startPeriod: "",
+		startPeriod: Date.today().clearTime().moveToFirstDayOfMonth().toString('dd/MM/yyyy'),
 //		startPeriod: "2012-09-01T00:00:00.000Z",
 		endPeriod: "",
 		payeeAccount: ""

@@ -6,6 +6,11 @@ app.config(function($routeProvider) {
 		controller : 'CreatePaymentController'
 	});
 	
+	$routeProvider.when('/newMonthly', {
+		templateUrl : '/assets/templates/payment/createMonthly.html',
+		controller : 'CreatePaymentController'
+	});
+	
 
 	$routeProvider.when('/test', {
 		templateUrl : '/assets/templates/payment/test.html',
@@ -119,6 +124,40 @@ app.controller('CreatePaymentController', function($scope, $http, $window) {
 		endPeriod: ""
 		
 	}
+	
+	$scope.monthlyPayment = {
+			id: "",
+			name: "",
+			amount: "",
+			remarks: "",
+			reference: "",
+			paidDate: (new Date()).toString('dd/MM/yyyy'),
+			payee: {
+				id: "",
+				name: ""
+			},
+			payeeAccountNumber: "",
+			payer: {
+				id: "",
+				name: ""
+			},
+			paymentType: {
+				id: ""
+			},
+			month_01: false,
+			month_02: false,
+			month_03: false,
+			month_04: false,
+			month_05: false,
+			month_06: false,
+			month_07: false,
+			month_08: false,
+			month_09: false,
+			month_10: false,
+			month_11: false,
+			month_12: false
+			
+		}
 	
 	
 	$scope.initializeForm = function(){

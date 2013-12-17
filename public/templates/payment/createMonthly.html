@@ -1,0 +1,76 @@
+
+
+<h2>Add a monthly payment</h2>
+
+<form role="form" class="form-horizontal" ng-init="initializeForm()" id="payment_form" name="payment_form">
+
+	<fieldset>
+
+		<field-row element-label="Payment Type" element-id="payment_type_id">
+			<select id="payment_type_id" name="payment_type_id" ng-model="monthlyPayment.paymentType.id" ng-options="type.id as type.name for type in paymentTypes" class="form-control" required>
+				<option value="">-- choose type --</option>
+			</select>
+			<span class="error" ng-show="payment_form.payment_type_id.$error.required">Required</span>
+		</field-row>
+
+		<div ng-controller="UserController" ng-init="retrieveUsers()">
+		<field-row element-label="Payer" element-id="payer_id">
+			<input type="hidden" id="payer_id" name="payer_id" class="form-control" ng-model="monthlyPayment.payer.id" required>
+       		<input type="text" id="payer_name" name="payer_name" class="form-control" ng-model="monthlyPayment.payer.name" ng-click="showUserSearch('Payer')" required>
+			<span class="error" ng-show="payment_form.payer_name.$error.required">Required</span>
+		</field-row>
+		<user-search name="payer" label="Payer" parent-model="payment"></user-search>
+		</div>
+
+		<div ng-controller="UserController" ng-init="retrieveUsers()">
+		<field-row element-label="Payee" element-id="payee_id">
+			<input type="hidden" id="payee_id" name="payee_id" class="form-control" ng-model="monthlyPayment.payee.id" required>
+       		<input type="text" id="payee_name" name="payee_name" class="form-control" ng-model="monthlyPayment.payee.name" ng-click="showUserSearch('Payee')" required>
+			<span class="error" ng-show="payment_form.payee_name.$error.required">Required</span>
+		</field-row>
+		<user-search name="payee" label="Payee" parent-model="payment"></user-search>
+		</div>
+		
+
+		<field-row element-label="Account" element-id="payee_account">
+			<input id="payee_account" name="payee_account" class="form-control" ng-model="monthlyPayment.payeeAccountNumber" >
+		</field-row>
+		
+		<field-row element-label="Paid Date" element-id="paid_date">
+			<date-picker parent-model="payment" model-variable="paidDate">
+				 <input id="paid_date" name="paid_date" class="form-control" type="text" ng-model="monthlyPayment.paidDate" class="form-control" required>
+			</date-picker>
+			<span class="error" ng-show="payment_form.paid_date.$error.required">Required</span>
+		</field-row>
+		
+		<field-row element-label="Amount" element-id="amount">
+			<input id="amount" name="amount" class="form-control" required ng-model="monthlyPayment.amount" ng-pattern="/^\d+$/">
+			<span class="error" ng-show="payment_form.amount.$error.required">Required</span>
+			<span class="error" ng-show="payment_form.amount.$error.pattern">Invalid!</span>
+		</field-row>
+		
+		<field-row element-label="Reference" element-id="reference">
+			<input id="reference" name="reference" class="form-control" ng-model="monthlyPayment.reference">
+		</field-row>
+		
+		<field-row element-label="Remarks" element-id="remarks">
+			<textarea id="remarks" name="remarks" class="form-control" ng-model="monthlyPayment.remarks" rows="5"></textarea>
+		</field-row>
+		
+		
+
+	</fieldset>
+
+	<div class="form-actions">
+		<button ng-click="save()">
+			<span class="glyphicon glyphicon-plus"></span>Add
+		</button>
+	</div>
+
+	<payment-templates></payment-templates>
+	
+	
+
+	
+
+</form>

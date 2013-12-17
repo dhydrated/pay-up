@@ -193,6 +193,14 @@ public class Application extends Controller {
 	}
 
 	/**
+	 * Display the 'new monthly payment form'.
+	 */
+	public static Result createMonthly2() {
+
+		return create2();
+	}
+
+	/**
 	 * Display the 'new payment form'.
 	 */
 	public static Result createMonthly() {

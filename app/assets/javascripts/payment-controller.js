@@ -99,7 +99,7 @@ app.controller('CreatePaymentController', function($scope, $http) {
 		id: "",
 		name: "",
 		amount: "",
-		remark: "",
+		remarks: "",
 		reference: "",
 		paidDate: (new Date()).toString('dd/MM/yyyy'),
 		payee: {

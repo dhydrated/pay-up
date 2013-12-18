@@ -8,7 +8,7 @@ app.config(function($routeProvider) {
 	
 	$routeProvider.when('/newMonthly', {
 		templateUrl : '/assets/templates/payment/createMonthly.html',
-		controller : 'CreatePaymentController'
+		controller : 'CreateMonthlyPaymentController'
 	});
 	
 
@@ -96,7 +96,7 @@ app.directive("paymentTemplates", function($http){
 		}
 	
 	}
-})
+});
 
 app.controller('CreatePaymentController', function($scope, $http, $window) {
 
@@ -124,41 +124,6 @@ app.controller('CreatePaymentController', function($scope, $http, $window) {
 		endPeriod: ""
 		
 	}
-	
-	$scope.monthlyPayment = {
-			id: "",
-			name: "",
-			amount: "",
-			remarks: "",
-			reference: "",
-			paidDate: (new Date()).toString('dd/MM/yyyy'),
-			payee: {
-				id: "",
-				name: ""
-			},
-			payeeAccountNumber: "",
-			payer: {
-				id: "",
-				name: ""
-			},
-			paymentType: {
-				id: ""
-			},
-			month_01: false,
-			month_02: false,
-			month_03: false,
-			month_04: false,
-			month_05: false,
-			month_06: false,
-			month_07: false,
-			month_08: false,
-			month_09: false,
-			month_10: false,
-			month_11: false,
-			month_12: false
-			
-		}
-	
 	
 	$scope.initializeForm = function(){
 		
@@ -190,10 +155,83 @@ app.controller('CreatePaymentController', function($scope, $http, $window) {
 
 	
 	$scope.$watch('payment.paymentType', function(value){
-		
-		console.log(value);
 		$scope.payment.paymentType = value;
-		console.log($scope);
+	});
+
+	$scope.save = function() {
+		
+		$http({
+			method : 'POST',
+			url : '/api/payments',
+			data : $scope.payment
+		}).success(function(data, status, headers, config) {
+			$scope.users = data;
+			$window.location='/payments';
+		}).error(function(data, status, headers, config) {
+			console.log('failed saving user.');
+		});
+	};
+
+});
+
+
+
+app.controller('CreateMonthlyPaymentController', function($scope, $http, $window) {
+
+	
+	$scope.payment = {
+			id: "",
+			name: "",
+			amount: "",
+			remarks: "",
+			reference: "",
+			paidDate: (new Date()).toString('dd/MM/yyyy'),
+			payee: {
+				id: "",
+				name: ""
+			},
+			payeeAccountNumber: "",
+			payer: {
+				id: "",
+				name: ""
+			},
+			paymentType: {
+				id: ""
+			},
+			months: [
+			         {id: "01", name: "January", selected: false, reference: ""},
+			         {id: "02", name: "February", selected: false, reference: ""},
+			         {id: "03", name: "March", selected: false, reference: ""},
+			         {id: "04", name: "April", selected: false, reference: ""},
+			         {id: "05", name: "May", selected: false, reference: ""},
+			         {id: "06", name: "June", selected: false, reference: ""},
+			         {id: "07", name: "July", selected: false, reference: ""},
+			         {id: "08", name: "August", selected: false, reference: ""},
+			         {id: "09", name: "September", selected: false, reference: ""},
+			         {id: "10", name: "October", selected: false, reference: ""},
+			         {id: "11", name: "November", selected: false, reference: ""},
+			         {id: "12", name: "December", selected: false, reference: ""}
+			]			
+		}
+	
+	
+	$scope.initializeForm = function(){
+		
+		$http({
+			method : 'GET',
+			url : '/api/payment_types'
+		}).success(function(data, status, headers, config) {
+			$scope.paymentTypes = data;
+		}).error(function(data, status, headers, config) {
+			console.log('failed to retrieve payment templates.');
+		});
+		
+		
+	}
+	
+	$scope.$watch('payment.paymentType', function(value){
+		
+		$scope.payment.paymentType = value;
 	});
 
 	$scope.save = function() {

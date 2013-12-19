@@ -43,7 +43,8 @@ POST    /payments/:id/delete       controllers.Application.delete(id:Long)
 
 GET     /api/payments              controllers.Application.apiList()
 GET     /api/payments/:id          controllers.Application.apiGet(id:Long)
-POST    /api/payments              controllers.Application.apiPost()
+POST    /api/payments              controllers.Application.apiCreatePayment()
+POST    /api/monthly_payments      controllers.Application.apiCreateMonthlyPayment()
 
 
 

@@ -238,7 +238,7 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 		
 		$http({
 			method : 'POST',
-			url : '/api/payments',
+			url : '/api/monthly_payments',
 			data : $scope.payment
 		}).success(function(data, status, headers, config) {
 			$scope.users = data;

@@ -106,7 +106,7 @@ public class Application extends Controller {
 	}
 	
 	@BodyParser.Of(play.mvc.BodyParser.Json.class)
-	public static Result apiPost() {
+	public static Result apiCreatePayment() {
 
 		JsonNode json = request().body().asJson();
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -132,6 +132,57 @@ public class Application extends Controller {
 		ObjectNode result = Json.newObject();
 		result.put("status", "OK");
 		result.put("message", "Payment id " + payment.id + " has been created.");
+		return ok(result);
+	}
+	
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+	public static Result apiCreateMonthlyPayment() {
+
+		JsonNode json = request().body().asJson();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Payment payment = null;
+		
+		JsonNode months = json.findPath("months");
+		
+		for(JsonNode month : months){
+			
+			if(month.findPath("selected").asBoolean()){
+
+				logger.debug(month.toString());
+				
+				try {
+					
+					Calendar cal = Calendar.getInstance();
+					cal.set(monthly.year, month-1, 1);
+					Date startDate = cal.getTime();
+					logger.debug(String.valueOf(cal.getActualMaximum(Calendar.DATE)));
+					cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
+					Date endDate = cal.getTime();
+					
+					payment = new Payment();
+					payment.amount = json.findPath("amount").getDecimalValue();
+					payment.endPeriod = df.parse(json.findPath("endPeriod").getTextValue());
+					payment.startPeriod = df.parse(json.findPath("startPeriod").getTextValue());
+					payment.paidDate = df.parse(json.findPath("paidDate").getTextValue());
+					payment.payeeAccountNumber = json.findPath("payeeAccountNumber").getTextValue();
+					payment.paymentType = PaymentType.find.byId(json.findPath("paymentType").findPath("id").getLongValue());
+					payment.reference = json.findPath("reference").getTextValue();
+					payment.remarks = json.findPath("remarks").getTextValue();
+					payment.payer = User.findById(json.findPath("payer").findPath("id").getLongValue());
+					payment.payee = User.findById(json.findPath("payee").findPath("id").getLongValue());
+					payment.save();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		
+		
+		
+		ObjectNode result = Json.newObject();
+		result.put("status", "OK");
+//		result.put("message", "Payment id " + payment.id + " has been created.");
 		return ok(result);
 	}
 

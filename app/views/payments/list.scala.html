@@ -102,7 +102,7 @@
                     <tr>
                         <td>
 							@if(pageType.equals("payments")){
-                        	<a href="@routes.Application.edit(payment.id)" 
+                        	<a href="@routes.Application.create2()#/edit/@payment.id" 
                         		rel="tooltip" data-original-title="@payment.name" 
                         		>@payment.payee.name</a></td>
                         	} else {

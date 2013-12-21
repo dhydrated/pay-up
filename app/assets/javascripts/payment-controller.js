@@ -6,6 +6,11 @@ app.config(function($routeProvider) {
 		controller : 'CreatePaymentController'
 	});
 	
+	$routeProvider.when('/edit/:paymentId', {
+		templateUrl : '/assets/templates/payment/create.html',
+		controller : 'CreatePaymentController'
+	});
+	
 	$routeProvider.when('/newMonthly', {
 		templateUrl : '/assets/templates/payment/createMonthly.html',
 		controller : 'CreateMonthlyPaymentController'
@@ -98,11 +103,10 @@ app.directive("paymentTemplates", function($http){
 	}
 });
 
-app.controller('CreatePaymentController', function($scope, $http, $window) {
+app.controller('CreatePaymentController', function($scope, $http, $window, $routeParams) {
 
 	$scope.payment = {
-		id: "",
-		name: "",
+		id: $routeParams.paymentId,
 		amount: "",
 		remarks: "",
 		reference: "",
@@ -136,8 +140,31 @@ app.controller('CreatePaymentController', function($scope, $http, $window) {
 			console.log('failed to retrieve payment templates.');
 		});
 		
-		
+		if($scope.editMode()){
+			
+			$http({
+				method : 'GET',
+				url : '/api/payments/'+$scope.payment.id
+			}).success(function(data, status, headers, config) {
+				$scope.payment.paymentType = data.paymentType;
+				$scope.payment.payee = data.payee;
+				$scope.payment.payer = data.payer;
+				$scope.payment.amount = data.amount;
+				$scope.payment.remarks = data.remarks;
+				$scope.payment.reference = data.reference;
+				$scope.payment.payeeAccountNumber = data.payeeAccountNumber;
+				$scope.payment.startPeriod = new Date(data.startPeriod).toString('dd/MM/yyyy');
+				$scope.payment.endPeriod = new Date(data.endPeriod).toString('dd/MM/yyyy');
+				$scope.payment.paidDate = new Date(data.paidDate).toString('dd/MM/yyyy');
+			}).error(function(data, status, headers, config) {
+				console.log('failed to retrieve payment templates.');
+			});
+		}
 	}
+	
+	$scope.editMode = function(){
+		return ($scope.payment.id !== undefined);
+	};
 	
 	$scope.updateEndPeriod = function(){
 		var startDate = Date.parseExact($scope.payment.startPeriod, 'dd/MM/yyyy');
@@ -160,9 +187,15 @@ app.controller('CreatePaymentController', function($scope, $http, $window) {
 
 	$scope.save = function() {
 		
+		var targetUrl = '/api/payments';
+
+		if($scope.editMode()){
+			targetUrl = targetUrl + '/' + $scope.payment.id
+		}
+		
 		$http({
 			method : 'POST',
-			url : '/api/payments',
+			url : targetUrl,
 			data : $scope.payment
 		}).success(function(data, status, headers, config) {
 			$scope.users = data;
@@ -180,8 +213,6 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 
 	
 	$scope.payment = {
-			id: "",
-			name: "",
 			amount: "",
 			remarks: "",
 			reference: "",
@@ -227,8 +258,6 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 			console.log('failed to retrieve payment templates.');
 		});
 		
-
-		
 		$scope.years = function() {
 			
 			currentYear = new Date().getFullYear();
@@ -239,8 +268,6 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 			}
 			return years;
 		}();
-		
-		
 		
 	}
 	

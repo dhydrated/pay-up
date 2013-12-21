@@ -5,6 +5,8 @@
 <form role="form" class="form-horizontal" ng-init="initializeForm()" id="payment_form" name="payment_form">
 
 	<fieldset>
+	
+		<input type="hidden" id="payment_id" name="payment_id" class="form-control" ng-model="payment.id" required>
 
 		<field-row element-label="Payment Type" element-id="payment_type_id">
 			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentType.id" ng-options="type.id as type.name for type in paymentTypes" class="form-control" required>
@@ -76,13 +78,19 @@
 	</fieldset>
 
 	<div class="form-actions">
-		<button ng-click="save()">
-			<span class="glyphicon glyphicon-plus"></span>Add
+		<button ng-click="save()" class="btn btn-default">
+			<div ng-hide="editMode()">
+			<span class="glyphicon glyphicon-plus" ></span>Add
+			</div>
+			<div ng-show="editMode()">
+			<span class="glyphicon glyphicon-floppy-disk" ></span>Update
+			</div>
 		</button>
 	</div>
 
+	<div ng-hide="editMode()">
 	<payment-templates></payment-templates>
-	
+	</div>
 	
 
 	

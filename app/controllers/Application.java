@@ -137,6 +137,36 @@ public class Application extends Controller {
 	}
 	
 	@BodyParser.Of(play.mvc.BodyParser.Json.class)
+	public static Result apiUpdatePayment(Long id) {
+
+		JsonNode json = request().body().asJson();
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Payment payment = null;
+		try {
+
+			payment = Payment.find.byId(id);
+			payment.amount = new BigDecimal(json.findPath("amount").asDouble());
+			payment.endPeriod = df.parse(json.findPath("endPeriod").getTextValue());
+			payment.startPeriod = df.parse(json.findPath("startPeriod").getTextValue());
+			payment.paidDate = df.parse(json.findPath("paidDate").getTextValue());
+			payment.payeeAccountNumber = json.findPath("payeeAccountNumber").getTextValue();
+			payment.paymentType = PaymentType.find.byId(json.findPath("paymentType").findPath("id").getLongValue());
+			payment.reference = json.findPath("reference").getTextValue();
+			payment.remarks = json.findPath("remarks").getTextValue();
+			payment.payer = User.findById(json.findPath("payer").findPath("id").getLongValue());
+			payment.payee = User.findById(json.findPath("payee").findPath("id").getLongValue());
+			payment.update();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		ObjectNode result = Json.newObject();
+		result.put("status", "OK");
+		result.put("message", "Payment id " + payment.id + " has been updated.");
+		return ok(result);
+	}
+	
+	@BodyParser.Of(play.mvc.BodyParser.Json.class)
 	public static Result apiCreateMonthlyPayment() {
 
 		JsonNode json = request().body().asJson();

@@ -73,9 +73,9 @@ app.directive("paymentTemplates", function($http){
 				console.log('failed to retrieve payment templates.');
 			});
 			
-			scope.$watch('paymentTemplates', function(value){
+			/*scope.$watch('paymentTemplates', function(value){
 				console.log(value);
-			});
+			});*/
 			
 			scope.open = function(){
 				$('#templates-list-modal').modal('show');
@@ -199,19 +199,20 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 				id: ""
 			},
 			months: [
-			         {id: "01", name: "January", selected: false, reference: ""},
-			         {id: "02", name: "February", selected: false, reference: ""},
-			         {id: "03", name: "March", selected: false, reference: ""},
-			         {id: "04", name: "April", selected: false, reference: ""},
-			         {id: "05", name: "May", selected: false, reference: ""},
-			         {id: "06", name: "June", selected: false, reference: ""},
-			         {id: "07", name: "July", selected: false, reference: ""},
-			         {id: "08", name: "August", selected: false, reference: ""},
-			         {id: "09", name: "September", selected: false, reference: ""},
+			         {id: "1", name: "January", selected: false, reference: ""},
+			         {id: "2", name: "February", selected: false, reference: ""},
+			         {id: "3", name: "March", selected: false, reference: ""},
+			         {id: "4", name: "April", selected: false, reference: ""},
+			         {id: "5", name: "May", selected: false, reference: ""},
+			         {id: "6", name: "June", selected: false, reference: ""},
+			         {id: "7", name: "July", selected: false, reference: ""},
+			         {id: "8", name: "August", selected: false, reference: ""},
+			         {id: "9", name: "September", selected: false, reference: ""},
 			         {id: "10", name: "October", selected: false, reference: ""},
 			         {id: "11", name: "November", selected: false, reference: ""},
 			         {id: "12", name: "December", selected: false, reference: ""}
-			]			
+			],
+			year: new Date().getFullYear()
 		}
 	
 	
@@ -225,6 +226,20 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 		}).error(function(data, status, headers, config) {
 			console.log('failed to retrieve payment templates.');
 		});
+		
+
+		
+		$scope.years = function() {
+			
+			currentYear = new Date().getFullYear();
+			years = [];
+			
+			for(var i=currentYear-1; i<=currentYear+1; i++){
+				years.push(i);
+			}
+			return years;
+		}();
+		
 		
 		
 	}

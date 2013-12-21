@@ -30,10 +30,14 @@
 		</field-row>
 		<user-search name="payee" label="Payee" parent-model="payment"></user-search>
 		</div>
-		
 
-		<field-row element-label="Account" element-id="payee_account">
+		<field-row element-label="Payee Account" element-id="payee_account">
 			<input id="payee_account" name="payee_account" class="form-control" ng-model="payment.payeeAccountNumber" >
+		</field-row>
+
+		<field-row element-label="Year" element-id="year">
+			<select id="year" name="year" ng-model="payment.year" ng-options="year for year in years" class="form-control" required>
+			</select>
 		</field-row>
 		
 		<div class="form-group" ng-repeat="month in payment.months">

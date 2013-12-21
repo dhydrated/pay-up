@@ -4,6 +4,7 @@ import static play.data.Form.form;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -142,27 +143,33 @@ public class Application extends Controller {
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Payment payment = null;
 		
+
+
+		logger.debug(json.toString());
+		
 		JsonNode months = json.findPath("months");
 		
 		for(JsonNode month : months){
 			
 			if(month.findPath("selected").asBoolean()){
 
-				logger.debug(month.toString());
-				
 				try {
 					
+					int year = json.findPath("year").getIntValue();
+					int mth =  month.findPath("id").asInt();
+					
 					Calendar cal = Calendar.getInstance();
-					cal.set(monthly.year, month-1, 1);
+					cal.set(year, mth-1, 1);
 					Date startDate = cal.getTime();
-					logger.debug(String.valueOf(cal.getActualMaximum(Calendar.DATE)));
 					cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
 					Date endDate = cal.getTime();
 					
+					Double amount = json.findPath("amount").asDouble();
+					
 					payment = new Payment();
-					payment.amount = json.findPath("amount").getDecimalValue();
-					payment.endPeriod = df.parse(json.findPath("endPeriod").getTextValue());
-					payment.startPeriod = df.parse(json.findPath("startPeriod").getTextValue());
+					payment.amount = new BigDecimal(amount);
+					payment.endPeriod = endDate;
+					payment.startPeriod = startDate;
 					payment.paidDate = df.parse(json.findPath("paidDate").getTextValue());
 					payment.payeeAccountNumber = json.findPath("payeeAccountNumber").getTextValue();
 					payment.paymentType = PaymentType.find.byId(json.findPath("paymentType").findPath("id").getLongValue());
@@ -182,7 +189,7 @@ public class Application extends Controller {
 		
 		ObjectNode result = Json.newObject();
 		result.put("status", "OK");
-//		result.put("message", "Payment id " + payment.id + " has been created.");
+		result.put("message", "Payment(s) has been created.");
 		return ok(result);
 	}
 

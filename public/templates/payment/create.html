@@ -87,12 +87,15 @@
 			</div>
 		</button>
 	</div>
-
+	
 	<div ng-hide="editMode()">
 	<payment-templates></payment-templates>
 	</div>
-	
 
-	
+</form>
 
+<form action="/payments/{{payment.id}}/delete" method="POST">
+	<div class="topRight" ng-show="editMode()">
+	<input type="submit" value="Delete this payment" class="btn btn-danger">
+	</div>
 </form>

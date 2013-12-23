@@ -122,8 +122,7 @@
 			</tr>
 			<tr ng-repeat="artifact in payment.artifacts" >
 				<td><a href="/payments/artifacts/{{artifact.id}}">{{artifact.name}}</a></td>
-				<td><button class="btn btn-danger" ng-click="deleteArtifact('{{artifact.id}}');">Delete</button></td>
-				<!--  -->
+				<td><button class="btn btn-danger" ng-click="deleteArtifact(artifact.id);">Delete</button></td>
 			</tr>
 		</table>
 	</div>

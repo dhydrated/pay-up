@@ -13,10 +13,6 @@ fileUploadModule.config(function($routeProvider) {
 var FileUploadController = [ '$scope', '$upload', '$routeParams', function($scope, $upload, $routeParams) {
 	
   
-  $scope.$watch('parentId', function(value){
-	  console.log(value);
-  })
-	
   $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
     for (var i = 0; i < $files.length; i++) {

@@ -221,8 +221,6 @@ app.controller('CreatePaymentController', function($scope, $http, $window, $rout
 	
 	$scope.deleteArtifact = function(artifactId) {
 		
-		console.log('deleting...' + artifactId);
-		
 		$http({
 			method : 'POST',
 			url : '/api/payments/artifacts/'+artifactId+'/delete'

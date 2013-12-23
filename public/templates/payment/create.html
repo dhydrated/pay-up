@@ -100,16 +100,31 @@
 	</div>
 </form>
 
-
+<hr>
 <div ng-show="editMode()">
 	<div ng-controller="FileUploadController">
 	  <input type="hidden" ng-model="myModelObj">
-	  <input type="file" ng-file-select="onFileSelect($files)" >
+	  <input type="file" ng-file-select="onFileSelect($files)" name="picture">
+	  
 	  <!-- <input type="file" ng-file-select="onFileSelect($files)" multiple>
 	  <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class"
 	        ng-show="dropSupported">drop files here</div>
 	  <div ng-file-drop-available="dropSupported=true" 
 	        ng-show="!dropSupported">HTML5 Drop File is not supported!</div> -->
 	  <button ng-click="upload.abort()">Cancel Upload</button>
+	</div>
+	
+	<div>
+		<table class="table table-bordered">
+			<tr>
+				<th>Artifact</th>
+				<th>Action</th>
+			</tr>
+			<tr ng-repeat="artifact in payment.artifacts" >
+				<td><a href="/payments/artifacts/{{artifact.id}}">{{artifact.name}}</a></td>
+				<td><button class="btn btn-danger" ng-click="deleteArtifact('{{artifact.id}}');">Delete</button></td>
+				<!--  -->
+			</tr>
+		</table>
 	</div>
 </div>

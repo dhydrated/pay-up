@@ -159,7 +159,21 @@ app.controller('CreatePaymentController', function($scope, $http, $window, $rout
 			}).error(function(data, status, headers, config) {
 				console.log('failed to retrieve payment templates.');
 			});
+			
+
+			$scope.updateArtifactsList();
 		}
+	}
+	
+	$scope.updateArtifactsList = function(){
+		$http({
+			method : 'GET',
+			url : '/api/payments/'+$scope.payment.id+'/artifacts'
+		}).success(function(data, status, headers, config) {
+			$scope.payment.artifacts = data;
+		}).error(function(data, status, headers, config) {
+			console.log('failed to retrieve payment artifacts.');
+		});
 	}
 	
 	$scope.editMode = function(){
@@ -204,7 +218,22 @@ app.controller('CreatePaymentController', function($scope, $http, $window, $rout
 			console.log('failed saving user.');
 		});
 	};
-
+	
+	$scope.deleteArtifact = function(artifactId) {
+		
+		console.log('deleting...' + artifactId);
+		
+		$http({
+			method : 'POST',
+			url : '/api/payments/artifacts/'+artifactId+'/delete'
+		}).success(function(data, status, headers, config) {
+			$scope.updateArtifactsList();
+		}).error(function(data, status, headers, config) {
+			console.log('failed deleting artifact.');
+		});
+		
+	};
+	
 });
 
 

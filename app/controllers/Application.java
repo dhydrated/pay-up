@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -99,6 +100,33 @@ public class Application extends Controller {
     	}
     	
 		return ok(Json.toJson(payments));
+	}
+	
+
+	public static Result apiPaymentArtifacts(Long paymentId) {
+
+		List<PaymentArtifact> artifacts = PaymentArtifact.findByPaymentId(paymentId);
+		
+		List<PaymentArtifact> modifiedArtifacts = new ArrayList<PaymentArtifact>();
+		
+		for(PaymentArtifact artifact : artifacts){
+			artifact.data = null;
+			artifact.payment = null;
+			
+			modifiedArtifacts.add(artifact);
+		}
+		
+		return ok(Json.toJson(modifiedArtifacts));
+	}
+	
+	
+	public static Result apiDeletePaymentArtifact(Long id) throws Exception {
+
+		PaymentArtifact artifact = PaymentArtifact.find.byId(id);
+		Long paymentId = artifact.payment.id;
+		artifact.delete();
+
+		return ok(Json.toJson(paymentId));
 	}
 	
 	public static Result apiGet(Long id) {
@@ -413,30 +441,46 @@ public class Application extends Controller {
 	
 	public static Result apiUploadFile(Long paymentId) throws Exception {
 		
-		logger.debug("in upload()");
+		logger.debug("in apiUploadFile("+paymentId+")");
+		
+		logger.debug(request().body().toString());
+		
+
 		MultipartFormData body = request().body().asMultipartFormData();
-		FilePart filePart = body.getFile("picture");
-		if (filePart != null) {
-			String fileName = filePart.getFilename();
-			String contentType = filePart.getContentType();
-			File file = filePart.getFile();
+//		FilePart filePart = body.getFile("picture");
+		
+		List<FilePart> files = body.getFiles();
+		
+		for(FilePart filePart : files){
 
-			Payment payment = Payment.find.byId(paymentId);
+			
+			if (filePart != null) {
+				String fileName = filePart.getFilename();
+				String contentType = filePart.getContentType();
+				File file = filePart.getFile();
 
-			PaymentArtifact artifact = new PaymentArtifact();
-			artifact.name = fileName;
-			artifact.type = contentType;
-			FileInputStream fis = new FileInputStream(file);
-			artifact.data = IOUtils.toByteArray(fis);
-			artifact.payment = payment;
-			artifact.save();
+				Payment payment = Payment.find.byId(paymentId);
 
-			logger.debug(artifact.id.toString());
-			logger.debug(fileName);
-			return ok("File uploaded");
-		} else {
-			return ok("Missing file");
+				PaymentArtifact artifact = new PaymentArtifact();
+				artifact.name = fileName;
+				artifact.type = contentType;
+				FileInputStream fis = new FileInputStream(file);
+				artifact.data = IOUtils.toByteArray(fis);
+				artifact.payment = payment;
+				artifact.save();
+
+				logger.debug(artifact.id.toString());
+				logger.debug(fileName);
+				return ok("File uploaded");
+			} else {
+				return ok("Missing file");
+			}
+			
 		}
+
+		return ok("Missing file");
+//		File file = request().body().asRaw().asFile();
+//		  return ok("File uploaded");
 	  
 	}
 

@@ -13,5 +13,12 @@
     <script type="text/javascript" src="@routes.Assets.at("javascripts/date.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/user-controller.js")"></script>
     <script type="text/javascript" src="@routes.Assets.at("javascripts/payment-controller.js")"></script>
+	    
+	<!-- shim to support upload progress/abort and non-HTML5 FormData browsers.-->
+	<!-- use html5-shim.min.js instead for progress/abort for html5 browsers only-->
+	<!-- Note: MUST BE PLACED BEFORE angular.js-->
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/fileupload/angular-file-upload-shim.min.js")" ></script> 
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/fileupload/angular-file-upload.min.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/fileupload-controller.js")"></script>
     
 }

@@ -1,4 +1,4 @@
-var app = angular.module('puPayment', ['puUser']);
+var app = angular.module('puPayment', ['puUser', 'FileUploadModule']);
 
 app.config(function($routeProvider) {
 	$routeProvider.when('/new', {

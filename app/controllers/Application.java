@@ -410,6 +410,35 @@ public class Application extends Controller {
 			return edit(paymentId);
 		}
 	}
+	
+	public static Result apiUploadFile(Long paymentId) throws Exception {
+		
+		logger.debug("in upload()");
+		MultipartFormData body = request().body().asMultipartFormData();
+		FilePart filePart = body.getFile("picture");
+		if (filePart != null) {
+			String fileName = filePart.getFilename();
+			String contentType = filePart.getContentType();
+			File file = filePart.getFile();
+
+			Payment payment = Payment.find.byId(paymentId);
+
+			PaymentArtifact artifact = new PaymentArtifact();
+			artifact.name = fileName;
+			artifact.type = contentType;
+			FileInputStream fis = new FileInputStream(file);
+			artifact.data = IOUtils.toByteArray(fis);
+			artifact.payment = payment;
+			artifact.save();
+
+			logger.debug(artifact.id.toString());
+			logger.debug(fileName);
+			return ok("File uploaded");
+		} else {
+			return ok("Missing file");
+		}
+	  
+	}
 
 	public static Result getPaymentArtifact(Long id) throws Exception {
 

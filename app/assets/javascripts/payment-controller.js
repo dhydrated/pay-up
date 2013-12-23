@@ -78,10 +78,6 @@ app.directive("paymentTemplates", function($http){
 				console.log('failed to retrieve payment templates.');
 			});
 			
-			/*scope.$watch('paymentTemplates', function(value){
-				console.log(value);
-			});*/
-			
 			scope.open = function(){
 				$('#templates-list-modal').modal('show');
 			}
@@ -219,6 +215,10 @@ app.controller('CreatePaymentController', function($scope, $http, $window, $rout
 		});
 	};
 	
+	$scope.cancel = function(){
+		$window.location='/payments';
+	}
+	
 	$scope.deleteArtifact = function(artifactId) {
 		
 		$http({
@@ -296,6 +296,10 @@ app.controller('CreateMonthlyPaymentController', function($scope, $http, $window
 			return years;
 		}();
 		
+	}
+	
+	$scope.cancel = function(){
+		$window.location='/payments';
 	}
 	
 	$scope.$watch('payment.paymentType', function(value){

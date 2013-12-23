@@ -78,9 +78,11 @@
 	</fieldset>
 
 	<div class="form-actions">
-		<button ng-click="save()">
+		<button ng-click="save()" class="btn btn-default" ng-disabled="!payment_form.$valid">
 			<span class="glyphicon glyphicon-plus"></span>Add
 		</button>
+		
+		<button ng-click="cancel()" class="btn btn-default">Cancel</button>
 	</div>
 
 	<payment-templates></payment-templates>

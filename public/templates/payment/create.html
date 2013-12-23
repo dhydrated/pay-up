@@ -6,7 +6,7 @@
 
 	<fieldset>
 	
-		<input type="hidden" id="payment_id" name="payment_id" class="form-control" ng-model="payment.id" required>
+		<input type="hidden" id="payment_id" name="payment_id" class="form-control" ng-model="payment.id">
 
 		<field-row element-label="Payment Type" element-id="payment_type_id">
 			<select id="payment_type_id" name="payment_type_id" ng-model="payment.paymentType.id" ng-options="type.id as type.name for type in paymentTypes" class="form-control" required>
@@ -73,12 +73,10 @@
 			<textarea id="remarks" name="remarks" class="form-control" ng-model="payment.remarks" rows="5"></textarea>
 		</field-row>
 		
-		
-
 	</fieldset>
 
 	<div class="form-actions">
-		<button ng-click="save()" class="btn btn-default">
+		<button ng-click="save()" class="btn btn-default" ng-disabled="!payment_form.$valid">
 			<div ng-hide="editMode()">
 			<span class="glyphicon glyphicon-plus" ></span>Add
 			</div>
@@ -86,6 +84,9 @@
 			<span class="glyphicon glyphicon-floppy-disk" ></span>Update
 			</div>
 		</button>
+		
+		
+		<button ng-click="cancel()" class="btn btn-default">Cancel</button>
 	</div>
 	
 	<div ng-hide="editMode()">
@@ -103,15 +104,37 @@
 <hr>
 <div ng-show="editMode()">
 	<div ng-controller="FileUploadController">
-	  <input type="hidden" ng-model="myModelObj">
-	  <input type="file" ng-file-select="onFileSelect($files)" name="picture">
-	  
-	  <!-- <input type="file" ng-file-select="onFileSelect($files)" multiple>
-	  <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class"
-	        ng-show="dropSupported">drop files here</div>
-	  <div ng-file-drop-available="dropSupported=true" 
-	        ng-show="!dropSupported">HTML5 Drop File is not supported!</div> -->
-	  <button ng-click="upload.abort()">Cancel Upload</button>
+	
+	    <button class="btn btn-default" ng-click="openFileUpload();"><span class="glyphicon glyphicon-upload" ></span>Upload a File</button>
+	
+		<div class="form-group">
+	    
+		    <div class="modal fade" id="fileupload-modal" tabindex="-1" role="dialog" aria-labelledby="fileupload-modal-label" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="fileupload-modal-label">Payment Artifact Upload</h4>
+			      </div>
+			      <div class="modal-body">
+	
+						  <input type="hidden" ng-model="myModelObj">
+						  <input type="file" ng-file-select="onFileSelect($files)" class="form-control">
+						  
+						  <!-- <input type="file" ng-file-select="onFileSelect($files)" multiple>
+						  <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class"
+						        ng-show="dropSupported">drop files here</div>
+						  <div ng-file-drop-available="dropSupported=true" 
+						        ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+						  <button ng-click="upload.abort()">Cancel Upload</button> -->
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div>
+		</div>
 	</div>
 	
 	<div>

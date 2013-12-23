@@ -60,7 +60,7 @@
 		</field-row>
 		
 		<field-row element-label="Amount" element-id="amount">
-			<input id="amount" name="amount" class="form-control" required ng-model="payment.amount" ng-pattern="/^\d+$/">
+			<input id="amount" name="amount" class="form-control" required ng-model="payment.amount" ng-pattern="/^[\d\.]+$/">
 			<span class="error" ng-show="payment_form.amount.$error.required">Required</span>
 			<span class="error" ng-show="payment_form.amount.$error.pattern">Invalid!</span>
 		</field-row>

@@ -5,6 +5,8 @@
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
 
 @main {
+
+<div ng-app="puPaymentTemplate" ng-controller="PaymentTemplateController">
     
     <h2>Add a payment template</h2>
     
@@ -21,17 +23,25 @@
                 'class -> "form-control"
             )
 
-            <div ng-controller="UsersController" ng-init="retrieveUsers()">
-           		<div user-search="payee" label="Payee" ng-click="showUserSearch('Payee')"  ></div>
-           	</div>
+            <div ng-controller="UserController" ng-init="retrieveUsers()">
+			<field-row element-label="Payer" element-id="payer_id">
+				<input type="text" id="payer.id" name="payer.id" class="form-control" ng-model="paymentTemplate.payer.id" required style="display:none">
+	       		<input type="text" id="payer_name" name="payer_name" class="form-control" ng-model="paymentTemplate.payer.name" ng-click="showUserSearch('Payer')" required>
+			</field-row>
+			<user-search name="payer" label="Payer" parent-model="paymentTemplate"></user-search>
+			</div>
+	
+			<div ng-controller="UserController" ng-init="retrieveUsers()">
+			<field-row element-label="Payee" element-id="payee_id">
+				<input type="text" id="payee.id" name="payee.id" class="form-control" ng-model="paymentTemplate.payee.id" required style="display:none">
+	       		<input type="text" id="payee_name" name="payee_name" class="form-control" ng-model="paymentTemplate.payee.name" ng-click="showUserSearch('Payee')" required>
+			</field-row>
+			<user-search name="payee" label="Payee" parent-model="paymentTemplate"></user-search>
+			</div>
             
             @inputText(paymentTemplateForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
 
-            <div ng-controller="UsersController" ng-init="retrieveUsers()">
-           		<div user-search="payer" label="Payer" ng-click="showUserSearch('Payer')"  ></div>
-           	</div>
-            
             @inputText(paymentTemplateForm("amount"), '_label -> "Amount",
                 'class -> "form-control")
             
@@ -47,5 +57,8 @@
     
     
     <script type="text/javascript" src="@routes.Assets.at("javascripts/user-controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/payment-template-controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/form-module.js")"></script>
     
+</div>
 }

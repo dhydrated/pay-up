@@ -1,5 +1,5 @@
 
-var app = angular.module('puUser', ['ngSanitize']);
+var app = angular.module('puUser', ['ngSanitize', 'puFormModule']);
 
 app.controller('UserController', function($scope, $http) {
 	
@@ -14,7 +14,7 @@ app.controller('UserController', function($scope, $http) {
 	};
 	
 	$scope.showUserSearch = function(userSelect){
-		$scope.userSelectId = '#'+userSelect.toLowerCase()+'_id';
+		$scope.userSelectId = '#'+userSelect.toLowerCase()+'.id';
 		$scope.userSelectName = '#'+userSelect.toLowerCase()+'_name';
 		$('#'+userSelect.toLowerCase()+'-modal').modal('show');
 	};

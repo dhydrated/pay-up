@@ -16,8 +16,8 @@
 		</field-row>
 
 		<div ng-controller="UserController" ng-init="retrieveUsers()">
-		<field-row element-label="Payer" element-id="payer_id">
-			<input type="hidden" id="payer_id" name="payer_id" class="form-control" ng-model="payment.payer.id" required>
+		<field-row element-label="Payer" element-id="payer.id">
+			<input type="hidden" id="payer.id" name="payer.id" class="form-control" ng-model="payment.payer.id" required>
        		<input type="text" id="payer_name" name="payer_name" class="form-control" ng-model="payment.payer.name" ng-click="showUserSearch('Payer')" required>
 			<span class="error" ng-show="payment_form.payer_name.$error.required">Required</span>
 		</field-row>
@@ -25,8 +25,8 @@
 		</div>
 
 		<div ng-controller="UserController" ng-init="retrieveUsers()">
-		<field-row element-label="Payee" element-id="payee_id">
-			<input type="hidden" id="payee_id" name="payee_id" class="form-control" ng-model="payment.payee.id" required>
+		<field-row element-label="Payee" element-id="payee.id">
+			<input type="hidden" id="payee.id" name="payee.id" class="form-control" ng-model="payment.payee.id" required>
        		<input type="text" id="payee_name" name="payee_name" class="form-control" ng-model="payment.payee.name" ng-click="showUserSearch('Payee')" required>
 			<span class="error" ng-show="payment_form.payee_name.$error.required">Required</span>
 		</field-row>

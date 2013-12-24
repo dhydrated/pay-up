@@ -1,4 +1,4 @@
-var app = angular.module('puPayment', ['puUser', 'FileUploadModule']);
+var app = angular.module('puPayment', ['puUser', 'FileUploadModule', 'puFormModule']);
 
 app.config(function($routeProvider) {
 	$routeProvider.when('/new', {
@@ -26,17 +26,6 @@ app.config(function($routeProvider) {
 	$routeProvider.otherwise({ redirectTo: '/new' });
 });
 
-app.directive("fieldRow", function(){
-	return {
-		restrict: "E",
-		transclude: true,
-		scope: {
-			elementLabel: "@",
-			elementId: "@"
-		},
-		templateUrl: "/assets/templates/field-row.html"
-	}
-});
 
 app.directive("datePicker", function(){
 	return {

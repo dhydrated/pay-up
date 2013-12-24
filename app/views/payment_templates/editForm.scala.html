@@ -6,6 +6,8 @@
 
 @main {
     
+<div ng-app="puPaymentTemplate" ng-controller="PaymentTemplateController">
+
     <h2>Edit payment template</h2>
     
     @form(routes.PaymentTemplateApplication.update(id), 'class -> "form-horizontal", 'role -> "form") {
@@ -21,17 +23,26 @@
                 'class -> "form-control"
             )
 
-           <div ng-controller="UsersController" ng-init="retrieveUsers()">
-				<div user-search="payee" label="Payee" ng-click="showUserSearch('payee')" user-search-id="@paymentTemplateForm.get().payee.id" user-search-name="@paymentTemplateForm.get().payee.name"></div>
-            </div>
+            <div ng-controller="UserController" ng-init="retrieveUsers()">
+			<field-row element-label="Payer" element-id="payer_id">
+				<input type="text" id="payer.id" name="payer.id" class="form-control" ng-model="paymentTemplate.payer.id" required style="display:none" value="@paymentTemplateForm.get().payer.id">
+	       		<input type="text" id="payer_name" name="payer_name" class="form-control" ng-model="paymentTemplate.payer.name" ng-click="showUserSearch('Payer')" 
+	       		required ng-init="setPayer(@paymentTemplateForm.get().payer.id, '@paymentTemplateForm.get().payer.name')" >
+			</field-row>
+			<user-search name="payer" label="Payer" parent-model="paymentTemplate"></user-search>
+			</div>
+	
+			<div ng-controller="UserController" ng-init="retrieveUsers()">
+			<field-row element-label="Payee" element-id="payee_id">
+				<input type="text" id="payee.id" name="payee.id" class="form-control" ng-model="paymentTemplate.payee.id" required style="display:none" value="@paymentTemplateForm.get().payee.id">
+	       		<input type="text" id="payee_name" name="payee_name" class="form-control" ng-model="paymentTemplate.payee.name" ng-click="showUserSearch('Payee')" 
+	       			required ng-init="setPayee(@paymentTemplateForm.get().payee.id, '@paymentTemplateForm.get().payee.name')" >
+			</field-row>
+			<user-search name="payee" label="Payee" parent-model="paymentTemplate"></user-search>
+			</div>
             
             @inputText(paymentTemplateForm("payeeAccountNumber"), '_label -> "Payee Account",
                 'class -> "form-control")
-
-            
-           <div ng-controller="UsersController" ng-init="retrieveUsers()">
-				<div user-search="payer" label="Payer" ng-click="showUserSearch('payer')" user-search-id="@paymentTemplateForm.get().payer.id" user-search-name="@paymentTemplateForm.get().payer.name"></div>
-            </div>
             
             @inputText(paymentTemplateForm("amount"), '_label -> "Amount",
                 'class -> "form-control")
@@ -51,5 +62,9 @@
     }
     
     <script type="text/javascript" src="@routes.Assets.at("javascripts/user-controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/payment-template-controller.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.at("javascripts/form-module.js")"></script>
+    
+</div>
     
 }

@@ -76,7 +76,9 @@
 	</fieldset>
 
 	<div class="form-actions">
-		<button ng-click="save()" class="btn btn-default" ng-disabled="!payment_form.$valid">
+		
+        <div class="col-sm-2"></div>
+		<button ng-click="save()" class="btn btn-primary" ng-disabled="!payment_form.$valid">
 			<div ng-hide="editMode()">
 			<span class="glyphicon glyphicon-plus" ></span>Add
 			</div>

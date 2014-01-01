@@ -16,6 +16,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.users.loggedInUserChangePasswordForm;
 import views.html.users.changePasswordForm;
 import views.html.users.userCreateForm;
 import views.html.users.userEditForm;
@@ -85,13 +86,24 @@ public class UserApplication extends Controller {
 
     public static Result changePassword(Long id) {
     	
-    	User user = User.find.byId(id);
-    	
         Form<Credential> credentialForm = form(Credential.class).fill(
         		Credential.find.byId(id)
         );
         return ok(
             changePasswordForm.render(id, credentialForm)
+        );
+    }
+    
+
+    public static Result loggedInUserChangePassword() {
+    	
+    	Long id = Long.valueOf(session("userCredentialId"));
+    	
+        Form<Credential> credentialForm = form(Credential.class).fill(
+        		Credential.find.byId(id)
+        );
+        return ok(
+            loggedInUserChangePasswordForm.render(id, credentialForm)
         );
     }
     
@@ -138,6 +150,19 @@ public class UserApplication extends Controller {
         credentialForm.get().update(id);
         flash("success", "User password has been updated");
         return GO_HOME;
+    }
+    
+    public static Result loggedInUserUpdatePassword(Long id) {
+    	
+        Form<Credential> credentialForm = form(Credential.class).bindFromRequest();
+        if(credentialForm.hasErrors()) {
+            return badRequest(loggedInUserChangePasswordForm.render(id, credentialForm));
+        }
+        credentialForm.get().password = DigestUtils.md5Hex(credentialForm.get().password);
+        
+        credentialForm.get().update(id);
+        flash("success", "User password has been updated");
+        return redirect(routes.Application.index());
     }
     
     /**

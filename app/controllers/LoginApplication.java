@@ -70,6 +70,10 @@ public class LoginApplication extends Controller {
             
             session("userId", user.id.toString());
             
+            session("userName", user.name);
+            
+            session("userCredentialId", user.credential.id.toString());
+            
             return redirect(
                 routes.Application.index()
             );

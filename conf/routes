@@ -68,6 +68,7 @@ POST    /payment_types/:id/delete       controllers.PaymentTypeApplication.delet
 GET		/api/payment_types				controllers.PaymentTypeApplication.apiList()
 
 # Users list (look at the default values for pagination parameters)
+GET		/users/loggedin_user_change_password	controllers.UserApplication.loggedInUserChangePassword()
 GET     /users                  controllers.UserApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add payment
 GET     /users/new              controllers.UserApplication.create()
@@ -77,6 +78,7 @@ GET     /users/:id              controllers.UserApplication.edit(id:Long)
 GET     /users/change_password/:id              controllers.UserApplication.changePassword(id:Long)
 POST    /users/:id              controllers.UserApplication.update(id:Long)
 POST    /users/change_password/:id              controllers.UserApplication.updatePassword(id:Long)
+POST    /users/loggedin_user_update_password/:id              controllers.UserApplication.loggedInUserUpdatePassword(id:Long)
 # Delete a user
 POST    /users/:id/delete       controllers.UserApplication.delete(id:Long)
 GET     /api/users              controllers.UserApplication.apiList()

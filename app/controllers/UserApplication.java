@@ -172,8 +172,11 @@ public class UserApplication extends Controller {
             return badRequest(loggedInUserEditForm.render(userForm));
         }
         
-        userForm.get().update(id);
+        User user = User.findById(id);
         
+        userForm.get().roles = user.roles;
+        
+        userForm.get().update(id);
 
         session("userName", userForm.get().name);
         session("email", userForm.get().email);

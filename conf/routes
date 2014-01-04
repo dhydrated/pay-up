@@ -68,8 +68,10 @@ POST    /payment_types/:id/delete       controllers.PaymentTypeApplication.delet
 GET		/api/payment_types				controllers.PaymentTypeApplication.apiList()
 
 # Users list (look at the default values for pagination parameters)
-POST    /users/loggedin_user_update_password    controllers.UserApplication.loggedInUserUpdatePassword()
+GET     /users/loggedin_user_edit_profile		controllers.UserApplication.loggedInUserEditProfile()
+POST    /users/loggedin_user_update_profile		controllers.UserApplication.loggedInUserUpdateProfile()
 GET		/users/loggedin_user_change_password	controllers.UserApplication.loggedInUserChangePassword()
+POST    /users/loggedin_user_update_password    controllers.UserApplication.loggedInUserUpdatePassword()
 GET     /users                  controllers.UserApplication.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 # Add payment
 GET     /users/new              controllers.UserApplication.create()

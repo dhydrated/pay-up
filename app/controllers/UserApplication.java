@@ -20,6 +20,7 @@ import views.html.users.loggedInUserChangePasswordForm;
 import views.html.users.changePasswordForm;
 import views.html.users.userCreateForm;
 import views.html.users.userEditForm;
+import views.html.users.loggedInUserEditForm;
 import views.html.users.userList;
 
 /**
@@ -73,13 +74,36 @@ public class UserApplication extends Controller {
     	for(Role role : user.roles){
     		logger.debug(role.name);
     	}
-    	logger.debug("password: " + user.credential.password);
     	
         Form<User> userForm = form(User.class).fill(
             User.find.byId(id)
         );
         return ok(
             userEditForm.render(id, userForm)
+        );
+    }
+    
+
+    /**
+     * Display the 'edit form' of a existing User.
+     *
+     * @param id Id of the user to edit
+     */
+    public static Result loggedInUserEditProfile() {
+    	
+    	Long id = Long.valueOf(session("userId"));
+    	
+    	User user = User.find.byId(id);
+    	
+    	for(Role role : user.roles){
+    		logger.debug(role.name);
+    	}
+    	
+        Form<User> userForm = form(User.class).fill(
+            User.find.byId(id)
+        );
+        return ok(
+            loggedInUserEditForm.render(userForm)
         );
     }
     
@@ -137,6 +161,25 @@ public class UserApplication extends Controller {
         
         flash("success", "User " + userForm.get().name + " has been updated");
         return GO_HOME;
+    }
+    
+    public static Result loggedInUserUpdateProfile() {
+
+    	Long id = Long.valueOf(session("userId"));
+    	
+        Form<User> userForm = form(User.class).bindFromRequest();
+        if(userForm.hasErrors()) {
+            return badRequest(loggedInUserEditForm.render(userForm));
+        }
+        
+        userForm.get().update(id);
+        
+
+        session("userName", userForm.get().name);
+        session("email", userForm.get().email);
+        
+        flash("success", "User " + userForm.get().name + " has been updated");
+        return redirect(routes.Application.index());
     }
     
     public static Result updatePassword(Long id) {

@@ -152,7 +152,9 @@ public class UserApplication extends Controller {
         return GO_HOME;
     }
     
-    public static Result loggedInUserUpdatePassword(Long id) {
+    public static Result loggedInUserUpdatePassword() {
+
+    	Long id = Long.valueOf(session("userCredentialId"));
     	
         Form<Credential> credentialForm = form(Credential.class).bindFromRequest();
         if(credentialForm.hasErrors()) {

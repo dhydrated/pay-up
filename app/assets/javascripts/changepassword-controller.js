@@ -8,12 +8,6 @@ app.controller('ChangePasswordController', function($scope, $http) {
 		confirm_password : ""
 	};
 	
-	$scope.$watch("data.first_password", function(val){
-		console.log("data.first_password");
-		console.log(val);
-		console.log($scope);
-	})
-	
 	$scope.notTheSame = function(){
 		if($scope.data.first_password !== $scope.data.confirm_password
 				&& $scope.data.first_password !== undefined){
@@ -31,7 +25,6 @@ app.controller('ChangePasswordController', function($scope, $http) {
 		}
 		else{
 			e.preventDefault();
-			console.log("not the same");
 		}
 	}
 });

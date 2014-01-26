@@ -143,7 +143,7 @@ public class Application extends Controller {
 		try {
 
 			payment = new Payment();
-			payment.amount = json.findPath("amount").getDecimalValue();
+			payment.amount = new BigDecimal(json.findPath("amount").getTextValue());
 			payment.endPeriod = df.parse(json.findPath("endPeriod").getTextValue());
 			payment.startPeriod = df.parse(json.findPath("startPeriod").getTextValue());
 			payment.paidDate = df.parse(json.findPath("paidDate").getTextValue());

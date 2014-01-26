@@ -74,7 +74,7 @@ app.directive("paymentTemplates", function($http){
 			scope.selectTemplate = function(template){
 				console.log(template);
 				console.log(scope.$parent['payment']);
-				scope.$parent['payment']['amount'] = template['amount'];
+				scope.$parent['payment']['amount'] = template['amount'].toString();
 				scope.$parent['payment']['payer'] = template['payer'];
 				scope.$parent['payment']['payee'] = template['payee'];
 				scope.$parent['payment']['payeeAccountNumber'] = template['payeeAccountNumber'];
@@ -202,6 +202,7 @@ app.controller('CreatePaymentController', function($scope, $http, $window, $rout
 		}).error(function(data, status, headers, config) {
 			console.log('failed saving user.');
 		});
+		
 	};
 	
 	$scope.cancel = function(){

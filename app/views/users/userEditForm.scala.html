@@ -35,6 +35,26 @@
 			      </div>
 			   </div>
 			}
+			
+			
+        <table class="table table-striped table-bordered">
+	        <thead>
+	            <tr>
+	                <th class="header" width="80%">Members</th>
+	                <th class="header">Admin</th>
+	                <th class="header">Action</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	        @for(address <- UserAddressMap.find.all()){
+				<tr><td>@address.name</td></tr>
+				<tr><td>@address.name</td></tr>
+				<tr><td>@address.name</td></tr>
+			}
+	        </tbody>
+	        
+	    </table>
+			
         
         </fieldset>
         
